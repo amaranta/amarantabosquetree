@@ -9,16 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg: #f5f0e8;
-  --bg2: #ede5d4;
-  --fg: #1a1a12;
-  --fg2: #3d3d2d;
+  --bg: #f2ede3;
+  --bg2: #e8e0ce;
+  --fg: #0d0d08;
+  --fg2: #2a2a1a;
   --accent: #2d5a1b;
   --accent2: #3d7a25;
-  --line: rgba(0,0,0,0.12);
+  --line: rgba(0,0,0,0.15);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sc: 'Cormorant SC', Georgia, serif;
   --sans: 'Jost', system-ui, sans-serif;
@@ -98,11 +99,11 @@ body.noche #stars { display:block; }
 section { padding:var(--gap) 0; }
 .divider { border:none; border-top:1px solid var(--line); margin:0; }
 
-.eyebrow { font-family:var(--sc); font-size:0.68rem; letter-spacing:3px; font-weight:600; color:var(--accent); display:block; margin-bottom:1.2rem; }
+.eyebrow { font-family:var(--sc); font-size:0.75rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); display:block; margin-bottom:1.2rem; }
 h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
 h1 em { font-style:italic; color:var(--accent); }
-h2 { font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.1; margin-bottom:1.5rem; color:var(--fg); }
-.lead { font-family:var(--serif); font-weight:400; font-size:clamp(1.1rem,2.5vw,1.35rem); line-height:1.6; color:var(--fg); }
+h2 { font-family:var(--serif); font-weight:600; font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.1; margin-bottom:1.5rem; color:var(--fg); }
+.lead { font-family:var(--serif); font-weight:500; font-size:clamp(1.15rem,2.5vw,1.4rem); line-height:1.65; color:var(--fg); }
 p { font-size:0.97rem; line-height:1.75; color:var(--fg); }
 a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 
@@ -114,12 +115,12 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
   width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
 }
 .hero-img { position:relative; overflow:hidden; min-height:600px; }
-.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; filter:saturate(0.85) brightness(0.9); }
+.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% center; filter:saturate(0.85) brightness(0.9); }
 .hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 55%,var(--bg)); }
 .hero-content { display:flex; flex-direction:column; justify-content:center; padding:clamp(6rem,12vw,9rem) clamp(2rem,4vw,3.5rem) 4rem 2.5rem; }
-.hero-lugar { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
+.hero-lugar { font-family:var(--sc); font-size:0.72rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
 .hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:var(--fg2); margin:1.8rem 0 2.5rem; line-height:1.6; }
-.hero-lema { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-top:2.5rem; }
+.hero-lema { font-family:var(--sc); font-size:0.72rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-top:2.5rem; }
 .hero-lema span { margin:0 0.5rem; opacity:0.4; }
 h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
 h1 em { font-style:italic; color:var(--accent); }
@@ -128,20 +129,20 @@ h1 em { font-style:italic; color:var(--accent); }
 .cta-link::after { content:'→'; font-family:var(--sans); font-size:0.9rem; letter-spacing:0; }
 
 .intro-grid { display:grid; grid-template-columns:150px 1fr; gap:3.5rem; align-items:start; }
-.intro-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); padding-top:0.4rem; }
-.frase-apertura { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.1rem,2.5vw,1.35rem); color:var(--accent); line-height:1.5; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
+.intro-label { font-family:var(--sc); font-size:0.75rem; letter-spacing:2px; font-weight:600; color:var(--accent); padding-top:0.4rem; }
+.frase-apertura { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.15rem,2.5vw,1.4rem); color:var(--accent); line-height:1.55; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
 
 .ciencia-wrap { position:relative; overflow:hidden; }
 .shinrin-bg { position:absolute; right:0; top:50%; transform:translateY(-50%); font-size:6rem; line-height:1; letter-spacing:-0.05em; color:var(--line); pointer-events:none; user-select:none; font-family:serif; opacity:0.35; }
 
-.ciencia-datos { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-top:1rem; display:block; }
+.ciencia-datos { font-family:var(--sc); font-size:0.82rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-top:1.2rem; display:block; }
 
 .horario-estacion { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); padding:1rem 0; }
 .horario-estacion:last-child { border-bottom:1px solid var(--line); }
-.h-est { font-family:var(--serif); font-size:1.05rem; color:var(--fg); line-height:1.4; }
+.h-est { font-family:var(--serif); font-size:1.1rem; font-weight:500; color:var(--fg); line-height:1.4; }
 .h-est small { display:block; font-family:var(--sans); font-size:0.78rem; color:var(--fg2); margin-top:0.2rem; }
 .h-horas { display:flex; flex-direction:column; gap:0.3rem; justify-content:center; }
-.h-hora { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+.h-hora { font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
 
 .cal-leyenda { display:flex; gap:1.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
 .cal-leyenda-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--sc); font-size:0.58rem; letter-spacing:2px; color:var(--fg2); }
@@ -168,16 +169,16 @@ h1 em { font-style:italic; color:var(--accent); }
 .est-item { padding:1.2rem 0.8rem; background:var(--bg2); cursor:pointer; transition:background 0.2s; }
 .est-item:hover { background:var(--line); }
 .est-icono { font-size:1.4rem; display:block; margin-bottom:0.4rem; }
-.est-nombre { font-family:var(--sc); font-size:0.55rem; letter-spacing:2px; color:var(--accent); font-weight:600; display:block; margin-bottom:0.2rem; }
-.est-palabra { font-family:var(--serif); font-size:0.88rem; color:var(--fg); display:block; }
+.est-nombre { font-family:var(--sc); font-size:0.7rem; letter-spacing:2px; color:var(--accent); font-weight:600; display:block; margin-bottom:0.3rem; }
+.est-palabra { font-family:var(--serif); font-size:0.95rem; font-weight:500; color:var(--fg); display:block; }
 .est-detalle { display:none; position:absolute; top:100%; left:0; right:0; background:var(--bg2); border:1px solid var(--line); padding:1.2rem; z-index:10; font-size:0.85rem; color:var(--fg2); line-height:1.6; margin-top:2px; }
 .est-detalle.open { display:block; }
 .est-detalle em { display:block; margin-top:0.5rem; font-family:var(--serif); font-style:italic; color:var(--accent); font-size:0.9rem; }
 
-.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; }
-.galeria .g { overflow:hidden; aspect-ratio:3/4; }
-.galeria .g img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; filter:saturate(0.85); transition:filter 0.4s, transform 0.4s; }
-.galeria .g img:hover { filter:saturate(1); transform:scale(1.02); }
+.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; align-items:start; }
+.galeria .g { overflow:hidden; }
+.galeria .g img { width:100%; height:auto; display:block; filter:saturate(0.85); transition:filter 0.4s, transform 0.4s; }
+.galeria .g img:hover { filter:saturate(1); }
 
 .eclipse-box { border:1px solid var(--accent); padding:2rem; margin-bottom:2rem; }
 .eclipse-badge { font-family:var(--sc); font-size:0.58rem; letter-spacing:3px; font-weight:600; color:var(--bg); background:var(--accent); padding:4px 10px; display:inline-block; margin-bottom:1rem; }
@@ -190,13 +191,13 @@ h1 em { font-style:italic; color:var(--accent); }
 .ev-item { border-top:1px solid var(--line); padding:1.1rem 0; cursor:pointer; }
 .ev-item:last-child { border-bottom:1px solid var(--line); }
 .ev-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; }
-.ev-nombre { font-family:var(--serif); font-size:1rem; color:var(--fg); }
-.ev-fecha { font-family:var(--sc); font-size:0.6rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+.ev-nombre { font-family:var(--serif); font-size:1.05rem; font-weight:500; color:var(--fg); }
+.ev-fecha { font-family:var(--sc); font-size:0.72rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
 .ev-body { display:none; margin-top:0.9rem; }
 .ev-body.open { display:block; }
-.ev-body p { color:var(--fg2); margin-bottom:0.3rem; font-size:0.9rem; }
+.ev-body p { color:var(--fg); margin-bottom:0.4rem; font-size:1rem; }
 
-.testi { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.1rem,2.8vw,1.55rem); line-height:1.45; color:var(--fg); padding:1.8rem 0; border-top:1px solid var(--line); }
+.testi { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.15rem,2.8vw,1.6rem); line-height:1.5; color:var(--fg); padding:1.8rem 0; border-top:1px solid var(--line); }
 .testi:last-child { border-bottom:1px solid var(--line); }
 .testi-autor { display:block; font-family:var(--sc); font-style:normal; font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-top:0.8rem; }
 
@@ -205,11 +206,11 @@ h1 em { font-style:italic; color:var(--accent); }
 .p-item:nth-child(odd) { padding-right:2rem; border-right:1px solid var(--line); }
 .p-item:nth-child(even) { padding-left:2rem; }
 .p-item.full { grid-column:1/-1; border-right:none; padding-right:0; border-bottom:1px solid var(--line); }
-.p-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.4rem; }
+.p-label { font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.5rem; }
 
 .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem 2.5rem; }
-.faq-q { font-family:var(--serif); font-size:1rem; font-weight:500; color:var(--fg); margin-bottom:0.35rem; }
-.faq-a { font-size:0.92rem; color:var(--fg2); line-height:1.65; }
+.faq-q { font-family:var(--serif); font-size:1.05rem; font-weight:600; color:var(--fg); margin-bottom:0.4rem; }
+.faq-a { font-size:1rem; color:var(--fg); line-height:1.7; }
 
 .modalidades { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; }
 .modalidad { border:1px solid var(--line); padding:1.8rem; transition:border-color 0.2s; }
@@ -217,10 +218,9 @@ h1 em { font-style:italic; color:var(--accent); }
 .mod-titulo { font-family:var(--serif); font-size:1.2rem; color:var(--fg); margin-bottom:0.6rem; }
 .mod-texto { font-size:0.9rem; color:var(--fg2); line-height:1.65; margin-bottom:1.2rem; }
 
-.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
-.quien-fotos .q { overflow:hidden; aspect-ratio:3/4; }
-.quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; filter:saturate(0.82); }
-.quien-fotos .q:last-child img { object-position:center 45%; }
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; align-items:start; }
+.quien-fotos .q { overflow:hidden; }
+.quien-fotos .q img { width:100%; height:auto; display:block; filter:saturate(0.82); }
 
 .btn-g, .btn-n { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; padding:11px 22px; text-decoration:none; border:1px solid; transition:all 0.2s; margin-top:1.5rem; cursor:pointer; background:transparent; }
 .btn-g { border-color:var(--accent); color:var(--accent); }
@@ -229,12 +229,12 @@ h1 em { font-style:italic; color:var(--accent); }
 .btn-n:hover { background:var(--fg); color:var(--bg); text-decoration:none; }
 
 .cierre-poetico { padding:var(--gap) 0; text-align:center; border-top:1px solid var(--line); }
-.cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
+.cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
 
 footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; }
-.f-brand { font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; font-weight:600; color:var(--fg2); line-height:2.2; }
+.f-brand { font-family:var(--sc); font-size:0.72rem; letter-spacing:2px; font-weight:600; color:var(--fg); line-height:2.2; }
 .f-links { text-align:right; }
-.f-links a { display:block; font-size:0.82rem; color:var(--fg2); text-decoration:none; margin-bottom:0.25rem; }
+.f-links a { display:block; font-size:0.88rem; color:var(--fg); text-decoration:none; margin-bottom:0.25rem; }
 .f-links a:hover { color:var(--accent); }
 
 .hidden { display:none !important; }
@@ -246,19 +246,44 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   .hero-content { padding:2rem 1.5rem 3rem; }
   .intro-grid { grid-template-columns:1fr; gap:0.5rem; }
   .horario-estacion { grid-template-columns:1fr; gap:0.4rem; }
-  .estaciones-franja { grid-template-columns:repeat(3,1fr); }
+  .estaciones-franja { grid-template-columns:repeat(2,1fr); }
   .galeria { grid-template-columns:1fr; }
-  .galeria .g { aspect-ratio:4/3; }
   .practico-grid { grid-template-columns:1fr; }
   .p-item:nth-child(odd) { border-right:none; padding-right:0; }
   .p-item:nth-child(even) { padding-left:0; }
   .faq-grid { grid-template-columns:1fr; gap:1.2rem; }
   .modalidades { grid-template-columns:1fr; }
   .quien-fotos { grid-template-columns:1fr; }
-  .quien-fotos .q { aspect-ratio:4/3; }
   .eclipse-dets { grid-template-columns:1fr 1fr; }
   footer { flex-direction:column; align-items:flex-start; }
   .f-links { text-align:left; }
+}
+
+
+/* FECHA HERO */
+.hero-fecha {
+  font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600;
+  color:var(--accent); margin-bottom:1.5rem; display:block;
+  border:1px solid var(--accent); padding:8px 16px; display:inline-block;
+  transition: background 0.2s;
+}
+.hero-fecha:hover { background:var(--accent); color:var(--bg); }
+
+/* CALENDARIO 2 */
+.cal2-wrap { margin-top:1.5rem; }
+
+/* GALERÍA SIN RECORTE */
+.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; align-items:start; }
+.galeria .g img { width:100%; height:auto; display:block; filter:saturate(0.85); transition:filter 0.4s; }
+.galeria .g img:hover { filter:saturate(1); }
+
+/* QUIEN FOTOS SIN RECORTE */
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; align-items:start; }
+.quien-fotos .q img { width:100%; height:auto; display:block; filter:saturate(0.82); }
+
+@media(max-width:640px){
+  .galeria { grid-template-columns:1fr; }
+  .quien-fotos { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -269,14 +294,15 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <div class="overlay" id="overlay"></div>
 <div class="drawer" id="drawer">
   <a href="#inicio">Inicio</a>
+  <a href="#testimonios">Testimonios</a>
+  <a href="#quien">Quién soy</a>
+  <a href="#experiencia">La experiencia</a>
   <a href="#horarios">Horarios</a>
   <a href="#calendario">Calendario</a>
   <a href="#estaciones" id="linkEstaciones">Las estaciones</a>
   <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
-  <a href="#testimonios">Testimonios</a>
   <a href="#practico">Lo práctico</a>
   <a href="#grupos">Grupos y parejas</a>
-  <a href="#quien">Quién soy</a>
 </div>
 
 <button class="theme-btn" id="themeBtn">☽ Noche</button>
@@ -288,6 +314,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <div class="wrap">
 
+<!-- 1. HERO -->
 <section class="hero" id="inicio">
   <div class="hero-img">
     <img id="heroImg" src="hero.jpg" alt="Pinar de El Espinar">
@@ -297,6 +324,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <span id="heroIcon" style="font-size:2rem;margin-bottom:0.75rem;display:block">☀</span>
     <h1>Baños de<br><em id="heroWord">bosque</em></h1>
     <p class="hero-sub" id="heroSub">Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.</p>
+    <span class="hero-fecha" id="heroFecha"></span>
     <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="cta-link">Apuntarme</a>
     <p class="hero-lema">Reconecta<span>·</span>Respira<span>·</span>Renueva</p>
   </div>
@@ -304,6 +332,30 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 2. TESTIMONIOS -->
+<section id="testimonios">
+  <span class="eyebrow">Lo que dicen</span>
+  <div id="testiContainer"></div>
+</section>
+
+<hr class="divider">
+
+<!-- 3. QUIÉN SOY -->
+<section id="quien">
+  <span class="eyebrow">Quién guía</span>
+  <div class="quien-fotos">
+    <div class="q"><img src="amaranta.jpg" alt="Amaranta en el pinar"></div>
+    <div class="q"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar"></div>
+  </div>
+  <h2 style="margin-bottom:0.2rem">Amaranta</h2>
+  <p style="font-family:var(--sc);font-size:0.72rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
+  <p class="lead" style="font-size:1.05rem;margin-bottom:1.2rem">El bosque me enseñó a escuchar de otra manera. Ahora guío a otras personas para que encuentren lo que yo encontré aquí: un lugar donde no hay que ser productivo, ni fuerte, ni nada en particular. Solo estar. La naturaleza es la terapeuta más antigua que existe. Yo solo abro la puerta.</p>
+  <p>Cada sesión abre con una relajación guiada que prepara el cuerpo y la mente para recibir el bosque. El resto lo hace él.</p>
+</section>
+
+<hr class="divider">
+
+<!-- 4. LA EXPERIENCIA -->
 <section id="experiencia">
   <div class="intro-grid">
     <span class="intro-label" id="introLabel">La experiencia</span>
@@ -316,19 +368,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<section id="ciencia">
-  <div class="intro-grid">
-    <span class="intro-label">Por qué funciona</span>
-    <div class="ciencia-wrap">
-      <span class="shinrin-bg">森林浴</span>
-      <p class="lead" id="cienciaTexto">El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.</p>
-      <span class="ciencia-datos" id="cienciaDatos">📊 −40% cortisol · +50% células NK · Efectos hasta 30 días</span>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
+<!-- 5. HORARIOS -->
 <section id="horarios">
   <span class="eyebrow">Cuándo venir</span>
   <h2>Horarios por estación</h2>
@@ -349,6 +389,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 6. CALENDARIO 1 -->
 <section id="calendario">
   <span class="eyebrow">Próximas sesiones</span>
   <h2 id="calTitulo">Elige tu domingo</h2>
@@ -368,6 +409,21 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 7. POR QUÉ FUNCIONA -->
+<section id="ciencia">
+  <div class="intro-grid">
+    <span class="intro-label">Por qué funciona</span>
+    <div class="ciencia-wrap">
+      <span class="shinrin-bg">森林浴</span>
+      <p class="lead" id="cienciaTexto">El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.</p>
+      <span class="ciencia-datos" id="cienciaDatos">📊 −40% cortisol · +50% células NK · Efectos hasta 30 días</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 8. ESTACIONES -->
 <section id="estaciones">
   <span class="eyebrow">A lo largo del año</span>
   <h2>Las estaciones del bosque</h2>
@@ -381,11 +437,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
 </section>
 
+<!-- 9. GALERÍA -->
 <div class="galeria">
   <div class="g"><img id="galImg1" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
   <div class="g"><img id="galImg2" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
 </div>
 
+<!-- 10. EVENTOS NOCTURNOS -->
 <section id="eventos" class="hidden">
   <span class="eyebrow">Según el calendario astronómico</span>
   <h2>Próximas sesiones nocturnas</h2>
@@ -408,13 +466,22 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<section id="testimonios">
-  <span class="eyebrow">Lo que dicen</span>
-  <div id="testiContainer"></div>
+<!-- 11. CALENDARIO 2 -->
+<section id="calendario2">
+  <span class="eyebrow">¿Te apuntas?</span>
+  <h2 id="calTitulo2">Elige tu domingo</h2>
+  <div class="cal-nav">
+    <button class="cal-nav-btn" id="calPrev2">← Anterior</button>
+    <span class="cal-mes" id="calMes2"></span>
+    <button class="cal-nav-btn" id="calNext2">Siguiente →</button>
+  </div>
+  <div class="cal-grid" id="calGrid2"></div>
+  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g" style="margin-top:2rem">📱 Apuntarme por WhatsApp</a>
 </section>
 
 <hr class="divider">
 
+<!-- 12. PRÁCTICO + FAQ -->
 <section id="practico">
   <span class="eyebrow">Información práctica</span>
   <h2>Lo práctico</h2>
@@ -427,7 +494,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="p-item"><span class="p-label">Desde Madrid</span><p>A-6 salida 69. Parking sin problema. Te envío ubicación por WhatsApp.</p></div>
     <div class="p-item full"><span class="p-label">Contribución consciente</span><p>Las sesiones se ofrecen por contribución libre. Cada una aporta lo que puede y lo que siente que la experiencia vale para ella. El bosque no tiene precio de entrada.</p></div>
   </div>
-  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g">📱 Apuntarme por WhatsApp</a>
 </section>
 
 <hr class="divider">
@@ -446,6 +512,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 13. GRUPOS Y PAREJAS -->
 <section id="grupos">
   <span class="eyebrow">Sesiones privadas</span>
   <h2>Para grupos, parejas e individuales</h2>
@@ -456,20 +523,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
 </section>
 
-<hr class="divider">
-
-<section id="quien">
-  <span class="eyebrow">Quién guía</span>
-  <div class="quien-fotos">
-    <div class="q"><img src="amaranta.jpg" alt="Amaranta en el pinar"></div>
-    <div class="q"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar"></div>
-  </div>
-  <h2 style="margin-bottom:0.2rem">Amaranta</h2>
-  <p style="font-family:var(--sc);font-size:0.65rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
-  <p class="lead" style="font-size:1.05rem;margin-bottom:1.2rem">El bosque me enseñó a escuchar de otra manera. Ahora guío a otras personas para que encuentren lo que yo encontré aquí: un lugar donde no hay que ser productivo, ni fuerte, ni nada en particular. Solo estar. La naturaleza es la terapeuta más antigua que existe. Yo solo abro la puerta.</p>
-  <p style="color:var(--fg2)">Cada sesión abre con una relajación guiada que prepara el cuerpo y la mente para recibir el bosque. El resto lo hace él.</p>
-</section>
-
+<!-- CIERRE POÉTICO -->
 <div class="cierre-poetico">
   <p>Una experiencia guiada donde el silencio es el protagonista<br>y la naturaleza tu mejor terapeuta.</p>
 </div>
@@ -484,13 +538,14 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <a href="https://www.instagram.com/amaranta.bosque" target="_blank">📸 Instagram</a>
     <a href="https://www.tiktok.com/@amaranta.bosque" target="_blank">🎵 TikTok</a>
     <a href="tel:34630928698">📞 +34 630 92 86 98</a>
-    <a href="mailto:amarantanews@gmail.com">✉️ amarantanews@gmail.com</a>
+    <a href="mailto:amarantabosque@gmail.com">✉️ amarantabosque@gmail.com</a>
   </div>
 </footer>
 
 </div>
 
 <script>
+
 (function(){
   var s = document.getElementById('stars');
   for(var i = 0; i < 80; i++){
@@ -651,11 +706,54 @@ var MODOS={
   }
 };
 
+
+// ── FECHA DINÁMICA HERO ───────────────────────────────
+var MESES_TEXTO = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+var DIAS_TEXTO = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+function proximoDomingo(){
+  var hoy = new Date();
+  var d = new Date(hoy);
+  var diasHastaDomingo = (7 - d.getDay()) % 7;
+  if(diasHastaDomingo === 0) diasHastaDomingo = 7;
+  d.setDate(d.getDate() + diasHastaDomingo);
+  return d;
+}
+
+function proximaLuna(){
+  var hoy = new Date().toISOString().slice(0,10);
+  var todas = LUNAS.map(function(l){ return l[0]+'-'+(l[1]<10?'0':'')+l[1]+'-'+(l[2]<10?'0':'')+l[2]; })
+    .concat(LUNAS_NUEVAS.map(function(l){ return l[0]+'-'+(l[1]<10?'0':'')+l[1]+'-'+(l[2]<10?'0':'')+l[2]; }));
+  todas.sort();
+  var proxima = todas.filter(function(f){ return f >= hoy; })[0];
+  if(!proxima) return null;
+  var parts = proxima.split('-');
+  var fecha = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+  var esLunaLlena = LUNAS.some(function(l){ return l[0]===fecha.getFullYear()&&l[1]===fecha.getMonth()+1&&l[2]===fecha.getDate(); });
+  return { fecha: fecha, tipo: esLunaLlena ? 'llena' : 'nueva' };
+}
+
+function textoFechaHero(esDia){
+  if(esDia){
+    var d = proximoDomingo();
+    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+d.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[d.getMonth()])+'%20de%20'+d.getFullYear();
+    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">Próximo domingo · '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
+  } else {
+    var l = proximaLuna();
+    if(!l) return '';
+    var emoji = l.tipo==='llena' ? '🌕' : '🌑';
+    var nombre = l.tipo==='llena' ? 'Luna llena' : 'Luna nueva · Vía Láctea';
+    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20del%20'+l.fecha.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[l.fecha.getMonth()]);
+    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">'+emoji+' '+nombre+' · '+l.fecha.getDate()+' de '+MESES_TEXTO[l.fecha.getMonth()]+'</a>';
+  }
+}
+
 var modoActual = 'dia';
 
 function aplicarModo(modo){
   var t=MODOS[modo], esDia=(modo==='dia');
   document.getElementById('heroIcon').textContent   = t.icon;
+  var hf=document.getElementById('heroFecha'); if(hf) hf.innerHTML=textoFechaHero(esDia);
   document.getElementById('heroWord').textContent   = t.word;
   document.getElementById('heroSub').innerHTML      = t.sub;
   document.getElementById('introTexto').textContent = t.intro;
@@ -691,6 +789,74 @@ document.getElementById('themeBtn').addEventListener('click',function(){
 var guardado='';
 try{ guardado=localStorage.getItem('amaranta-theme')||''; }catch(e){}
 aplicarModo(guardado==='noche'?'noche':'dia');
+
+
+// CALENDARIO 2 - mismo mes que el primero, sincronizado
+function renderCal2(esDia){
+  var mes2 = document.getElementById('calMes2');
+  var grid2 = document.getElementById('calGrid2');
+  var titulo2 = document.getElementById('calTitulo2');
+  if(!mes2 || !grid2) return;
+  if(titulo2) titulo2.textContent = esDia ? 'Elige tu domingo' : 'Elige tu luna';
+  mes2.textContent = MESES[calM-1]+' '+calY;
+  var hoy = new Date();
+  var html = '';
+  DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
+  var off = new Date(calY,calM-1,1).getDay(); off = off===0?6:off-1;
+  for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
+  var dias = new Date(calY,calM,0).getDate();
+  for(var d=1;d<=dias;d++){
+    var cls='cal-d', url='';
+    var mes = MESES[calM-1];
+    var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
+    if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
+    if(esEclipse(calY,calM,d)){
+      cls+=' eclipse';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
+    } else if(esLuna(calY,calM,d)&&!esDia){
+      cls+=' luna';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+    } else if(esLunaNueva(calY,calM,d)&&!esDia){
+      cls+=' luna-nueva';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
+    } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
+      cls+=' dom';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
+    }
+    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
+  }
+  grid2.innerHTML = html;
+}
+
+document.getElementById('calGrid2').addEventListener('click',function(e){
+  var el=e.target.closest('[data-url]');
+  if(el) window.open(el.getAttribute('data-url'),'_blank');
+});
+document.getElementById('calPrev2').addEventListener('click',function(){
+  calM--; if(calM<1){calM=12;calY--;} 
+  renderCal(modoActual==='dia');
+  renderCal2(modoActual==='dia');
+});
+document.getElementById('calNext2').addEventListener('click',function(){
+  calM++; if(calM>12){calM=1;calY++;} 
+  renderCal(modoActual==='dia');
+  renderCal2(modoActual==='dia');
+});
+
+// Sincronizar cal2 con aplicarModo
+var _aplicarModoOriginal = aplicarModo;
+aplicarModo = function(modo){
+  _aplicarModoOriginal(modo);
+  renderCal2(modo==='dia');
+};
+
+// Reinicializar
+try{
+  var guardado2=localStorage.getItem('amaranta-theme')||'';
+  aplicarModo(guardado2==='noche'?'noche':'dia');
+}catch(e){
+  aplicarModo('dia');
+}
 </script>
 </body>
 </html>
