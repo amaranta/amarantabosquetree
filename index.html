@@ -107,23 +107,22 @@ p { font-size:0.97rem; line-height:1.75; color:var(--fg); }
 a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 
 .hero {
-  min-height:100vh; position:relative;
+  min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
   overflow:hidden; padding:0 !important;
   max-width:100%;
   margin-left:calc(-1 * clamp(1.5rem,5vw,3rem));
   width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
-  display:flex; align-items:flex-end;
 }
-.hero-img { position:absolute; inset:0; overflow:hidden; }
-.hero-img img { width:100%; height:100%; object-fit:cover; object-position:center center; filter:saturate(0.85) brightness(0.75); }
-.hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); }
-.hero-content { position:relative; z-index:2; padding:clamp(4rem,8vw,6rem) clamp(2rem,5vw,4rem); max-width:600px; }
-.hero-lugar { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:rgba(255,255,255,0.7); margin-bottom:2rem; display:block; }
-.hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:rgba(255,255,255,0.8); margin:1.8rem 0 2.5rem; line-height:1.6; }
-.hero-lema { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:rgba(255,255,255,0.6); margin-top:2.5rem; }
+.hero-img { position:relative; overflow:hidden; min-height:600px; }
+.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; filter:saturate(0.85) brightness(0.9); }
+.hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 55%,var(--bg)); }
+.hero-content { display:flex; flex-direction:column; justify-content:center; padding:clamp(6rem,12vw,9rem) clamp(2rem,4vw,3.5rem) 4rem 2.5rem; }
+.hero-lugar { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
+.hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:var(--fg2); margin:1.8rem 0 2.5rem; line-height:1.6; }
+.hero-lema { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-top:2.5rem; }
 .hero-lema span { margin:0 0.5rem; opacity:0.4; }
-h1 { color:#fff; }
-h1 em { color:var(--accent2); }
+h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
+h1 em { font-style:italic; color:var(--accent); }
 .cta-link { display:inline-flex; align-items:center; gap:0.8rem; font-family:var(--sc); font-size:0.7rem; letter-spacing:3px; font-weight:600; color:#fff; text-decoration:none; background:var(--accent); padding:13px 28px; transition:background 0.2s, transform 0.15s; }
 .cta-link:hover { background:var(--accent2); transform:translateY(-2px); text-decoration:none; }
 .cta-link::after { content:'→'; font-family:var(--sans); font-size:0.9rem; letter-spacing:0; }
@@ -221,7 +220,7 @@ h1 em { color:var(--accent2); }
 .quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
 .quien-fotos .q { overflow:hidden; aspect-ratio:3/4; }
 .quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block; filter:saturate(0.82); }
-.quien-fotos .q:last-child img { object-position:center 30%; }
+.quien-fotos .q:last-child img { object-position:center 45%; }
 
 .btn-g, .btn-n { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; padding:11px 22px; text-decoration:none; border:1px solid; transition:all 0.2s; margin-top:1.5rem; cursor:pointer; background:transparent; }
 .btn-g { border-color:var(--accent); color:var(--accent); }
@@ -241,8 +240,10 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 .hidden { display:none !important; }
 
 @media(max-width:640px){
-  .hero { min-height:70vh; }
-  .hero-content { padding:3rem 1.5rem 3rem; }
+  .hero { grid-template-columns:1fr; min-height:auto; }
+  .hero-img { height:70vw; }
+  .hero-img::after { background:linear-gradient(to bottom,transparent 50%,var(--bg)); }
+  .hero-content { padding:2rem 1.5rem 3rem; }
   .intro-grid { grid-template-columns:1fr; gap:0.5rem; }
   .horario-estacion { grid-template-columns:1fr; gap:0.4rem; }
   .estaciones-franja { grid-template-columns:repeat(3,1fr); }
@@ -641,7 +642,7 @@ var MODOS={
     llevar:'Ropa cómoda y de abrigo, calzado cerrado, agua, esterilla, cojín y manta.',
     ciencia:'La oscuridad activa la melatonina, baja el ritmo cardíaco y agudiza los sentidos. Sin estímulos visuales, la mente entra en un estado de atención abierta que reduce el estrés y mejora el sueño.',
     datos:'📊 Mayor melatonina · Reducción del estrés · Mejora del sueño',
-    heroImg:'hero-noche.jpg', galImg1:'luna.jpg', galImg2:'vialactea.jpg',
+    heroImg:'hero-noche.jpg', galImg1:'arroyo-noche.jpg', galImg2:'vialactea.jpg',
     testi:[
       {t:'"El silencio de la noche en el pinar no es vacío. Es calma. Una calma que no encontraba desde hace mucho tiempo."',a:'Elena'},
       {t:'"Dormí como no lo hacía en meses. El bosque de noche tiene algo que no se puede explicar, solo vivir."',a:'Ana'},
