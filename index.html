@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Baños de bosque con Amaranta. Parque Natural Sierra de Guadarrama, El Espinar. Sesiones de día y de noche.">
+<title>Amaranta · Baños de bosque · El Espinar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #f5f0e8;
+  --bg2: #ede5d4;
+  --fg: #1a1a12;
+  --fg2: #3d3d2d;
+  --accent: #2d5a1b;
+  --accent2: #3d7a25;
+  --line: rgba(0,0,0,0.12);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sc: 'Cormorant SC', Georgia, serif;
+  --sans: 'Jost', system-ui, sans-serif;
+  --max: 860px;
+  --gap: clamp(4rem,10vw,7rem);
+}
+
+body.noche {
+  --bg: #060c06;
+  --bg2: #0a120a;
+  --fg: #ddeedd;
+  --fg2: #99bb99;
+  --accent: #7aaa5a;
+  --accent2: #8bc87a;
+  --line: rgba(255,255,255,0.12);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--sans); font-weight: 400; line-height: 1.7;
+  transition: background 0.4s, color 0.4s; overflow-x: hidden;
+}
+
+#stars { display:none; position:fixed; inset:0; pointer-events:none; z-index:0; }
+body.noche #stars { display:block; }
+.star { position:absolute; background:#fff; border-radius:50%; animation:twinkle var(--d,3s) ease-in-out infinite alternate; }
+@keyframes twinkle { from{opacity:0.1} to{opacity:0.85} }
+
+.menu-btn {
+  position:fixed; top:20px; right:20px; z-index:1000;
+  width:44px; height:44px;
+  display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px;
+  cursor:pointer; background:var(--bg); border:1px solid var(--line); transition:background 0.3s;
+}
+.menu-btn span { display:block; width:20px; height:2px; background:var(--fg); transition:all 0.3s; }
+.menu-btn.open span:nth-child(1) { transform:rotate(45deg) translate(5px,6px); }
+.menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.menu-btn.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-6px); }
+
+.overlay { position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:998; opacity:0; visibility:hidden; transition:0.25s; }
+.overlay.open { opacity:1; visibility:visible; }
+
+.drawer {
+  position:fixed; top:0; right:-300px; width:270px; height:100%;
+  z-index:999; padding:90px 28px 40px;
+  background:var(--bg); border-left:1px solid var(--line); transition:right 0.3s ease;
+}
+.drawer.open { right:0; }
+.drawer a {
+  display:block; padding:13px 0;
+  font-family:var(--sc); font-size:0.78rem; letter-spacing:2.5px;
+  color:var(--fg); text-decoration:none; border-bottom:1px solid var(--line);
+  transition:color 0.2s, padding-left 0.2s;
+}
+.drawer a:hover { color:var(--accent); padding-left:8px; }
+
+.theme-btn {
+  position:fixed; bottom:70px; right:20px; z-index:1000;
+  font-family:var(--sc); font-size:0.68rem; letter-spacing:2px; font-weight:600;
+  color:var(--fg); background:var(--bg); border:1px solid var(--line);
+  padding:9px 16px; cursor:pointer; transition:all 0.2s;
+}
+.theme-btn:hover { color:var(--accent); border-color:var(--accent); }
+
+.wa-btn {
+  position:fixed; bottom:20px; right:20px; z-index:1000;
+  display:flex; align-items:center; gap:0.6rem;
+  background:var(--accent); color:#fff; text-decoration:none;
+  font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600;
+  padding:11px 18px; box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  transition:background 0.2s, transform 0.2s;
+}
+.wa-btn:hover { background:var(--accent2); transform:translateY(-2px); text-decoration:none; color:#fff; }
+
+.wrap { max-width:var(--max); margin:0 auto; padding:0 clamp(1.5rem,5vw,3rem); position:relative; z-index:2; }
+section { padding:var(--gap) 0; }
+.divider { border:none; border-top:1px solid var(--line); margin:0; }
+
+.eyebrow { font-family:var(--sc); font-size:0.68rem; letter-spacing:3px; font-weight:600; color:var(--accent); display:block; margin-bottom:1.2rem; }
+h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
+h1 em { font-style:italic; color:var(--accent); }
+h2 { font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.1; margin-bottom:1.5rem; color:var(--fg); }
+.lead { font-family:var(--serif); font-weight:400; font-size:clamp(1.1rem,2.5vw,1.35rem); line-height:1.6; color:var(--fg); }
+p { font-size:0.97rem; line-height:1.75; color:var(--fg); }
+a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
+
+.hero {
+  min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+  overflow:hidden; padding:0 !important;
+  max-width:100%;
+  margin-left:calc(-1 * clamp(1.5rem,5vw,3rem));
+  width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
+}
+.hero-img { position:relative; overflow:hidden; min-height:400px; }
+.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; filter:saturate(0.85) brightness(0.9); }
+.hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 55%,var(--bg)); }
+.hero-content { display:flex; flex-direction:column; justify-content:center; padding:clamp(6rem,12vw,9rem) clamp(2rem,4vw,3.5rem) 4rem 2.5rem; }
+.hero-lugar { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
+.hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:var(--fg2); margin:1.8rem 0 2.5rem; line-height:1.6; }
+.hero-lema { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-top:2.5rem; }
+.hero-lema span { margin:0 0.5rem; opacity:0.4; }
+.cta-link { display:inline-flex; align-items:center; gap:0.8rem; font-family:var(--sc); font-size:0.7rem; letter-spacing:3px; font-weight:600; color:#fff; text-decoration:none; background:var(--accent); padding:13px 28px; transition:background 0.2s, transform 0.15s; }
+.cta-link:hover { background:var(--accent2); transform:translateY(-2px); text-decoration:none; }
+.cta-link::after { content:'→'; font-family:var(--sans); font-size:0.9rem; letter-spacing:0; }
+
+.intro-grid { display:grid; grid-template-columns:150px 1fr; gap:3.5rem; align-items:start; }
+.intro-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); padding-top:0.4rem; }
+.frase-apertura { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.1rem,2.5vw,1.35rem); color:var(--accent); line-height:1.5; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
+
+.ciencia-wrap { position:relative; overflow:hidden; }
+.shinrin-bg { position:absolute; right:0; top:50%; transform:translateY(-50%); font-size:6rem; line-height:1; letter-spacing:-0.05em; color:var(--line); pointer-events:none; user-select:none; font-family:serif; opacity:0.35; }
+
+.ciencia-datos { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-top:1rem; display:block; }
+
+.horario-estacion { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); padding:1rem 0; }
+.horario-estacion:last-child { border-bottom:1px solid var(--line); }
+.h-est { font-family:var(--serif); font-size:1.05rem; color:var(--fg); line-height:1.4; }
+.h-est small { display:block; font-family:var(--sans); font-size:0.78rem; color:var(--fg2); margin-top:0.2rem; }
+.h-horas { display:flex; flex-direction:column; gap:0.3rem; justify-content:center; }
+.h-hora { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+
+.cal-leyenda { display:flex; gap:1.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+.cal-leyenda-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--sc); font-size:0.58rem; letter-spacing:2px; color:var(--fg2); }
+.cal-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.cal-dot.d { background:var(--accent); }
+.cal-dot.l { background:#c8a84b; }
+.cal-dot.n { background:#2a3a5a; }
+.cal-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+.cal-nav-btn { background:none; border:1px solid var(--line); color:var(--fg); font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; padding:8px 14px; cursor:pointer; transition:all 0.2s; }
+.cal-nav-btn:hover { border-color:var(--accent); color:var(--accent); }
+.cal-mes { font-family:var(--sc); font-size:0.8rem; letter-spacing:3px; color:var(--fg); font-weight:600; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+.cal-dnom { font-family:var(--sc); font-size:0.55rem; letter-spacing:1px; color:var(--fg2); text-align:center; padding:0.4rem 0; }
+.cal-d { height:42px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; color:var(--fg2); }
+.cal-d.dom { background:var(--accent); color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; transition:opacity 0.2s; }
+.cal-d.dom:hover { opacity:0.8; }
+.cal-d.luna { background:#c8a84b; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.eclipse { background:#d45a20; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.luna-nueva { background:#2a3a5a; color:#aac4ff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.luna-nueva:hover { opacity:0.8; }
+.cal-d.hoy { outline:2px solid var(--accent); outline-offset:-2px; }
+
+.estaciones-franja { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; margin-top:1.5rem; position:relative; }
+.est-item { padding:1.2rem 0.8rem; background:var(--bg2); cursor:pointer; transition:background 0.2s; }
+.est-item:hover { background:var(--line); }
+.est-icono { font-size:1.4rem; display:block; margin-bottom:0.4rem; }
+.est-nombre { font-family:var(--sc); font-size:0.55rem; letter-spacing:2px; color:var(--accent); font-weight:600; display:block; margin-bottom:0.2rem; }
+.est-palabra { font-family:var(--serif); font-size:0.88rem; color:var(--fg); display:block; }
+.est-detalle { display:none; position:absolute; top:100%; left:0; right:0; background:var(--bg2); border:1px solid var(--line); padding:1.2rem; z-index:10; font-size:0.85rem; color:var(--fg2); line-height:1.6; margin-top:2px; }
+.est-detalle.open { display:block; }
+.est-detalle em { display:block; margin-top:0.5rem; font-family:var(--serif); font-style:italic; color:var(--accent); font-size:0.9rem; }
+
+.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; }
+.galeria .g { overflow:hidden; height:360px; }
+.galeria .g img { width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block; filter:saturate(0.85); transition:filter 0.4s, transform 0.4s; }
+.galeria .g img:hover { filter:saturate(1); transform:scale(1.02); }
+
+.eclipse-box { border:1px solid var(--accent); padding:2rem; margin-bottom:2rem; }
+.eclipse-badge { font-family:var(--sc); font-size:0.58rem; letter-spacing:3px; font-weight:600; color:var(--bg); background:var(--accent); padding:4px 10px; display:inline-block; margin-bottom:1rem; }
+.eclipse-titulo { font-family:var(--serif); font-size:clamp(1.2rem,3vw,1.7rem); font-weight:400; color:var(--fg); margin-bottom:0.5rem; }
+.eclipse-fecha { font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-bottom:1rem; display:block; }
+.eclipse-desc { font-family:var(--serif); font-size:1rem; line-height:1.65; color:var(--fg); margin-bottom:1.2rem; }
+.eclipse-dets { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1.5rem; font-size:0.85rem; color:var(--fg2); }
+.eclipse-det-label { font-family:var(--sc); font-size:0.58rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.2rem; }
+
+.ev-item { border-top:1px solid var(--line); padding:1.1rem 0; cursor:pointer; }
+.ev-item:last-child { border-bottom:1px solid var(--line); }
+.ev-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; }
+.ev-nombre { font-family:var(--serif); font-size:1rem; color:var(--fg); }
+.ev-fecha { font-family:var(--sc); font-size:0.6rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+.ev-body { display:none; margin-top:0.9rem; }
+.ev-body.open { display:block; }
+.ev-body p { color:var(--fg2); margin-bottom:0.3rem; font-size:0.9rem; }
+
+.testi { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.1rem,2.8vw,1.55rem); line-height:1.45; color:var(--fg); padding:1.8rem 0; border-top:1px solid var(--line); }
+.testi:last-child { border-bottom:1px solid var(--line); }
+.testi-autor { display:block; font-family:var(--sc); font-style:normal; font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-top:0.8rem; }
+
+.practico-grid { display:grid; grid-template-columns:1fr 1fr; }
+.p-item { padding:1.1rem 0; border-top:1px solid var(--line); }
+.p-item:nth-child(odd) { padding-right:2rem; border-right:1px solid var(--line); }
+.p-item:nth-child(even) { padding-left:2rem; }
+.p-item.full { grid-column:1/-1; border-right:none; padding-right:0; border-bottom:1px solid var(--line); }
+.p-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.4rem; }
+
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem 2.5rem; }
+.faq-q { font-family:var(--serif); font-size:1rem; font-weight:500; color:var(--fg); margin-bottom:0.35rem; }
+.faq-a { font-size:0.92rem; color:var(--fg2); line-height:1.65; }
+
+.modalidades { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; }
+.modalidad { border:1px solid var(--line); padding:1.8rem; transition:border-color 0.2s; }
+.modalidad:hover { border-color:var(--accent); }
+.mod-titulo { font-family:var(--serif); font-size:1.2rem; color:var(--fg); margin-bottom:0.6rem; }
+.mod-texto { font-size:0.9rem; color:var(--fg2); line-height:1.65; margin-bottom:1.2rem; }
+
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
+.quien-fotos .q { overflow:hidden; height:320px; }
+.quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; filter:saturate(0.82); }
+.quien-fotos .q:last-child img { object-position:center 35%; }
+
+.btn-g, .btn-n { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; padding:11px 22px; text-decoration:none; border:1px solid; transition:all 0.2s; margin-top:1.5rem; cursor:pointer; background:transparent; }
+.btn-g { border-color:var(--accent); color:var(--accent); }
+.btn-g:hover { background:var(--accent); color:var(--bg); text-decoration:none; }
+.btn-n { border-color:var(--fg); color:var(--fg); }
+.btn-n:hover { background:var(--fg); color:var(--bg); text-decoration:none; }
+
+.cierre-poetico { padding:var(--gap) 0; text-align:center; border-top:1px solid var(--line); }
+.cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
+
+footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; }
+.f-brand { font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; font-weight:600; color:var(--fg2); line-height:2.2; }
+.f-links { text-align:right; }
+.f-links a { display:block; font-size:0.82rem; color:var(--fg2); text-decoration:none; margin-bottom:0.25rem; }
+.f-links a:hover { color:var(--accent); }
+
+.hidden { display:none !important; }
+
+@media(max-width:640px){
+  .hero { grid-template-columns:1fr; min-height:auto; }
+  .hero-img { height:70vw; }
+  .hero-img::after { background:linear-gradient(to bottom,transparent 50%,var(--bg)); }
+  .hero-content { padding:2rem 1.5rem 3rem; }
+  .intro-grid { grid-template-columns:1fr; gap:0.5rem; }
+  .horario-estacion { grid-template-columns:1fr; gap:0.4rem; }
+  .estaciones-franja { grid-template-columns:repeat(3,1fr); }
+  .galeria { grid-template-columns:1fr; }
+  .galeria .g { height:55vw; }
+  .practico-grid { grid-template-columns:1fr; }
+  .p-item:nth-child(odd) { border-right:none; padding-right:0; }
+  .p-item:nth-child(even) { padding-left:0; }
+  .faq-grid { grid-template-columns:1fr; gap:1.2rem; }
+  .modalidades { grid-template-columns:1fr; }
+  .quien-fotos { grid-template-columns:1fr; }
+  .quien-fotos .q { height:60vw; }
+  .eclipse-dets { grid-template-columns:1fr 1fr; }
+  footer { flex-direction:column; align-items:flex-start; }
+  .f-links { text-align:left; }
+}
+</style>
+</head>
+<body class="dia">
+<div id="stars"></div>
+
+<div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <a href="#inicio">Inicio</a>
+  <a href="#horarios">Horarios</a>
+  <a href="#calendario">Calendario</a>
+  <a href="#estaciones" id="linkEstaciones">Las estaciones</a>
+  <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
+  <a href="#testimonios">Testimonios</a>
+  <a href="#practico">Lo práctico</a>
+  <a href="#grupos">Grupos y parejas</a>
+  <a href="#quien">Quién soy</a>
+</div>
+
+<button class="theme-btn" id="themeBtn">☽ Noche</button>
+
+<a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="wa-btn">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.875L.057 23.5l5.797-1.52A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.579-.484-5.083-1.332l-.362-.215-3.44.902.918-3.352-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  Apuntarme
+</a>
+
+<div class="wrap">
+
+<section class="hero" id="inicio">
+  <div class="hero-img">
+    <img id="heroImg" src="hero.jpg" alt="Pinar de El Espinar">
+  </div>
+  <div class="hero-content">
+    <span class="hero-lugar">Parque Natural Sierra de Guadarrama · El Espinar</span>
+    <span id="heroIcon" style="font-size:2rem;margin-bottom:0.75rem;display:block">☀</span>
+    <h1>Baños de<br><em id="heroWord">bosque</em></h1>
+    <p class="hero-sub" id="heroSub">Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.</p>
+    <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="cta-link">Apuntarme</a>
+    <p class="hero-lema">Reconecta<span>·</span>Respira<span>·</span>Renueva</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="experiencia">
+  <div class="intro-grid">
+    <span class="intro-label" id="introLabel">La experiencia</span>
+    <div>
+      <p class="frase-apertura">Una experiencia guiada donde el silencio es el protagonista y la naturaleza tu mejor terapeuta.</p>
+      <p class="lead" id="introTexto">No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="ciencia">
+  <div class="intro-grid">
+    <span class="intro-label">Por qué funciona</span>
+    <div class="ciencia-wrap">
+      <span class="shinrin-bg">森林浴</span>
+      <p class="lead" id="cienciaTexto">El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.</p>
+      <span class="ciencia-datos" id="cienciaDatos">📊 −40% cortisol · +50% células NK · Efectos hasta 30 días</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="horarios">
+  <span class="eyebrow">Cuándo venir</span>
+  <h2>Horarios por estación</h2>
+  <div id="horarios-dia">
+    <div class="horario-estacion"><span class="h-est">🌼 Primavera<small>Abril · Mayo · Junio</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 19:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Noviembre · Febrero</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 12:00 h</span><span class="h-hora">☀ Tarde · 16:00 h</span></div></div>
+  </div>
+  <div id="horarios-noche" class="hidden">
+    <div class="horario-estacion"><span class="h-est">🌸 Primavera<small>Abril · Mayo · Junio</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 22:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 20:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Noviembre · Febrero</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 18:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">⚡ 12 agosto<small>Eclipse + Perseidas</small></span><div class="h-horas"><span class="h-hora">🌞 · 18:00 h</span></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="calendario">
+  <span class="eyebrow">Próximas sesiones</span>
+  <h2 id="calTitulo">Elige tu domingo</h2>
+  <div class="cal-leyenda">
+    <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo · sesión de día</div>
+    <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
+    <div class="cal-leyenda-item" id="leyNueva"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div>
+    <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse + Perseidas</div>
+  </div>
+  <div class="cal-nav">
+    <button class="cal-nav-btn" id="calPrev">← Anterior</button>
+    <span class="cal-mes" id="calMes"></span>
+    <button class="cal-nav-btn" id="calNext">Siguiente →</button>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+</section>
+
+<hr class="divider">
+
+<section id="estaciones">
+  <span class="eyebrow">A lo largo del año</span>
+  <h2>Las estaciones del bosque</h2>
+  <div class="estaciones-franja" id="estFranja">
+    <div class="est-item"><span class="est-icono">🌱</span><span class="est-nombre">Abril</span><span class="est-palabra">El despertar</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre soltando polen, piorno serrano, acebo.</p><p><strong>Fauna:</strong> Abubilla, cuco, pico picapinos.</p><p><strong>Medicinales:</strong> Tomillo salsero, diente de león.</p><em>El pinar se despereza después del invierno.</em></div></div>
+    <div class="est-item"><span class="est-icono">🌼</span><span class="est-nombre">Mayo</span><span class="est-palabra">El piorno</span><div class="est-detalle"><p><strong>Flora:</strong> Piorno en floración, escaramujo en flor.</p><p><strong>Fauna:</strong> Autillo, arrendajo, rabilargo ibérico.</p><p><strong>Medicinales:</strong> Rosa canina, tomillo salsero.</p><em>El piorno tiñe de amarillo los claros del pinar.</em></div></div>
+    <div class="est-item"><span class="est-icono">☀️</span><span class="est-nombre">Julio</span><span class="est-palabra">La sombra</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre en reposo, sombra densa.</p><p><strong>Fauna:</strong> Murciélagos, lagartos ocelados, buitre leonado.</p><p><strong>Medicinales:</strong> Resina de pino.</p><em>El calor aprieta fuera, pero bajo los pinos siempre hay sombra.</em></div></div>
+    <div class="est-item"><span class="est-icono">🍂</span><span class="est-nombre">Octubre</span><span class="est-palabra">Las setas</span><div class="est-detalle"><p><strong>Flora:</strong> Níscalo, boletus, roble melojo.</p><p><strong>Fauna:</strong> Ciervo (berrea), zorro.</p><p><strong>Medicinales:</strong> Diente de león, roble.</p><em>Los níscalos asoman bajo los pinos.</em></div></div>
+    <div class="est-item"><span class="est-icono">🍁</span><span class="est-nombre">Noviembre</span><span class="est-palabra">El melojo</span><div class="est-detalle"><p><strong>Flora:</strong> Roble melojo en su máximo esplendor, acebo con bayas.</p><p><strong>Fauna:</strong> Zorro, rabilargo, milano real.</p><p><strong>Medicinales:</strong> Escaramujo maduro.</p><em>El roble melojo se viste de fiesta antes de dormir.</em></div></div>
+    <div class="est-item"><span class="est-icono">❄️</span><span class="est-nombre">Enero</span><span class="est-palabra">El silencio</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre con escarcha o nieve, acebo.</p><p><strong>Fauna:</strong> Corzo, petirrojo, buitre leonado.</p><p><strong>Medicinales:</strong> Acebo (uso externo).</p><em>El invierno transforma el pinar. El silencio se vuelve denso.</em></div></div>
+  </div>
+</section>
+
+<div class="galeria">
+  <div class="g"><img src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
+  <div class="g"><img id="galImg2" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
+</div>
+
+<section id="eventos" class="hidden">
+  <span class="eyebrow">Según el calendario astronómico</span>
+  <h2>Próximas sesiones nocturnas</h2>
+  <div id="eclipseBloque" style="display:none">
+    <div class="eclipse-box">
+      <span class="eclipse-badge">⚡ Evento único · 12 agosto 2026</span>
+      <div class="eclipse-titulo">🌞✨ Eclipse solar + Perseidas</div>
+      <span class="eclipse-fecha">12 / 08 / 2026 · 18:00 h</span>
+      <p class="eclipse-desc">Un eclipse solar del 95% y la lluvia de estrellas Perseidas en la misma noche. Solo ocurre una vez en la vida. Una inmersión sensorial en el bosque mientras el cielo cambia de color, las aves callan y las estrellas fugaces cruzan el firmamento.</p>
+      <div class="eclipse-dets">
+        <div><span class="eclipse-det-label">🦉 Fauna</span>Todas las aves callan</div>
+        <div><span class="eclipse-det-label">🌿 Flora</span>Pino silvestre</div>
+        <div><span class="eclipse-det-label">🌱 Medicinal</span>Artemisa</div>
+      </div>
+      <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto" target="_blank" class="btn-g">📱 Reservar plaza</a>
+    </div>
+  </div>
+  <div id="eventosContainer"></div>
+</section>
+
+<hr class="divider">
+
+<section id="testimonios">
+  <span class="eyebrow">Lo que dicen</span>
+  <div id="testiContainer"></div>
+</section>
+
+<hr class="divider">
+
+<section id="practico">
+  <span class="eyebrow">Información práctica</span>
+  <h2>Lo práctico</h2>
+  <div class="practico-grid">
+    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Domingos. Otras fechas bajo petición.</p></div>
+    <div class="p-item"><span class="p-label">Dónde</span><p>El Espinar, Segovia. A 50 minutos de Madrid por la A-6, salida 69.</p></div>
+    <div class="p-item"><span class="p-label">Duración</span><p>Hora y media a dos horas.</p></div>
+    <div class="p-item"><span class="p-label">Grupo</span><p id="pGrupo">Máximo 12 personas.</p></div>
+    <div class="p-item"><span class="p-label">Qué llevar</span><p id="pLlevar">Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.</p></div>
+    <div class="p-item"><span class="p-label">Desde Madrid</span><p>A-6 salida 69. Parking sin problema. Te envío ubicación por WhatsApp.</p></div>
+    <div class="p-item full"><span class="p-label">Contribución consciente</span><p>Las sesiones se ofrecen por contribución libre. Cada una aporta lo que puede y lo que siente que la experiencia vale para ella. El bosque no tiene precio de entrada.</p></div>
+  </div>
+  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g">📱 Apuntarme por WhatsApp</a>
+</section>
+
+<hr class="divider">
+
+<section id="faq">
+  <span class="eyebrow">Preguntas frecuentes</span>
+  <div class="faq-grid">
+    <div><p class="faq-q">📍 ¿Dónde es exactamente?</p><p class="faq-a">En el pinar de El Espinar, Segovia. Te envío la ubicación por WhatsApp al apuntarte.</p></div>
+    <div><p class="faq-q">🌱 ¿Es para cualquier persona?</p><p class="faq-a">Sí. No hace falta experiencia previa ni condición física especial. Solo ganas de llegar.</p></div>
+    <div><p class="faq-q">🌧️ ¿Y si llueve?</p><p class="faq-a">Lo hacemos igual, salvo tormenta eléctrica. La lluvia tiene su propio regalo.</p></div>
+    <div><p class="faq-q">🤐 ¿Hay que hablar o compartir?</p><p class="faq-a">No. Solo estar. Compartir es siempre opcional.</p></div>
+    <div><p class="faq-q">👤 ¿Puedo ir sola o solo?</p><p class="faq-a">Sí. La mayoría viene así.</p></div>
+    <div><p class="faq-q">🐕 ¿Puedo llevar a mi perro?</p><p class="faq-a">No se permiten mascotas, salvo perros guía.</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="grupos">
+  <span class="eyebrow">Sesiones privadas</span>
+  <h2>Para grupos, parejas e individuales</h2>
+  <p class="lead">¿Buscas algo diferente? Preparo sesiones a medida, de día o de noche, para cualquier momento y cualquier número de personas.</p>
+  <div class="modalidades">
+    <div class="modalidad"><p class="mod-titulo">💑 Parejas o individual</p><p class="mod-texto">Una sesión íntima y personalizada, a tu ritmo. Sin grupo, sin agenda compartida. Solo el bosque y lo que necesitas encontrar en él.</p><a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20interesa%20una%20sesi%C3%B3n%20privada" target="_blank" class="btn-g">Consultar</a></div>
+    <div class="modalidad"><p class="mod-titulo">🌿 Equipos y colectivos</p><p class="mod-texto">Una experiencia diferente para tu equipo o grupo. Con el bosque como espacio de encuentro, descanso y reconexión.</p><a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20interesa%20una%20sesi%C3%B3n%20para%20grupo" target="_blank" class="btn-g">Consultar</a></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="quien">
+  <span class="eyebrow">Quién guía</span>
+  <div class="quien-fotos">
+    <div class="q"><img src="amaranta.jpg" alt="Amaranta en el pinar"></div>
+    <div class="q"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar"></div>
+  </div>
+  <h2 style="margin-bottom:0.2rem">Amaranta</h2>
+  <p style="font-family:var(--sc);font-size:0.65rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
+  <p class="lead" style="font-size:1.05rem;margin-bottom:1.2rem">El bosque me enseñó a escuchar de otra manera. Ahora guío a otras personas para que encuentren lo que yo encontré aquí: un lugar donde no hay que ser productivo, ni fuerte, ni nada en particular. Solo estar. La naturaleza es la terapeuta más antigua que existe. Yo solo abro la puerta.</p>
+  <p style="color:var(--fg2)">Cada sesión abre con una relajación guiada que prepara el cuerpo y la mente para recibir el bosque. El resto lo hace él.</p>
+</section>
+
+<div class="cierre-poetico">
+  <p>Una experiencia guiada donde el silencio es el protagonista<br>y la naturaleza tu mejor terapeuta.</p>
+</div>
+
+<footer>
+  <div class="f-brand">
+    Guía certificada · Forest Therapy Hub<br>
+    El Espinar · Segovia<br>
+    Reconecta · Respira · Renueva
+  </div>
+  <div class="f-links">
+    <a href="https://www.instagram.com/amaranta.bosque" target="_blank">📸 Instagram</a>
+    <a href="https://www.tiktok.com/@amaranta.bosque" target="_blank">🎵 TikTok</a>
+    <a href="tel:34630928698">📞 +34 630 92 86 98</a>
+    <a href="mailto:amarantanews@gmail.com">✉️ amarantanews@gmail.com</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var s = document.getElementById('stars');
+  for(var i = 0; i < 80; i++){
+    var el = document.createElement('div');
+    el.className = 'star';
+    var sz = (Math.random()*2+0.5).toFixed(1);
+    el.style.cssText = 'width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*5+2).toFixed(1)+'s';
+    s.appendChild(el);
+  }
+})();
+
+var menuBtn = document.getElementById('menuBtn');
+var drawer  = document.getElementById('drawer');
+var overlay = document.getElementById('overlay');
+function abrirMenu(){ menuBtn.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); }
+function cerrarMenu(){ menuBtn.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); }
+menuBtn.addEventListener('click', function(){ drawer.classList.contains('open') ? cerrarMenu() : abrirMenu(); });
+overlay.addEventListener('click', cerrarMenu);
+drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', cerrarMenu); });
+
+document.getElementById('estFranja').addEventListener('click', function(e){
+  var item = e.target.closest('.est-item');
+  if(!item) return;
+  var det = item.querySelector('.est-detalle');
+  var abierto = det.classList.contains('open');
+  document.querySelectorAll('.est-detalle.open').forEach(function(d){ d.classList.remove('open'); });
+  if(!abierto) det.classList.add('open');
+});
+
+var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
+var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
+var ECLIPSE = [2026,8,12];
+var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+var calY = 2026, calM = 6;
+(function(){ var h = new Date(); if(h.getFullYear()===2026 && h.getMonth()+1>=6){ calM = h.getMonth()+1; } })();
+
+function esLuna(y,m,d){ return LUNAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
+function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
+function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d; }
+
+function renderCal(esDia){
+  document.getElementById('calMes').textContent = MESES[calM-1]+' '+calY;
+  var hoy = new Date();
+  var html = '';
+  DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
+  var off = new Date(calY,calM-1,1).getDay(); off = off===0?6:off-1;
+  for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
+  var dias = new Date(calY,calM,0).getDate();
+  for(var d=1;d<=dias;d++){
+    var cls='cal-d', url='';
+    var mes = MESES[calM-1];
+    var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
+    if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
+    if(esEclipse(calY,calM,d)){
+      cls+=' eclipse';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
+    } else if(esLuna(calY,calM,d)&&!esDia){
+      cls+=' luna';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+    } else if(esLunaNueva(calY,calM,d)&&!esDia){
+      cls+=' luna-nueva';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
+    } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
+      cls+=' dom';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
+    }
+    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML = html;
+  var ll=document.getElementById('leyLuna'), le=document.getElementById('leyEclipse'), ln=document.getElementById('leyNueva');
+  if(ll) ll.style.display = esDia?'none':'flex';
+  if(ln) ln.style.display = esDia?'none':'flex';
+  if(le) le.style.display = (new Date()<=new Date(2026,7,12))?'flex':'none';
+}
+
+document.getElementById('calGrid').addEventListener('click',function(e){
+  var el=e.target.closest('[data-url]');
+  if(el) window.open(el.getAttribute('data-url'),'_blank');
+});
+document.getElementById('calPrev').addEventListener('click',function(){ calM--; if(calM<1){calM=12;calY--;} renderCal(modoActual==='dia'); });
+document.getElementById('calNext').addEventListener('click',function(){ calM++; if(calM>12){calM=1;calY++;} renderCal(modoActual==='dia'); });
+
+var EVENTOS=[
+  {f:"2026-06-15",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Sin luna, el cielo se abre. La Vía Láctea visible a simple vista entre los pinos.",fauna:"Murciélagos, autillo",flora:"Tomillo",med:"Tomillo",h:"22:00"},
+  {f:"2026-06-30",n:"Luna de Fresa",e:"🌕",d:"Primera luna llena del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"22:00"},
+  {f:"2026-07-14",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:45"},
+  {f:"2026-07-29",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:45"},
+  {f:"2026-08-12",n:"Eclipse solar + Perseidas",e:"🌞✨",d:"Eclipse solar (95%) + Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
+  {f:"2026-08-28",n:"Luna del Esturión",e:"🌕",d:"Última luna llena del verano.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"},
+  {f:"2026-09-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Andrómeda visible a simple vista. La galaxia más cercana.",fauna:"Búho real",flora:"Níscalo",med:"Diente de león",h:"20:30"},
+  {f:"2026-09-26",n:"Luna de la Cosecha",e:"🌕",d:"Luna cerca del equinoccio.",fauna:"Ciervo",flora:"Níscalos",med:"Cola de caballo",h:"20:00"},
+  {f:"2026-10-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Orión domina el cielo. Constelaciones de otoño.",fauna:"Lechuza",flora:"Roble",med:"Manzanilla",h:"19:30"},
+  {f:"2026-10-25",n:"Luna del Cazador",e:"🌕",d:"Luna de octubre.",fauna:"Cárabo",flora:"Roble",med:"Roble",h:"19:30"},
+  {f:"2026-11-09",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Noche oscura. Las Pléyades en el cénit.",fauna:"Erizo",flora:"Hongos",med:"Enebro",h:"18:30"},
+  {f:"2026-11-24",n:"Superluna",e:"🌕✨",d:"La más brillante del año.",fauna:"Corzo",flora:"Acebo",med:"Enebro",h:"18:15"},
+  {f:"2026-12-09",n:"Luna nueva · Gemínidas",e:"🌑",d:"Luna nueva coincide con las Gemínidas. Hasta 120 meteoros/hora con cielo completamente oscuro.",fauna:"Corzo",flora:"Acebo",med:"Sauco",h:"18:00"},
+  {f:"2026-12-24",n:"Luna Fría",e:"🌕🎄",d:"Nochebuena con luna llena.",fauna:"Corzo",flora:"Acebo",med:"Acebo",h:"18:00"}
+];
+
+function renderEventos(){
+  var hoy=new Date().toISOString().slice(0,10);
+  var eb=document.getElementById('eclipseBloque');
+  if(eb) eb.style.display=(hoy<='2026-08-12')?'block':'none';
+  var cont=document.getElementById('eventosContainer');
+  var prox=EVENTOS.filter(function(ev){ return ev.f>=hoy&&ev.f!=='2026-08-12'; }).slice(0,4);
+  var html='';
+  prox.forEach(function(ev){
+    var wa='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20'+encodeURIComponent(ev.n);
+    html+='<div class="ev-item"><div class="ev-head"><span class="ev-nombre">'+ev.e+' '+ev.n+'</span><span class="ev-fecha">'+ev.f.replace(/-/g,'/')+'&nbsp;&middot;&nbsp;'+ev.h+'h</span></div>';
+    html+='<div class="ev-body"><p>'+ev.d+'</p><p><strong>Fauna:</strong> '+ev.fauna+'</p><p><strong>Flora:</strong> '+ev.flora+'</p><p><strong>Medicinal:</strong> '+ev.med+'</p>';
+    html+='<a href="'+wa+'" target="_blank" class="btn-g" style="display:inline-flex;margin-top:1rem">Apuntarme</a></div></div>';
+  });
+  cont.innerHTML=html;
+}
+
+document.getElementById('eventosContainer').addEventListener('click',function(e){
+  if(e.target.tagName==='A') return;
+  var item=e.target.closest('.ev-item');
+  if(!item) return;
+  item.querySelector('.ev-body').classList.toggle('open');
+});
+
+var MODOS={
+  dia:{
+    icon:'☀',word:'bosque',
+    sub:'Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.',
+    intro:'No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.',
+    calTitulo:'Elige tu domingo',
+    cuando:'Domingos. Otras fechas bajo petición.',
+    grupo:'Máximo 12 personas.',
+    llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
+    ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
+    datos:'📊 −40% cortisol · +50% células NK · Efectos hasta 30 días',
+    heroImg:'hero.jpg', galImg2:'arroyo.jpg',
+    testi:[
+      {t:'"Llegué con la cabeza llena de ruido y salí en silencio. Un silencio que me llenaba por dentro. Nunca había sentido algo así."',a:'Carmen'},
+      {t:'"No sabía que era posible desconectar de verdad hasta que entré en ese bosque. Amaranta te lleva de la mano sin que lo notes."',a:'Lucía'},
+      {t:'"El estrés paró. Por primera vez en meses sentí que respiraba de verdad. Vuelvo el próximo domingo."',a:'Marta'}
+    ]
+  },
+  noche:{
+    icon:'☽',word:'bosque',
+    sub:'Dos horas de calma bajo las estrellas.<br>Caminamos despacio, dejando que la noche nos abrace.',
+    intro:'La noche no es ausencia de luz. Es otro tipo de presencia. Caminamos despacio, sin prisa. Escuchamos el silencio, el canto del cárabo. Miramos al cielo.',
+    calTitulo:'Elige tu luna',
+    cuando:'Según calendario astronómico y bajo petición.',
+    grupo:'Máximo 8 personas.',
+    llevar:'Ropa cómoda y de abrigo, calzado cerrado, agua, esterilla, cojín y manta.',
+    ciencia:'La oscuridad activa la melatonina, baja el ritmo cardíaco y agudiza los sentidos. Sin estímulos visuales, la mente entra en un estado de atención abierta que reduce el estrés y mejora el sueño.',
+    datos:'📊 Mayor melatonina · Reducción del estrés · Mejora del sueño',
+    heroImg:'arroyo-noche.jpg', galImg2:'arroyo-noche.jpg',
+    testi:[
+      {t:'"El silencio de la noche en el pinar no es vacío. Es calma. Una calma que no encontraba desde hace mucho tiempo."',a:'Elena'},
+      {t:'"Dormí como no lo hacía en meses. El bosque de noche tiene algo que no se puede explicar, solo vivir."',a:'Ana'},
+      {t:'"Ver las estrellas entre los pinos con todos los sentidos despiertos es una experiencia que se queda para siempre."',a:'Sofía'}
+    ]
+  }
+};
+
+var modoActual = 'dia';
+
+function aplicarModo(modo){
+  var t=MODOS[modo], esDia=(modo==='dia');
+  document.getElementById('heroIcon').textContent   = t.icon;
+  document.getElementById('heroWord').textContent   = t.word;
+  document.getElementById('heroSub').innerHTML      = t.sub;
+  document.getElementById('introTexto').textContent = t.intro;
+  document.getElementById('calTitulo').textContent  = t.calTitulo;
+  document.getElementById('pCuando').textContent    = t.cuando;
+  document.getElementById('pGrupo').textContent     = t.grupo;
+  document.getElementById('pLlevar').textContent    = t.llevar;
+  document.getElementById('cienciaTexto').textContent = t.ciencia;
+  document.getElementById('cienciaDatos').textContent = t.datos;
+  document.getElementById('heroImg').src  = t.heroImg;
+  document.getElementById('galImg2').src  = t.galImg2;
+  var th=''; t.testi.forEach(function(x){ th+='<blockquote class="testi">'+x.t+'<span class="testi-autor">— '+x.a+'</span></blockquote>'; });
+  document.getElementById('testiContainer').innerHTML = th;
+  document.getElementById('horarios-dia').classList.toggle('hidden',!esDia);
+  document.getElementById('horarios-noche').classList.toggle('hidden',esDia);
+  document.getElementById('estaciones').classList.toggle('hidden',!esDia);
+  document.getElementById('eventos').classList.toggle('hidden',esDia);
+  document.getElementById('linkEstaciones').classList.toggle('hidden',!esDia);
+  document.getElementById('linkEventos').classList.toggle('hidden',esDia);
+  document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día';
+  if(!esDia) renderEventos();
+  renderCal(esDia);
+  document.body.className = modo;
+  modoActual = modo;
+  try{ localStorage.setItem('amaranta-theme',modo); }catch(e){}
+}
+
+document.getElementById('themeBtn').addEventListener('click',function(){
+  aplicarModo(modoActual==='dia'?'noche':'dia');
+});
+
+var guardado='';
+try{ guardado=localStorage.getItem('amaranta-theme')||''; }catch(e){}
+aplicarModo(guardado==='noche'?'noche':'dia');
+</script>
+</body>
+</html>
