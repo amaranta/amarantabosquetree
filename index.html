@@ -109,7 +109,7 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 
 .hero {
   min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
-  padding:0 !important;
+  overflow:hidden; padding:0 !important;
   max-width:100%;
   margin-left:calc(-1 * clamp(1.5rem,5vw,3rem));
   width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
@@ -175,9 +175,9 @@ h1 em { font-style:italic; color:var(--accent); }
 .est-detalle.open { display:block; }
 .est-detalle em { display:block; margin-top:0.5rem; font-family:var(--serif); font-style:italic; color:var(--accent); font-size:0.9rem; }
 
-.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; }
-.galeria .g { aspect-ratio:2/3; overflow:hidden; }
-.galeria .g img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; filter:saturate(0.85); transition:filter 0.4s; }
+.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; align-items:stretch; }
+.galeria .g { overflow:hidden; aspect-ratio:4/3; }
+.galeria .g img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.85); transition:filter 0.4s, transform 0.4s; }
 .galeria .g img:hover { filter:saturate(1); }
 
 .eclipse-box { border:1px solid var(--accent); padding:2rem; margin-bottom:2rem; }
@@ -218,9 +218,9 @@ h1 em { font-style:italic; color:var(--accent); }
 .mod-titulo { font-family:var(--serif); font-size:1.2rem; color:var(--fg); margin-bottom:0.6rem; }
 .mod-texto { font-size:0.9rem; color:var(--fg2); line-height:1.65; margin-bottom:1.2rem; }
 
-.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
-.quien-fotos .q { aspect-ratio:2/3; overflow:hidden; }
-.quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; filter:saturate(0.82); }
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; align-items:start; }
+.quien-fotos .q { overflow:hidden; aspect-ratio:3/4; }
+.quien-fotos .q img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.82); }
 
 .btn-g, .btn-n { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; padding:11px 22px; text-decoration:none; border:1px solid; transition:all 0.2s; margin-top:1.5rem; cursor:pointer; background:transparent; }
 .btn-g { border-color:var(--accent); color:var(--accent); }
@@ -272,12 +272,28 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 /* CALENDARIO 2 */
 .cal2-wrap { margin-top:1.5rem; }
 
+/* GALERÍA SIN RECORTE */
+.galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; align-items:start; }
+.galeria .g img { width:100%; height:auto; display:block; filter:saturate(0.85); transition:filter 0.4s; }
+.galeria .g img:hover { filter:saturate(1); }
+
+/* QUIEN FOTOS SIN RECORTE */
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; align-items:start; }
+.quien-fotos .q img { width:100%; height:auto; display:block; filter:saturate(0.82); }
 
 @media(max-width:640px){
   .galeria { grid-template-columns:1fr; }
   .quien-fotos { grid-template-columns:1fr; }
 }
 </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-470XN53QCG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-470XN53QCG');
+</script>
 </head>
 <body class="dia">
 <div id="stars"></div>
@@ -291,6 +307,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#experiencia">La experiencia</a>
   <a href="#horarios">Horarios</a>
   <a href="#calendario">Calendario</a>
+  <a href="#estaciones" id="linkEstaciones">Las estaciones</a>
   <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
   <a href="#practico">Lo práctico</a>
   <a href="#grupos">Grupos y parejas</a>
@@ -334,9 +351,9 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <!-- 3. QUIÉN SOY -->
 <section id="quien">
   <span class="eyebrow">Quién guía</span>
-  <div class="quien-fotos" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;">
-    <div style="aspect-ratio:2/3;overflow:hidden;"><img src="amaranta.jpg" alt="Amaranta en el pinar" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.82);"></div>
-    <div style="aspect-ratio:2/3;overflow:hidden;"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.82);"></div>
+  <div class="quien-fotos">
+    <div class="q"><img src="amaranta.jpg" alt="Amaranta en el pinar"></div>
+    <div class="q"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar"></div>
   </div>
   <h2 style="margin-bottom:0.2rem">Amaranta</h2>
   <p style="font-family:var(--sc);font-size:0.72rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
@@ -364,16 +381,16 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <span class="eyebrow">Cuándo venir</span>
   <h2>Horarios por estación</h2>
   <div id="horarios-dia">
-    <div class="horario-estacion"><span class="h-est">🌼 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 19:00 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre · Noviembre</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 12:00 h</span><span class="h-hora">☀ Tarde · 16:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌼 Primavera<small>Abril · Mayo · Junio</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 19:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Noviembre · Febrero</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 12:00 h</span><span class="h-hora">☀ Tarde · 16:00 h</span></div></div>
   </div>
   <div id="horarios-noche" class="hidden">
-    <div class="horario-estacion"><span class="h-est">🌸 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 22:30 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre · Noviembre</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 20:00 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 18:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌸 Primavera<small>Abril · Mayo · Junio</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 22:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 20:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Noviembre · Febrero</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 18:30 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">⚡ 12 agosto<small>Eclipse + Perseidas</small></span><div class="h-horas"><span class="h-hora">🌞 · 18:00 h</span></div></div>
   </div>
 </section>
@@ -414,10 +431,24 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 8. ESTACIONES -->
+<section id="estaciones">
+  <span class="eyebrow">A lo largo del año</span>
+  <h2>Las estaciones del bosque</h2>
+  <div class="estaciones-franja" id="estFranja">
+    <div class="est-item"><span class="est-icono">🌱</span><span class="est-nombre">Abril</span><span class="est-palabra">El despertar</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre soltando polen, piorno serrano, acebo.</p><p><strong>Fauna:</strong> Abubilla, cuco, pico picapinos.</p><p><strong>Medicinales:</strong> Tomillo salsero, diente de león.</p><em>El pinar se despereza después del invierno.</em></div></div>
+    <div class="est-item"><span class="est-icono">🌼</span><span class="est-nombre">Mayo</span><span class="est-palabra">El piorno</span><div class="est-detalle"><p><strong>Flora:</strong> Piorno en floración, escaramujo en flor.</p><p><strong>Fauna:</strong> Autillo, arrendajo, rabilargo ibérico.</p><p><strong>Medicinales:</strong> Rosa canina, tomillo salsero.</p><em>El piorno tiñe de amarillo los claros del pinar.</em></div></div>
+    <div class="est-item"><span class="est-icono">☀️</span><span class="est-nombre">Julio</span><span class="est-palabra">La sombra</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre en reposo, sombra densa.</p><p><strong>Fauna:</strong> Murciélagos, lagartos ocelados, buitre leonado.</p><p><strong>Medicinales:</strong> Resina de pino.</p><em>El calor aprieta fuera, pero bajo los pinos siempre hay sombra.</em></div></div>
+    <div class="est-item"><span class="est-icono">🍂</span><span class="est-nombre">Octubre</span><span class="est-palabra">Las setas</span><div class="est-detalle"><p><strong>Flora:</strong> Níscalo, boletus, roble melojo.</p><p><strong>Fauna:</strong> Ciervo (berrea), zorro.</p><p><strong>Medicinales:</strong> Diente de león, roble.</p><em>Los níscalos asoman bajo los pinos.</em></div></div>
+    <div class="est-item"><span class="est-icono">🍁</span><span class="est-nombre">Noviembre</span><span class="est-palabra">El melojo</span><div class="est-detalle"><p><strong>Flora:</strong> Roble melojo en su máximo esplendor, acebo con bayas.</p><p><strong>Fauna:</strong> Zorro, rabilargo, milano real.</p><p><strong>Medicinales:</strong> Escaramujo maduro.</p><em>El roble melojo se viste de fiesta antes de dormir.</em></div></div>
+    <div class="est-item"><span class="est-icono">❄️</span><span class="est-nombre">Enero</span><span class="est-palabra">El silencio</span><div class="est-detalle"><p><strong>Flora:</strong> Pino silvestre con escarcha o nieve, acebo.</p><p><strong>Fauna:</strong> Corzo, petirrojo, buitre leonado.</p><p><strong>Medicinales:</strong> Acebo (uso externo).</p><em>El invierno transforma el pinar. El silencio se vuelve denso.</em></div></div>
+  </div>
+</section>
+
 <!-- 9. GALERÍA -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:var(--gap) 0;">
-  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg1" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
-  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg2" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
+<div class="galeria">
+  <div class="g"><img id="galImg1" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
+  <div class="g"><img id="galImg2" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
 </div>
 
 <!-- 10. EVENTOS NOCTURNOS -->
@@ -542,6 +573,15 @@ function cerrarMenu(){ menuBtn.classList.remove('open'); drawer.classList.remove
 menuBtn.addEventListener('click', function(){ drawer.classList.contains('open') ? cerrarMenu() : abrirMenu(); });
 overlay.addEventListener('click', cerrarMenu);
 drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', cerrarMenu); });
+
+document.getElementById('estFranja').addEventListener('click', function(e){
+  var item = e.target.closest('.est-item');
+  if(!item) return;
+  var det = item.querySelector('.est-detalle');
+  var abierto = det.classList.contains('open');
+  document.querySelectorAll('.est-detalle.open').forEach(function(d){ d.classList.remove('open'); });
+  if(!abierto) det.classList.add('open');
+});
 
 var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
 var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
@@ -738,7 +778,9 @@ function aplicarModo(modo){
   document.getElementById('testiContainer').innerHTML = th;
   document.getElementById('horarios-dia').classList.toggle('hidden',!esDia);
   document.getElementById('horarios-noche').classList.toggle('hidden',esDia);
+  document.getElementById('estaciones').classList.toggle('hidden',!esDia);
   document.getElementById('eventos').classList.toggle('hidden',esDia);
+  document.getElementById('linkEstaciones').classList.toggle('hidden',!esDia);
   document.getElementById('linkEventos').classList.toggle('hidden',esDia);
   document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día';
   if(!esDia) renderEventos();
