@@ -9,21 +9,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+SC:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg: #f5f0e8;
-  --bg2: #ede5d4;
-  --fg: #1a1a12;
-  --fg2: #3d3d2d;
+  --bg: #f2ede3;
+  --bg2: #e8e0ce;
+  --fg: #0d0d08;
+  --fg2: #2a2a1a;
   --accent: #2d5a1b;
   --accent2: #3d7a25;
-  --line: rgba(0,0,0,0.12);
+  --line: rgba(0,0,0,0.15);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sc: 'Cormorant SC', Georgia, serif;
   --sans: 'Jost', system-ui, sans-serif;
-  --max: min(90%, 1400px);
-  --gap: clamp(4rem,8vw,7rem);
+  --max: 860px;
+  --gap: clamp(4rem,10vw,7rem);
 }
 
 body.noche {
@@ -39,7 +40,7 @@ body.noche {
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg); color: var(--fg);
-  font-family: var(--sans); font-weight: 400; line-height: 1.7;
+  font-family: var(--sans); font-weight: 400; font-size: 18px; line-height: 1.75;
   transition: background 0.4s, color 0.4s; overflow-x: hidden;
 }
 
@@ -94,61 +95,61 @@ body.noche #stars { display:block; }
 }
 .wa-btn:hover { background:var(--accent2); transform:translateY(-2px); text-decoration:none; color:#fff; }
 
-.wrap { max-width:var(--max); margin:0 auto; padding:0 clamp(1.5rem,4vw,3rem); position:relative; z-index:2; }
+.wrap { max-width:var(--max); margin:0 auto; padding:0 clamp(1.5rem,5vw,3rem); position:relative; z-index:2; }
 section { padding:var(--gap) 0; }
 .divider { border:none; border-top:1px solid var(--line); margin:0; }
 
-.eyebrow { font-family:var(--sc); font-size:0.68rem; letter-spacing:3px; font-weight:600; color:var(--accent); display:block; margin-bottom:1.2rem; }
+.eyebrow { font-family:var(--sc); font-size:0.75rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); display:block; margin-bottom:1.2rem; }
 h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
 h1 em { font-style:italic; color:var(--accent); }
-h2 { font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.1; margin-bottom:1.5rem; color:var(--fg); }
-.lead { font-family:var(--serif); font-weight:400; font-size:clamp(1.1rem,2.5vw,1.35rem); line-height:1.6; color:var(--fg); }
-p { font-size:0.97rem; line-height:1.75; color:var(--fg); }
+h2 { font-family:var(--serif); font-weight:600; font-size:clamp(1.8rem,5vw,2.8rem); line-height:1.1; margin-bottom:1.5rem; color:var(--fg); }
+.lead { font-family:var(--serif); font-weight:500; font-size:clamp(1.25rem,2.8vw,1.55rem); line-height:1.65; color:var(--fg); }
+p { font-size:1.05rem; line-height:1.8; color:var(--fg); }
 a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 
 .hero {
   min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
-  overflow:hidden; padding:0 !important;
+  padding:0 !important;
   max-width:100%;
-  margin-left:calc(-1 * clamp(1.5rem,4vw,3rem));
-  width:calc(100% + 2 * clamp(1.5rem,4vw,3rem));
+  margin-left:calc(-1 * clamp(1.5rem,5vw,3rem));
+  width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
 }
-.hero-img { position:relative; overflow:hidden; min-height:400px; }
-.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; filter:saturate(0.85) brightness(0.9); }
+.hero-img { position:relative; overflow:hidden; min-height:600px; }
+.hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% center; filter:saturate(0.85) brightness(0.9); }
 .hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 55%,var(--bg)); }
 .hero-content { display:flex; flex-direction:column; justify-content:center; padding:clamp(6rem,12vw,9rem) clamp(2rem,4vw,3.5rem) 4rem 2.5rem; }
-.hero-lugar { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
-.hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:var(--fg2); margin:1.8rem 0 1.5rem; line-height:1.6; }
-.hero-aviso { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; color:var(--accent); margin:1rem 0 2rem; }
-.hero-lema { font-family:var(--sc); font-size:0.62rem; letter-spacing:3px; font-weight:600; color:var(--accent); margin-top:2rem; }
+.hero-lugar { font-family:var(--sc); font-size:0.72rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-bottom:2rem; display:block; }
+.hero-sub { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1rem,2vw,1.2rem); color:var(--fg2); margin:1.8rem 0 2.5rem; line-height:1.6; }
+.hero-lema { font-family:var(--sc); font-size:0.72rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-top:2.5rem; }
 .hero-lema span { margin:0 0.5rem; opacity:0.4; }
+h1 { font-family:var(--serif); font-weight:300; font-size:clamp(3.8rem,12vw,7.5rem); line-height:0.92; letter-spacing:-2px; color:var(--fg); }
+h1 em { font-style:italic; color:var(--accent); }
 .cta-link { display:inline-flex; align-items:center; gap:0.8rem; font-family:var(--sc); font-size:0.7rem; letter-spacing:3px; font-weight:600; color:#fff; text-decoration:none; background:var(--accent); padding:13px 28px; transition:background 0.2s, transform 0.15s; }
 .cta-link:hover { background:var(--accent2); transform:translateY(-2px); text-decoration:none; }
 .cta-link::after { content:'→'; font-family:var(--sans); font-size:0.9rem; letter-spacing:0; }
 
 .intro-grid { display:grid; grid-template-columns:150px 1fr; gap:3.5rem; align-items:start; }
-.intro-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); padding-top:0.4rem; }
-.frase-apertura { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.1rem,2.5vw,1.35rem); color:var(--accent); line-height:1.5; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
+.intro-label { font-family:var(--sc); font-size:0.75rem; letter-spacing:2px; font-weight:600; color:var(--accent); padding-top:0.4rem; }
+.frase-apertura { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.15rem,2.5vw,1.4rem); color:var(--accent); line-height:1.55; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
 
 .ciencia-wrap { position:relative; overflow:hidden; }
 .shinrin-bg { position:absolute; right:0; top:50%; transform:translateY(-50%); font-size:6rem; line-height:1; letter-spacing:-0.05em; color:var(--line); pointer-events:none; user-select:none; font-family:serif; opacity:0.35; }
 
-.ciencia-datos { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-top:1rem; display:block; }
+.ciencia-datos { font-family:var(--sc); font-size:0.82rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin-top:1.2rem; display:block; }
 
 .horario-estacion { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line); padding:1rem 0; }
 .horario-estacion:last-child { border-bottom:1px solid var(--line); }
-.h-est { font-family:var(--serif); font-size:1.05rem; color:var(--fg); line-height:1.4; }
+.h-est { font-family:var(--serif); font-size:1.1rem; font-weight:500; color:var(--fg); line-height:1.4; }
 .h-est small { display:block; font-family:var(--sans); font-size:0.78rem; color:var(--fg2); margin-top:0.2rem; }
 .h-horas { display:flex; flex-direction:column; gap:0.3rem; justify-content:center; }
-.h-hora { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+.h-hora { font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
 
 .cal-leyenda { display:flex; gap:1.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
 .cal-leyenda-item { display:flex; align-items:center; gap:0.4rem; font-family:var(--sc); font-size:0.58rem; letter-spacing:2px; color:var(--fg2); }
 .cal-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 .cal-dot.d { background:var(--accent); }
 .cal-dot.l { background:#c8a84b; }
-.cal-dot.n { background:#6a4e2e; }
-.cal-dot.e { background:#d45a20; }
+.cal-dot.n { background:#2a3a5a; }
 .cal-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
 .cal-nav-btn { background:none; border:1px solid var(--line); color:var(--fg); font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; padding:8px 14px; cursor:pointer; transition:all 0.2s; }
 .cal-nav-btn:hover { border-color:var(--accent); color:var(--accent); }
@@ -159,14 +160,25 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 .cal-d.dom { background:var(--accent); color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; transition:opacity 0.2s; }
 .cal-d.dom:hover { opacity:0.8; }
 .cal-d.luna { background:#c8a84b; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
-.cal-d.nueva { background:#6a4e2e; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
 .cal-d.eclipse { background:#d45a20; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.luna-nueva { background:#2a3a5a; color:#aac4ff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.luna-nueva:hover { opacity:0.8; }
 .cal-d.hoy { outline:2px solid var(--accent); outline-offset:-2px; }
 
+.estaciones-franja { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; margin-top:1.5rem; position:relative; }
+.est-item { padding:1.2rem 0.8rem; background:var(--bg2); cursor:pointer; transition:background 0.2s; }
+.est-item:hover { background:var(--line); }
+.est-icono { font-size:1.4rem; display:block; margin-bottom:0.4rem; }
+.est-nombre { font-family:var(--sc); font-size:0.7rem; letter-spacing:2px; color:var(--accent); font-weight:600; display:block; margin-bottom:0.3rem; }
+.est-palabra { font-family:var(--serif); font-size:0.95rem; font-weight:500; color:var(--fg); display:block; }
+.est-detalle { display:none; position:absolute; top:100%; left:0; right:0; background:var(--bg2); border:1px solid var(--line); padding:1.2rem; z-index:10; font-size:0.85rem; color:var(--fg2); line-height:1.6; margin-top:2px; }
+.est-detalle.open { display:block; }
+.est-detalle em { display:block; margin-top:0.5rem; font-family:var(--serif); font-style:italic; color:var(--accent); font-size:0.9rem; }
+
 .galeria { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin:var(--gap) 0; }
-.galeria .g { overflow:hidden; height:360px; }
-.galeria .g img { width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block; filter:saturate(0.85); transition:filter 0.4s, transform 0.4s; }
-.galeria .g img:hover { filter:saturate(1); transform:scale(1.02); }
+.galeria .g { aspect-ratio:2/3; overflow:hidden; }
+.galeria .g img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; filter:saturate(0.85); transition:filter 0.4s; }
+.galeria .g img:hover { filter:saturate(1); }
 
 .eclipse-box { border:1px solid var(--accent); padding:2rem; margin-bottom:2rem; }
 .eclipse-badge { font-family:var(--sc); font-size:0.58rem; letter-spacing:3px; font-weight:600; color:var(--bg); background:var(--accent); padding:4px 10px; display:inline-block; margin-bottom:1rem; }
@@ -179,37 +191,36 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 .ev-item { border-top:1px solid var(--line); padding:1.1rem 0; cursor:pointer; }
 .ev-item:last-child { border-bottom:1px solid var(--line); }
 .ev-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; }
-.ev-nombre { font-family:var(--serif); font-size:1rem; color:var(--fg); }
-.ev-fecha { font-family:var(--sc); font-size:0.6rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
+.ev-nombre { font-family:var(--serif); font-size:1.05rem; font-weight:500; color:var(--fg); }
+.ev-fecha { font-family:var(--sc); font-size:0.72rem; letter-spacing:2px; font-weight:600; color:var(--accent); }
 .ev-body { display:none; margin-top:0.9rem; }
 .ev-body.open { display:block; }
-.ev-body p { color:var(--fg2); margin-bottom:0.3rem; font-size:0.9rem; }
+.ev-body p { color:var(--fg); margin-bottom:0.4rem; font-size:1rem; }
 
-.testi { font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.1rem,2.8vw,1.55rem); line-height:1.45; color:var(--fg); padding:1.8rem 0; border-top:1px solid var(--line); }
+.testi { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.25rem,3vw,1.7rem); line-height:1.5; color:var(--fg); padding:1.8rem 0; border-top:1px solid var(--line); }
 .testi:last-child { border-bottom:1px solid var(--line); }
 .testi-autor { display:block; font-family:var(--sc); font-style:normal; font-size:0.65rem; letter-spacing:2.5px; font-weight:600; color:var(--accent); margin-top:0.8rem; }
-
-.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
-.quien-fotos .q { overflow:hidden; height:320px; }
-.quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; filter:saturate(0.82); }
-.quien-fotos .q:last-child img { object-position:center 35%; }
 
 .practico-grid { display:grid; grid-template-columns:1fr 1fr; }
 .p-item { padding:1.1rem 0; border-top:1px solid var(--line); }
 .p-item:nth-child(odd) { padding-right:2rem; border-right:1px solid var(--line); }
 .p-item:nth-child(even) { padding-left:2rem; }
 .p-item.full { grid-column:1/-1; border-right:none; padding-right:0; border-bottom:1px solid var(--line); }
-.p-label { font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.4rem; }
+.p-label { font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600; color:var(--accent); display:block; margin-bottom:0.5rem; }
 
 .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem 2.5rem; }
-.faq-q { font-family:var(--serif); font-size:1rem; font-weight:500; color:var(--fg); margin-bottom:0.35rem; }
-.faq-a { font-size:0.92rem; color:var(--fg2); line-height:1.65; }
+.faq-q { font-family:var(--serif); font-size:1.05rem; font-weight:600; color:var(--fg); margin-bottom:0.4rem; }
+.faq-a { font-size:1.05rem; color:var(--fg); line-height:1.75; }
 
 .modalidades { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; }
 .modalidad { border:1px solid var(--line); padding:1.8rem; transition:border-color 0.2s; }
 .modalidad:hover { border-color:var(--accent); }
 .mod-titulo { font-family:var(--serif); font-size:1.2rem; color:var(--fg); margin-bottom:0.6rem; }
 .mod-texto { font-size:0.9rem; color:var(--fg2); line-height:1.65; margin-bottom:1.2rem; }
+
+.quien-fotos { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
+.quien-fotos .q { aspect-ratio:2/3; overflow:hidden; }
+.quien-fotos .q img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; filter:saturate(0.82); }
 
 .btn-g, .btn-n { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--sc); font-size:0.65rem; letter-spacing:2px; font-weight:600; padding:11px 22px; text-decoration:none; border:1px solid; transition:all 0.2s; margin-top:1.5rem; cursor:pointer; background:transparent; }
 .btn-g { border-color:var(--accent); color:var(--accent); }
@@ -218,12 +229,12 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 .btn-n:hover { background:var(--fg); color:var(--bg); text-decoration:none; }
 
 .cierre-poetico { padding:var(--gap) 0; text-align:center; border-top:1px solid var(--line); }
-.cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
+.cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
 
 footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; }
-.f-brand { font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; font-weight:600; color:var(--fg2); line-height:2.2; }
+.f-brand { font-family:var(--sc); font-size:0.72rem; letter-spacing:2px; font-weight:600; color:var(--fg); line-height:2.2; }
 .f-links { text-align:right; }
-.f-links a { display:block; font-size:0.82rem; color:var(--fg2); text-decoration:none; margin-bottom:0.25rem; }
+.f-links a { display:block; font-size:0.88rem; color:var(--fg); text-decoration:none; margin-bottom:0.25rem; }
 .f-links a:hover { color:var(--accent); }
 
 .hidden { display:none !important; }
@@ -235,18 +246,36 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   .hero-content { padding:2rem 1.5rem 3rem; }
   .intro-grid { grid-template-columns:1fr; gap:0.5rem; }
   .horario-estacion { grid-template-columns:1fr; gap:0.4rem; }
+  .estaciones-franja { grid-template-columns:repeat(2,1fr); }
   .galeria { grid-template-columns:1fr; }
-  .galeria .g { height:55vw; }
   .practico-grid { grid-template-columns:1fr; }
   .p-item:nth-child(odd) { border-right:none; padding-right:0; }
   .p-item:nth-child(even) { padding-left:0; }
   .faq-grid { grid-template-columns:1fr; gap:1.2rem; }
   .modalidades { grid-template-columns:1fr; }
   .quien-fotos { grid-template-columns:1fr; }
-  .quien-fotos .q { height:60vw; }
   .eclipse-dets { grid-template-columns:1fr 1fr; }
   footer { flex-direction:column; align-items:flex-start; }
   .f-links { text-align:left; }
+}
+
+
+/* FECHA HERO */
+.hero-fecha {
+  font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600;
+  color:var(--accent); margin-bottom:1.5rem; display:block;
+  border:1px solid var(--accent); padding:8px 16px; display:inline-block;
+  transition: background 0.2s;
+}
+.hero-fecha:hover { background:var(--accent); color:var(--bg); }
+
+/* CALENDARIO 2 */
+.cal2-wrap { margin-top:1.5rem; }
+
+
+@media(max-width:640px){
+  .galeria { grid-template-columns:1fr; }
+  .quien-fotos { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -258,14 +287,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <div class="drawer" id="drawer">
   <a href="#inicio">Inicio</a>
   <a href="#testimonios">Testimonios</a>
-  <a href="#quien">Quién guía</a>
+  <a href="#quien">Quién soy</a>
   <a href="#experiencia">La experiencia</a>
   <a href="#horarios">Horarios</a>
   <a href="#calendario">Calendario</a>
-  <a href="#ciencia">Por qué funciona</a>
+  <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
   <a href="#practico">Lo práctico</a>
-  <a href="#faq">FAQ</a>
-  <a href="#grupos">Sesiones privadas</a>
+  <a href="#grupos">Grupos y parejas</a>
 </div>
 
 <button class="theme-btn" id="themeBtn">☽ Noche</button>
@@ -277,7 +305,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <div class="wrap">
 
-<!-- HERO (contenido dinámico según modo) -->
+<!-- 1. HERO -->
 <section class="hero" id="inicio">
   <div class="hero-img">
     <img id="heroImg" src="hero.jpg" alt="Pinar de El Espinar">
@@ -287,7 +315,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <span id="heroIcon" style="font-size:2rem;margin-bottom:0.75rem;display:block">☀</span>
     <h1>Baños de<br><em id="heroWord">bosque</em></h1>
     <p class="hero-sub" id="heroSub">Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.</p>
-    <div id="heroAviso" class="hero-aviso">Próximo domingo · 31 de mayo</div>
+    <span class="hero-fecha" id="heroFecha"></span>
     <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="cta-link">Apuntarme</a>
     <p class="hero-lema">Reconecta<span>·</span>Respira<span>·</span>Renueva</p>
   </div>
@@ -295,7 +323,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- TESTIMONIOS -->
+<!-- 2. TESTIMONIOS -->
 <section id="testimonios">
   <span class="eyebrow">Lo que dicen</span>
   <div id="testiContainer"></div>
@@ -303,25 +331,25 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- QUIÉN GUÍA (con fotos) -->
+<!-- 3. QUIÉN SOY -->
 <section id="quien">
   <span class="eyebrow">Quién guía</span>
-  <div class="quien-fotos">
-    <div class="q"><img src="amaranta.jpg" alt="Amaranta en el pinar"></div>
-    <div class="q"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar"></div>
+  <div class="quien-fotos" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;">
+    <div style="aspect-ratio:2/3;overflow:hidden;"><img src="amaranta.jpg" alt="Amaranta en el pinar" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.82);"></div>
+    <div style="aspect-ratio:2/3;overflow:hidden;"><img src="grupo.jpg" alt="Sesión de baño de bosque en El Espinar" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.82);"></div>
   </div>
   <h2 style="margin-bottom:0.2rem">Amaranta</h2>
-  <p style="font-family:var(--sc);font-size:0.65rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
+  <p style="font-family:var(--sc);font-size:0.72rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-bottom:1.5rem">Guía certificada · Forest Therapy Hub</p>
   <p class="lead" style="font-size:1.05rem;margin-bottom:1.2rem">El bosque me enseñó a escuchar de otra manera. Ahora guío a otras personas para que encuentren lo que yo encontré aquí: un lugar donde no hay que ser productivo, ni fuerte, ni nada en particular. Solo estar. La naturaleza es la terapeuta más antigua que existe. Yo solo abro la puerta.</p>
-  <p style="color:var(--fg2)">Cada sesión abre con una relajación guiada que prepara el cuerpo y la mente para recibir el bosque. El resto lo hace él.</p>
+  <p>Cada sesión abre con una relajación guiada que prepara el cuerpo y la mente para recibir el bosque. El resto lo hace él.</p>
 </section>
 
 <hr class="divider">
 
-<!-- LA EXPERIENCIA -->
+<!-- 4. LA EXPERIENCIA -->
 <section id="experiencia">
   <div class="intro-grid">
-    <span class="intro-label">La experiencia</span>
+    <span class="intro-label" id="introLabel">La experiencia</span>
     <div>
       <p class="frase-apertura">Una experiencia guiada donde el silencio es el protagonista y la naturaleza tu mejor terapeuta.</p>
       <p class="lead" id="introTexto">No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.</p>
@@ -331,7 +359,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- HORARIOS -->
+<!-- 5. HORARIOS -->
 <section id="horarios">
   <span class="eyebrow">Cuándo venir</span>
   <h2>Horarios por estación</h2>
@@ -352,11 +380,16 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- CALENDARIO -->
+<!-- 6. CALENDARIO 1 -->
 <section id="calendario">
   <span class="eyebrow">Próximas sesiones</span>
   <h2 id="calTitulo">Elige tu domingo</h2>
-  <div class="cal-leyenda" id="calLeyenda"></div>
+  <div class="cal-leyenda">
+    <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo · sesión de día</div>
+    <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
+    <div class="cal-leyenda-item" id="leyNueva"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div>
+    <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse + Perseidas</div>
+  </div>
   <div class="cal-nav">
     <button class="cal-nav-btn" id="calPrev">← Anterior</button>
     <span class="cal-mes" id="calMes"></span>
@@ -367,7 +400,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- POR QUÉ FUNCIONA (CIENCIA) -->
+<!-- 7. POR QUÉ FUNCIONA -->
 <section id="ciencia">
   <div class="intro-grid">
     <span class="intro-label">Por qué funciona</span>
@@ -381,13 +414,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- GALERÍA -->
-<div class="galeria">
-  <div class="g"><img src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
-  <div class="g"><img id="galImg2" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
+<!-- 9. GALERÍA -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:var(--gap) 0;">
+  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg1" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul"></div>
+  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg2" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="arroyo.jpg" alt="Arroyo entre los pinos"></div>
 </div>
 
-<!-- EVENTOS NOCTURNOS (solo se muestra en modo noche) -->
+<!-- 10. EVENTOS NOCTURNOS -->
 <section id="eventos" class="hidden">
   <span class="eyebrow">Según el calendario astronómico</span>
   <h2>Próximas sesiones nocturnas</h2>
@@ -408,9 +441,24 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <div id="eventosContainer"></div>
 </section>
 
-<hr class="divider" id="dividerEventos" style="display:none">
+<hr class="divider">
 
-<!-- SECCIÓN INFORMACIÓN PRÁCTICA, FAQ, SESIONES PRIVADAS, CIERRE, FOOTER -->
+<!-- 11. CALENDARIO 2 -->
+<section id="calendario2">
+  <span class="eyebrow">¿Te apuntas?</span>
+  <h2 id="calTitulo2">Elige tu domingo</h2>
+  <div class="cal-nav">
+    <button class="cal-nav-btn" id="calPrev2">← Anterior</button>
+    <span class="cal-mes" id="calMes2"></span>
+    <button class="cal-nav-btn" id="calNext2">Siguiente →</button>
+  </div>
+  <div class="cal-grid" id="calGrid2"></div>
+  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g" style="margin-top:2rem">📱 Apuntarme por WhatsApp</a>
+</section>
+
+<hr class="divider">
+
+<!-- 12. PRÁCTICO + FAQ -->
 <section id="practico">
   <span class="eyebrow">Información práctica</span>
   <h2>Lo práctico</h2>
@@ -423,7 +471,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="p-item"><span class="p-label">Desde Madrid</span><p>A-6 salida 69. Parking sin problema. Te envío ubicación por WhatsApp.</p></div>
     <div class="p-item full"><span class="p-label">Contribución consciente</span><p>Las sesiones se ofrecen por contribución libre. Cada una aporta lo que puede y lo que siente que la experiencia vale para ella. El bosque no tiene precio de entrada.</p></div>
   </div>
-  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g">📱 Apuntarme por WhatsApp</a>
 </section>
 
 <hr class="divider">
@@ -442,6 +489,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- 13. GRUPOS Y PAREJAS -->
 <section id="grupos">
   <span class="eyebrow">Sesiones privadas</span>
   <h2>Para grupos, parejas e individuales</h2>
@@ -452,6 +500,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
 </section>
 
+<!-- CIERRE POÉTICO -->
 <div class="cierre-poetico">
   <p>Una experiencia guiada donde el silencio es el protagonista<br>y la naturaleza tu mejor terapeuta.</p>
 </div>
@@ -473,7 +522,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 </div>
 
 <script>
-// Estrellas nocturnas
+
 (function(){
   var s = document.getElementById('stars');
   for(var i = 0; i < 80; i++){
@@ -485,7 +534,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   }
 })();
 
-// Menú
 var menuBtn = document.getElementById('menuBtn');
 var drawer  = document.getElementById('drawer');
 var overlay = document.getElementById('overlay');
@@ -495,16 +543,15 @@ menuBtn.addEventListener('click', function(){ drawer.classList.contains('open') 
 overlay.addEventListener('click', cerrarMenu);
 drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', cerrarMenu); });
 
-// Datos lunas, eclipses
-var LUNAS_LLENAS = [[2026,6,15],[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
-var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]]; // Para modo noche destacar lunas nuevas
+var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
+var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
 var ECLIPSE = [2026,8,12];
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
 var calY = 2026, calM = 6;
 (function(){ var h = new Date(); if(h.getFullYear()===2026 && h.getMonth()+1>=6){ calM = h.getMonth()+1; } })();
 
-function esLunaLlena(y,m,d){ return LUNAS_LLENAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
+function esLuna(y,m,d){ return LUNAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d; }
 
@@ -524,12 +571,12 @@ function renderCal(esDia){
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
-    } else if(!esDia && esLunaLlena(calY,calM,d)){
+    } else if(esLuna(calY,calM,d)&&!esDia){
       cls+=' luna';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20nocturna%20del%20'+ft;
-    } else if(!esDia && esLunaNueva(calY,calM,d)){
-      cls+=' nueva';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20nueva%20del%20'+ft;
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+    } else if(esLunaNueva(calY,calM,d)&&!esDia){
+      cls+=' luna-nueva';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
     } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
       cls+=' dom';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
@@ -537,6 +584,10 @@ function renderCal(esDia){
     html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
   }
   document.getElementById('calGrid').innerHTML = html;
+  var ll=document.getElementById('leyLuna'), le=document.getElementById('leyEclipse'), ln=document.getElementById('leyNueva');
+  if(ll) ll.style.display = esDia?'none':'flex';
+  if(ln) ln.style.display = esDia?'none':'flex';
+  if(le) le.style.display = (new Date()<=new Date(2026,7,12))?'flex':'none';
 }
 
 document.getElementById('calGrid').addEventListener('click',function(e){
@@ -546,15 +597,23 @@ document.getElementById('calGrid').addEventListener('click',function(e){
 document.getElementById('calPrev').addEventListener('click',function(){ calM--; if(calM<1){calM=12;calY--;} renderCal(modoActual==='dia'); });
 document.getElementById('calNext').addEventListener('click',function(){ calM++; if(calM>12){calM=1;calY++;} renderCal(modoActual==='dia'); });
 
-// Eventos astronómicos
 var EVENTOS=[
-  {f:"2026-06-15",n:"Luna nueva",e:"🌑",d:"Vía Láctea visible.",fauna:"Murciélagos",flora:"Tomillo",med:"Tomillo",h:"22:00"},
+  {f:"2026-06-15",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Sin luna, el cielo se abre. La Vía Láctea visible a simple vista entre los pinos.",fauna:"Murciélagos, autillo",flora:"Tomillo",med:"Tomillo",h:"22:00"},
   {f:"2026-06-30",n:"Luna de Fresa",e:"🌕",d:"Primera luna llena del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"22:00"},
-  {f:"2026-07-14",n:"Luna nueva",e:"🌑",d:"Oscuridad total.",fauna:"Jabalí",flora:"Hiedra",med:"Hiedra",h:"21:45"},
+  {f:"2026-07-14",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:45"},
   {f:"2026-07-29",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:45"},
-  {f:"2026-08-12",n:"Eclipse solar",e:"🌞✨",d:"Eclipse solar (95%) + Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
-  {f:"2026-08-28",n:"Luna del Esturión",e:"🌕",d:"Última luna del verano.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"}
+  {f:"2026-08-12",n:"Eclipse solar + Perseidas",e:"🌞✨",d:"Eclipse solar (95%) + Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
+  {f:"2026-08-28",n:"Luna del Esturión",e:"🌕",d:"Última luna llena del verano.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"},
+  {f:"2026-09-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Andrómeda visible a simple vista. La galaxia más cercana.",fauna:"Búho real",flora:"Níscalo",med:"Diente de león",h:"20:30"},
+  {f:"2026-09-26",n:"Luna de la Cosecha",e:"🌕",d:"Luna cerca del equinoccio.",fauna:"Ciervo",flora:"Níscalos",med:"Cola de caballo",h:"20:00"},
+  {f:"2026-10-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Orión domina el cielo. Constelaciones de otoño.",fauna:"Lechuza",flora:"Roble",med:"Manzanilla",h:"19:30"},
+  {f:"2026-10-25",n:"Luna del Cazador",e:"🌕",d:"Luna de octubre.",fauna:"Cárabo",flora:"Roble",med:"Roble",h:"19:30"},
+  {f:"2026-11-09",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Noche oscura. Las Pléyades en el cénit.",fauna:"Erizo",flora:"Hongos",med:"Enebro",h:"18:30"},
+  {f:"2026-11-24",n:"Superluna",e:"🌕✨",d:"La más brillante del año.",fauna:"Corzo",flora:"Acebo",med:"Enebro",h:"18:15"},
+  {f:"2026-12-09",n:"Luna nueva · Gemínidas",e:"🌑",d:"Luna nueva coincide con las Gemínidas. Hasta 120 meteoros/hora con cielo completamente oscuro.",fauna:"Corzo",flora:"Acebo",med:"Sauco",h:"18:00"},
+  {f:"2026-12-24",n:"Luna Fría",e:"🌕🎄",d:"Nochebuena con luna llena.",fauna:"Corzo",flora:"Acebo",med:"Acebo",h:"18:00"}
 ];
+
 function renderEventos(){
   var hoy=new Date().toISOString().slice(0,10);
   var eb=document.getElementById('eclipseBloque');
@@ -570,6 +629,7 @@ function renderEventos(){
   });
   cont.innerHTML=html;
 }
+
 document.getElementById('eventosContainer').addEventListener('click',function(e){
   if(e.target.tagName==='A') return;
   var item=e.target.closest('.ev-item');
@@ -577,12 +637,10 @@ document.getElementById('eventosContainer').addEventListener('click',function(e)
   item.querySelector('.ev-body').classList.toggle('open');
 });
 
-// Modos día / noche
 var MODOS={
   dia:{
-    icon:'☀', word:'bosque',
+    icon:'☀',word:'bosque',
     sub:'Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.',
-    aviso:'Próximo domingo · 31 de mayo',
     intro:'No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.',
     calTitulo:'Elige tu domingo',
     cuando:'Domingos. Otras fechas bajo petición.',
@@ -590,18 +648,16 @@ var MODOS={
     llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
     ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
     datos:'📊 −40% cortisol · +50% células NK · Efectos hasta 30 días',
-    heroImg:'hero.jpg', galImg2:'arroyo.jpg',
+    heroImg:'hero.jpg', galImg1:'pinos.jpg', galImg2:'arroyo.jpg',
     testi:[
       {t:'"Llegué con la cabeza llena de ruido y salí en silencio. Un silencio que me llenaba por dentro. Nunca había sentido algo así."',a:'Carmen'},
       {t:'"No sabía que era posible desconectar de verdad hasta que entré en ese bosque. Amaranta te lleva de la mano sin que lo notes."',a:'Lucía'},
       {t:'"El estrés paró. Por primera vez en meses sentí que respiraba de verdad. Vuelvo el próximo domingo."',a:'Marta'}
-    ],
-    leyenda: '<div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo · sesión de día</div><div class="cal-leyenda-item"><div class="cal-dot e"></div>Eclipse + Perseidas</div>'
+    ]
   },
   noche:{
-    icon:'☽', word:'bosque',
+    icon:'☽',word:'bosque',
     sub:'Dos horas de calma bajo las estrellas.<br>Caminamos despacio, dejando que la noche nos abrace.',
-    aviso:'🌑 Luna nueva · Vía Láctea · 15 de junio',
     intro:'La noche no es ausencia de luz. Es otro tipo de presencia. Caminamos despacio, sin prisa. Escuchamos el silencio, el canto del cárabo. Miramos al cielo.',
     calTitulo:'Elige tu luna',
     cuando:'Según calendario astronómico y bajo petición.',
@@ -609,55 +665,164 @@ var MODOS={
     llevar:'Ropa cómoda y de abrigo, calzado cerrado, agua, esterilla, cojín y manta.',
     ciencia:'La oscuridad activa la melatonina, baja el ritmo cardíaco y agudiza los sentidos. Sin estímulos visuales, la mente entra en un estado de atención abierta que reduce el estrés y mejora el sueño.',
     datos:'📊 Mayor melatonina · Reducción del estrés · Mejora del sueño',
-    heroImg:'arroyo-noche.jpg', galImg2:'arroyo-noche.jpg',
+    heroImg:'hero-noche.jpg', galImg1:'arroyo-noche.jpg', galImg2:'vialactea.jpg',
     testi:[
       {t:'"El silencio de la noche en el pinar no es vacío. Es calma. Una calma que no encontraba desde hace mucho tiempo."',a:'Elena'},
       {t:'"Dormí como no lo hacía en meses. El bosque de noche tiene algo que no se puede explicar, solo vivir."',a:'Ana'},
       {t:'"Ver las estrellas entre los pinos con todos los sentidos despiertos es una experiencia que se queda para siempre."',a:'Sofía'}
-    ],
-    leyenda: '<div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo · sesión de día</div><div class="cal-leyenda-item"><div class="cal-dot l"></div>Luna llena · nocturna</div><div class="cal-leyenda-item"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div><div class="cal-leyenda-item"><div class="cal-dot e"></div>Eclipse + Perseidas</div>'
+    ]
   }
 };
+
+
+// ── FECHA DINÁMICA HERO ───────────────────────────────
+var MESES_TEXTO = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+var DIAS_TEXTO = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+function proximoDomingo(){
+  var hoy = new Date();
+  var d = new Date(hoy);
+  var diasHastaDomingo = (7 - d.getDay()) % 7;
+  if(diasHastaDomingo === 0) diasHastaDomingo = 7;
+  d.setDate(d.getDate() + diasHastaDomingo);
+  return d;
+}
+
+function proximaLuna(){
+  var hoy = new Date().toISOString().slice(0,10);
+  var todas = LUNAS.map(function(l){ return l[0]+'-'+(l[1]<10?'0':'')+l[1]+'-'+(l[2]<10?'0':'')+l[2]; })
+    .concat(LUNAS_NUEVAS.map(function(l){ return l[0]+'-'+(l[1]<10?'0':'')+l[1]+'-'+(l[2]<10?'0':'')+l[2]; }));
+  todas.sort();
+  var proxima = todas.filter(function(f){ return f >= hoy; })[0];
+  if(!proxima) return null;
+  var parts = proxima.split('-');
+  var fecha = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+  var esLunaLlena = LUNAS.some(function(l){ return l[0]===fecha.getFullYear()&&l[1]===fecha.getMonth()+1&&l[2]===fecha.getDate(); });
+  return { fecha: fecha, tipo: esLunaLlena ? 'llena' : 'nueva' };
+}
+
+function textoFechaHero(esDia){
+  if(esDia){
+    var d = proximoDomingo();
+    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+d.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[d.getMonth()])+'%20de%20'+d.getFullYear();
+    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">Próximo domingo · '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
+  } else {
+    var l = proximaLuna();
+    if(!l) return '';
+    var emoji = l.tipo==='llena' ? '🌕' : '🌑';
+    var nombre = l.tipo==='llena' ? 'Luna llena' : 'Luna nueva · Vía Láctea';
+    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20del%20'+l.fecha.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[l.fecha.getMonth()]);
+    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">'+emoji+' '+nombre+' · '+l.fecha.getDate()+' de '+MESES_TEXTO[l.fecha.getMonth()]+'</a>';
+  }
+}
 
 var modoActual = 'dia';
 
 function aplicarModo(modo){
   var t=MODOS[modo], esDia=(modo==='dia');
-  document.getElementById('heroIcon').textContent = t.icon;
-  document.getElementById('heroWord').textContent = t.word;
-  document.getElementById('heroSub').innerHTML = t.sub;
-  document.getElementById('heroAviso').innerHTML = t.aviso;
+  document.getElementById('heroIcon').textContent   = t.icon;
+  var hf=document.getElementById('heroFecha'); if(hf) hf.innerHTML=textoFechaHero(esDia);
+  document.getElementById('heroWord').textContent   = t.word;
+  document.getElementById('heroSub').innerHTML      = t.sub;
   document.getElementById('introTexto').textContent = t.intro;
-  document.getElementById('calTitulo').textContent = t.calTitulo;
-  document.getElementById('pCuando').textContent = t.cuando;
-  document.getElementById('pGrupo').textContent = t.grupo;
-  document.getElementById('pLlevar').textContent = t.llevar;
+  document.getElementById('calTitulo').textContent  = t.calTitulo;
+  document.getElementById('pCuando').textContent    = t.cuando;
+  document.getElementById('pGrupo').textContent     = t.grupo;
+  document.getElementById('pLlevar').textContent    = t.llevar;
   document.getElementById('cienciaTexto').textContent = t.ciencia;
   document.getElementById('cienciaDatos').textContent = t.datos;
-  document.getElementById('heroImg').src = t.heroImg;
-  document.getElementById('galImg2').src = t.galImg2;
+  document.getElementById('heroImg').src  = t.heroImg;
+  document.getElementById('galImg1').src  = t.galImg1;
+  document.getElementById('galImg2').src  = t.galImg2;
   var th=''; t.testi.forEach(function(x){ th+='<blockquote class="testi">'+x.t+'<span class="testi-autor">— '+x.a+'</span></blockquote>'; });
   document.getElementById('testiContainer').innerHTML = th;
-  document.getElementById('horarios-dia').classList.toggle('hidden', !esDia);
-  document.getElementById('horarios-noche').classList.toggle('hidden', esDia);
-  document.getElementById('eventos').classList.toggle('hidden', esDia);
-  document.getElementById('dividerEventos').style.display = esDia ? 'none' : 'block';
-  document.getElementById('calLeyenda').innerHTML = t.leyenda;
+  document.getElementById('horarios-dia').classList.toggle('hidden',!esDia);
+  document.getElementById('horarios-noche').classList.toggle('hidden',esDia);
+  document.getElementById('eventos').classList.toggle('hidden',esDia);
+  document.getElementById('linkEventos').classList.toggle('hidden',esDia);
   document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día';
   if(!esDia) renderEventos();
   renderCal(esDia);
   document.body.className = modo;
   modoActual = modo;
-  try{ localStorage.setItem('amaranta-theme', modo); } catch(e){}
+  try{ localStorage.setItem('amaranta-theme',modo); }catch(e){}
 }
 
 document.getElementById('themeBtn').addEventListener('click',function(){
-  aplicarModo(modoActual==='dia' ? 'noche' : 'dia');
+  aplicarModo(modoActual==='dia'?'noche':'dia');
 });
 
 var guardado='';
-try{ guardado=localStorage.getItem('amaranta-theme')||''; } catch(e){}
-aplicarModo(guardado==='noche' ? 'noche' : 'dia');
+try{ guardado=localStorage.getItem('amaranta-theme')||''; }catch(e){}
+aplicarModo(guardado==='noche'?'noche':'dia');
+
+
+// CALENDARIO 2 - mismo mes que el primero, sincronizado
+function renderCal2(esDia){
+  var mes2 = document.getElementById('calMes2');
+  var grid2 = document.getElementById('calGrid2');
+  var titulo2 = document.getElementById('calTitulo2');
+  if(!mes2 || !grid2) return;
+  if(titulo2) titulo2.textContent = esDia ? 'Elige tu domingo' : 'Elige tu luna';
+  mes2.textContent = MESES[calM-1]+' '+calY;
+  var hoy = new Date();
+  var html = '';
+  DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
+  var off = new Date(calY,calM-1,1).getDay(); off = off===0?6:off-1;
+  for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
+  var dias = new Date(calY,calM,0).getDate();
+  for(var d=1;d<=dias;d++){
+    var cls='cal-d', url='';
+    var mes = MESES[calM-1];
+    var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
+    if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
+    if(esEclipse(calY,calM,d)){
+      cls+=' eclipse';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
+    } else if(esLuna(calY,calM,d)&&!esDia){
+      cls+=' luna';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+    } else if(esLunaNueva(calY,calM,d)&&!esDia){
+      cls+=' luna-nueva';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
+    } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
+      cls+=' dom';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
+    }
+    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
+  }
+  grid2.innerHTML = html;
+}
+
+document.getElementById('calGrid2').addEventListener('click',function(e){
+  var el=e.target.closest('[data-url]');
+  if(el) window.open(el.getAttribute('data-url'),'_blank');
+});
+document.getElementById('calPrev2').addEventListener('click',function(){
+  calM--; if(calM<1){calM=12;calY--;} 
+  renderCal(modoActual==='dia');
+  renderCal2(modoActual==='dia');
+});
+document.getElementById('calNext2').addEventListener('click',function(){
+  calM++; if(calM>12){calM=1;calY++;} 
+  renderCal(modoActual==='dia');
+  renderCal2(modoActual==='dia');
+});
+
+// Sincronizar cal2 con aplicarModo
+var _aplicarModoOriginal = aplicarModo;
+aplicarModo = function(modo){
+  _aplicarModoOriginal(modo);
+  renderCal2(modo==='dia');
+};
+
+// Reinicializar
+try{
+  var guardado2=localStorage.getItem('amaranta-theme')||'';
+  aplicarModo(guardado2==='noche'?'noche':'dia');
+}catch(e){
+  aplicarModo('dia');
+}
 </script>
 </body>
 </html>
