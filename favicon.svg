@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    rect.bg { fill: #F0EDE4; }
+    g.pine { stroke: #2D5016; }
+    @media (prefers-color-scheme: dark) {
+      rect.bg { fill: #1A2318; }
+      g.pine { stroke: #C8A96E; }
+    }
+  </style>
+  <rect class="bg" width="100" height="100" rx="18"/>
+  <g class="pine" fill="none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(50,12)">
+    <polyline points="0,0 -16,22 16,22"/>
+    <polyline points="-6,12 -26,38 26,38"/>
+    <polyline points="-12,26 -34,56 34,56"/>
+    <line x1="0" y1="56" x2="0" y2="72"/>
+    <line x1="-12" y1="72" x2="12" y2="72"/>
+  </g>
+</svg>
