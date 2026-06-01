@@ -282,10 +282,32 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 /* CALENDARIO 2 */
 .cal2-wrap { margin-top:1.5rem; }
 
+/* SELECTOR DE HORARIO */
+.horario-picker {
+  display:none; margin-top:1rem; padding:1.2rem 1.4rem;
+  background:var(--bg2); border:1px solid var(--accent);
+  animation: fadeIn 0.2s ease;
+}
+.horario-picker.visible { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+.horario-picker-titulo {
+  font-family:var(--sc); font-size:0.65rem; letter-spacing:2.5px; font-weight:600;
+  color:var(--accent); margin-bottom:0.9rem; display:block;
+}
+.horario-picker-btns { display:flex; gap:0.7rem; flex-wrap:wrap; }
+.horario-opt {
+  font-family:var(--sc); font-size:0.7rem; letter-spacing:2px; font-weight:600;
+  color:var(--accent); background:transparent; border:1px solid var(--accent);
+  padding:10px 20px; cursor:pointer; transition:all 0.2s; text-decoration:none;
+  display:inline-flex; align-items:center; gap:0.4rem;
+}
+.horario-opt:hover { background:var(--accent); color:var(--bg); text-decoration:none; }
+
 
 @media(max-width:640px){
   .galeria { grid-template-columns:1fr; }
   .quien-fotos { grid-template-columns:1fr; }
+  .horario-picker-btns { flex-direction:column; }
 }
 </style>
 </head>
@@ -406,6 +428,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <button class="cal-nav-btn" id="calNext">Siguiente →</button>
   </div>
   <div class="cal-grid" id="calGrid"></div>
+  <div class="horario-picker" id="horarioPicker1">
+    <span class="horario-picker-titulo" id="horarioPickerTitulo1">Elige horario para el domingo</span>
+    <div class="horario-picker-btns">
+      <a class="horario-opt" id="horarioOpt1a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
+      <a class="horario-opt" id="horarioOpt1b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -463,6 +492,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <button class="cal-nav-btn" id="calNext2">Siguiente →</button>
   </div>
   <div class="cal-grid" id="calGrid2"></div>
+  <div class="horario-picker" id="horarioPicker2">
+    <span class="horario-picker-titulo" id="horarioPickerTitulo2">Elige horario para el domingo</span>
+    <div class="horario-picker-btns">
+      <a class="horario-opt" id="horarioOpt2a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
+      <a class="horario-opt" id="horarioOpt2b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
+    </div>
+  </div>
   <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g" style="margin-top:2rem">📱 Apuntarme por WhatsApp</a>
 </section>
 
@@ -567,6 +603,9 @@ function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d
 
 function renderCal(esDia){
   document.getElementById('calMes').textContent = MESES[calM-1]+' '+calY;
+  // Ocultar picker si estaba visible
+  var picker1 = document.getElementById('horarioPicker1');
+  if(picker1) picker1.classList.remove('visible');
   var hoy = new Date();
   var html = '';
   DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
@@ -574,9 +613,10 @@ function renderCal(esDia){
   for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
   var dias = new Date(calY,calM,0).getDate();
   for(var d=1;d<=dias;d++){
-    var cls='cal-d', url='';
+    var cls='cal-d', url='', extraAttrs='';
     var mes = MESES[calM-1];
     var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
+    var ftTexto = d+' de '+mes+' de '+calY;
     if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
@@ -589,9 +629,10 @@ function renderCal(esDia){
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
     } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
       cls+=' dom';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
+      url='placeholder';
+      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'"';
     }
-    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
+    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
   }
   document.getElementById('calGrid').innerHTML = html;
   var ll=document.getElementById('leyLuna'), le=document.getElementById('leyEclipse'), ln=document.getElementById('leyNueva');
@@ -600,9 +641,36 @@ function renderCal(esDia){
   if(le) le.style.display = (new Date()<=new Date(2026,7,12))?'flex':'none';
 }
 
+// Horarios por estación (mañana, tarde)
+function horasPorMes(m){
+  if(m>=6&&m<=8) return ['10:00','19:00'];   // Verano
+  if(m===12||m<=2) return ['12:00','16:00'];  // Invierno
+  return ['11:00','18:00'];                   // Primavera / Otoño
+}
+
 document.getElementById('calGrid').addEventListener('click',function(e){
   var el=e.target.closest('[data-url]');
-  if(el) window.open(el.getAttribute('data-url'),'_blank');
+  if(!el) return;
+  if(el.classList.contains('dom')){
+    // Mostrar selector de horario
+    var picker = document.getElementById('horarioPicker1');
+    var tituloEl = document.getElementById('horarioPickerTitulo1');
+    var ftTexto = el.getAttribute('data-fecha-texto');
+    var ftEncoded = el.getAttribute('data-fecha');
+    tituloEl.textContent = 'Elige horario · ' + ftTexto;
+    var horas = horasPorMes(calM);
+    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20' + ftEncoded;
+    var opt1a = document.getElementById('horarioOpt1a');
+    var opt1b = document.getElementById('horarioOpt1b');
+    opt1a.textContent = '☀ Mañana · ' + horas[0] + ' h';
+    opt1b.textContent = '☀ Tarde · ' + horas[1] + ' h';
+    opt1a.href = base + '%20a%20las%20' + encodeURIComponent(horas[0]) + '%20h';
+    opt1b.href = base + '%20a%20las%20' + encodeURIComponent(horas[1]) + '%20h';
+    picker.classList.add('visible');
+    picker.scrollIntoView({behavior:'smooth', block:'nearest'});
+  } else {
+    window.open(el.getAttribute('data-url'),'_blank');
+  }
 });
 document.getElementById('calPrev').addEventListener('click',function(){ calM--; if(calM<1){calM=12;calY--;} renderCal(modoActual==='dia'); });
 document.getElementById('calNext').addEventListener('click',function(){ calM++; if(calM>12){calM=1;calY++;} renderCal(modoActual==='dia'); });
@@ -775,6 +843,9 @@ function renderCal2(esDia){
   if(!mes2 || !grid2) return;
   if(titulo2) titulo2.textContent = esDia ? 'Elige tu domingo' : 'Elige tu luna';
   mes2.textContent = MESES[calM-1]+' '+calY;
+  // Ocultar picker si estaba visible
+  var picker2 = document.getElementById('horarioPicker2');
+  if(picker2) picker2.classList.remove('visible');
   var hoy = new Date();
   var html = '';
   DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
@@ -782,9 +853,10 @@ function renderCal2(esDia){
   for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
   var dias = new Date(calY,calM,0).getDate();
   for(var d=1;d<=dias;d++){
-    var cls='cal-d', url='';
+    var cls='cal-d', url='', extraAttrs='';
     var mes = MESES[calM-1];
     var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
+    var ftTexto = d+' de '+mes+' de '+calY;
     if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
@@ -797,16 +869,36 @@ function renderCal2(esDia){
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
     } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
       cls+=' dom';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+ft;
+      url='placeholder';
+      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'"';
     }
-    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+'>'+d+'</div>';
+    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
   }
   grid2.innerHTML = html;
 }
 
 document.getElementById('calGrid2').addEventListener('click',function(e){
   var el=e.target.closest('[data-url]');
-  if(el) window.open(el.getAttribute('data-url'),'_blank');
+  if(!el) return;
+  if(el.classList.contains('dom')){
+    var picker = document.getElementById('horarioPicker2');
+    var tituloEl = document.getElementById('horarioPickerTitulo2');
+    var ftTexto = el.getAttribute('data-fecha-texto');
+    var ftEncoded = el.getAttribute('data-fecha');
+    tituloEl.textContent = 'Elige horario · ' + ftTexto;
+    var horas = horasPorMes(calM);
+    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20' + ftEncoded;
+    var opt2a = document.getElementById('horarioOpt2a');
+    var opt2b = document.getElementById('horarioOpt2b');
+    opt2a.textContent = '☀ Mañana · ' + horas[0] + ' h';
+    opt2b.textContent = '☀ Tarde · ' + horas[1] + ' h';
+    opt2a.href = base + '%20a%20las%20' + encodeURIComponent(horas[0]) + '%20h';
+    opt2b.href = base + '%20a%20las%20' + encodeURIComponent(horas[1]) + '%20h';
+    picker.classList.add('visible');
+    picker.scrollIntoView({behavior:'smooth', block:'nearest'});
+  } else {
+    window.open(el.getAttribute('data-url'),'_blank');
+  }
 });
 document.getElementById('calPrev2').addEventListener('click',function(){
   calM--; if(calM<1){calM=12;calY--;} 
