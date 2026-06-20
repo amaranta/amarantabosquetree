@@ -424,9 +424,9 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <!-- 6. CALENDARIO 1 -->
 <section id="calendario">
   <span class="eyebrow">Próximas sesiones</span>
-  <h2 id="calTitulo">Elige tu domingo</h2>
+  <h2 id="calTitulo">Elige tu día</h2>
   <div class="cal-leyenda">
-    <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo · sesión de día</div>
+    <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo y sábado · sesión de día</div>
     <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
     <div class="cal-leyenda-item" id="leyNueva"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div>
     <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse + Perseidas</div>
@@ -438,11 +438,11 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
   <div class="cal-grid" id="calGrid"></div>
   <div class="horario-picker" id="horarioPicker1">
-    <span class="horario-picker-titulo" id="horarioPickerTitulo1">Elige horario para el domingo</span>
+    <span class="horario-picker-titulo" id="horarioPickerTitulo1">Elige horario</span>
     <div class="horario-picker-btns">
       <a class="horario-opt" id="horarioOpt1a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
       <a class="horario-opt" id="horarioOpt1b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
-      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 12 personas · Te confirmo plaza por WhatsApp.</p>
+      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 8 personas · Te confirmo plaza por WhatsApp.</p>
   </div>
   </div>
 </section>
@@ -495,7 +495,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <!-- 11. CALENDARIO 2 -->
 <section id="calendario2">
   <span class="eyebrow">¿Te apuntas?</span>
-  <h2 id="calTitulo2">Elige tu domingo</h2>
+  <h2 id="calTitulo2">Elige tu día</h2>
   <div class="cal-nav">
     <button class="cal-nav-btn" id="calPrev2">← Anterior</button>
     <span class="cal-mes" id="calMes2"></span>
@@ -503,11 +503,11 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
   <div class="cal-grid" id="calGrid2"></div>
   <div class="horario-picker" id="horarioPicker2">
-    <span class="horario-picker-titulo" id="horarioPickerTitulo2">Elige horario para el domingo</span>
+    <span class="horario-picker-titulo" id="horarioPickerTitulo2">Elige horario</span>
     <div class="horario-picker-btns">
       <a class="horario-opt" id="horarioOpt2a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
       <a class="horario-opt" id="horarioOpt2b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
-      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 12 personas · Te confirmo plaza por WhatsApp.</p>
+      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 8 personas · Te confirmo plaza por WhatsApp.</p>
   </div>
   </div>
   <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g" style="margin-top:2rem">📱 Apuntarme por WhatsApp</a>
@@ -520,10 +520,10 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <span class="eyebrow">Información práctica</span>
   <h2>Lo práctico</h2>
   <div class="practico-grid">
-    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Domingos. Otras fechas bajo petición.</p></div>
+    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Domingos. Sábados a partir del 27 de junio. Otras fechas bajo petición.</p></div>
     <div class="p-item"><span class="p-label">Dónde</span><p>El Espinar, Segovia. A 50 minutos de Madrid por la A-6, salida 69.</p></div>
     <div class="p-item"><span class="p-label">Duración</span><p>Hora y media a dos horas.</p></div>
-    <div class="p-item"><span class="p-label">Grupo</span><p id="pGrupo">Máximo 12 personas.</p></div>
+    <div class="p-item"><span class="p-label">Grupo</span><p id="pGrupo">Máximo 8 personas.</p></div>
     <div class="p-item"><span class="p-label">Qué llevar</span><p id="pLlevar">Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.</p></div>
     <div class="p-item"><span class="p-label">Desde Madrid</span><p>A-6 salida 69. Parking sin problema. Te envío ubicación por WhatsApp.</p></div>
     <div class="p-item full"><span class="p-label">Contribución consciente</span><p>Las sesiones se ofrecen por contribución libre. Cada una aporta lo que puede y lo que siente que la experiencia vale para ella. El bosque no tiene precio de entrada.</p></div>
@@ -571,6 +571,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <div class="f-links">
     <a href="https://www.instagram.com/amaranta.bosque" target="_blank">📸 Instagram</a>
     <a href="https://www.tiktok.com/@amaranta.bosque" target="_blank">🎵 TikTok</a>
+    <a href="https://www.facebook.com/profile.php?id=1653049362" target="_blank">📘 Facebook</a>
+    <a href="https://open.spotify.com/show/033yJJfA1HJmljPhQ2t8Ko" target="_blank">🎧 Spotify</a>
     <a href="tel:34630928698">📞 +34 630 92 86 98</a>
     <a href="mailto:amarantabosque@gmail.com">✉️ amarantabosque@gmail.com</a>
   </div>
@@ -603,6 +605,7 @@ drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', ce
 var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
 var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
 var ECLIPSE = [2026,8,12];
+var LIMITE_SABADOS = new Date(2026,5,27); // sábados reservables a partir del 27 de junio de 2026
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
 var calY = 2026, calM = 6;
@@ -611,6 +614,13 @@ var calY = 2026, calM = 6;
 function esLuna(y,m,d){ return LUNAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d; }
+function esDiaReservable(y,m,d){
+  var fecha = new Date(y,m-1,d);
+  var dow = fecha.getDay();
+  if(dow===0) return true;
+  if(dow===6 && fecha>=LIMITE_SABADOS) return true;
+  return false;
+}
 
 function renderCal(esDia){
   document.getElementById('calMes').textContent = MESES[calM-1]+' '+calY;
@@ -638,10 +648,11 @@ function renderCal(esDia){
     } else if(esLunaNueva(calY,calM,d)&&!esDia){
       cls+=' luna-nueva';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
-    } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
+    } else if(esDia && esDiaReservable(calY,calM,d)){
       cls+=' dom';
       url='placeholder';
-      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'"';
+      var diaNombre = new Date(calY,calM-1,d).getDay()===6 ? 'sábado' : 'domingo';
+      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="'+encodeURIComponent(diaNombre)+'"';
     }
     html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
   }
@@ -668,9 +679,10 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     var tituloEl = document.getElementById('horarioPickerTitulo1');
     var ftTexto = el.getAttribute('data-fecha-texto');
     var ftEncoded = el.getAttribute('data-fecha');
+    var diaNombre = el.getAttribute('data-dia') || 'domingo';
     tituloEl.textContent = 'Elige horario · ' + ftTexto;
     var horas = horasPorMes(calM);
-    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20' + ftEncoded;
+    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
     var opt1a = document.getElementById('horarioOpt1a');
     var opt1b = document.getElementById('horarioOpt1b');
     opt1a.textContent = '☀ Mañana · ' + horas[0] + ' h';
@@ -731,9 +743,9 @@ var MODOS={
     icon:'☀',word:'bosque',
     sub:'Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.',
     intro:'No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.',
-    calTitulo:'Elige tu domingo',
-    cuando:'Domingos. Otras fechas bajo petición.',
-    grupo:'Máximo 12 personas.',
+    calTitulo:'Elige tu día',
+    cuando:'Domingos. Sábados a partir del 27 de junio. Otras fechas bajo petición.',
+    grupo:'Máximo 8 personas.',
     llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
     ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
     datos:'📊 −40% cortisol · +50% células NK · Efectos hasta 30 días',
@@ -769,12 +781,13 @@ var MODOS={
 var MESES_TEXTO = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 var DIAS_TEXTO = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 
-function proximoDomingo(){
+function proximoDiaReservable(){
   var hoy = new Date();
-  var d = new Date(hoy);
-  var diasHastaDomingo = (7 - d.getDay()) % 7;
-  if(diasHastaDomingo === 0) diasHastaDomingo = 7;
-  d.setDate(d.getDate() + diasHastaDomingo);
+  var d = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  for(var i=1; i<=14; i++){
+    var cand = new Date(d.getFullYear(), d.getMonth(), d.getDate()+i);
+    if(esDiaReservable(cand.getFullYear(), cand.getMonth()+1, cand.getDate())) return cand;
+  }
   return d;
 }
 
@@ -793,9 +806,11 @@ function proximaLuna(){
 
 function textoFechaHero(esDia){
   if(esDia){
-    var d = proximoDomingo();
-    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20'+d.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[d.getMonth()])+'%20de%20'+d.getFullYear();
-    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">Próximo domingo · '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
+    var d = proximoDiaReservable();
+    var diaTexto = DIAS_TEXTO[d.getDay()];
+    var diaCap = diaTexto.charAt(0).toUpperCase() + diaTexto.slice(1);
+    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20'+encodeURIComponent(diaTexto)+'%20'+d.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[d.getMonth()])+'%20de%20'+d.getFullYear();
+    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
   } else {
     var l = proximaLuna();
     if(!l) return '';
@@ -853,7 +868,7 @@ function renderCal2(esDia){
   var grid2 = document.getElementById('calGrid2');
   var titulo2 = document.getElementById('calTitulo2');
   if(!mes2 || !grid2) return;
-  if(titulo2) titulo2.textContent = esDia ? 'Elige tu domingo' : 'Elige tu luna';
+  if(titulo2) titulo2.textContent = esDia ? 'Elige tu día' : 'Elige tu luna';
   mes2.textContent = MESES[calM-1]+' '+calY;
   // Ocultar picker si estaba visible
   var picker2 = document.getElementById('horarioPicker2');
@@ -879,10 +894,11 @@ function renderCal2(esDia){
     } else if(esLunaNueva(calY,calM,d)&&!esDia){
       cls+=' luna-nueva';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
-    } else if(esDia && new Date(calY,calM-1,d).getDay()===0){
+    } else if(esDia && esDiaReservable(calY,calM,d)){
       cls+=' dom';
       url='placeholder';
-      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'"';
+      var diaNombre = new Date(calY,calM-1,d).getDay()===6 ? 'sábado' : 'domingo';
+      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="'+encodeURIComponent(diaNombre)+'"';
     }
     html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
   }
@@ -897,9 +913,10 @@ document.getElementById('calGrid2').addEventListener('click',function(e){
     var tituloEl = document.getElementById('horarioPickerTitulo2');
     var ftTexto = el.getAttribute('data-fecha-texto');
     var ftEncoded = el.getAttribute('data-fecha');
+    var diaNombre = el.getAttribute('data-dia') || 'domingo';
     tituloEl.textContent = 'Elige horario · ' + ftTexto;
     var horas = horasPorMes(calM);
-    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20domingo%20' + ftEncoded;
+    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
     var opt2a = document.getElementById('horarioOpt2a');
     var opt2b = document.getElementById('horarioOpt2b');
     opt2a.textContent = '☀ Mañana · ' + horas[0] + ' h';
