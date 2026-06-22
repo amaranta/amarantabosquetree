@@ -366,7 +366,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#grupos">Grupos y parejas</a>
 </div>
 
-<button class="theme-btn" id="themeBtn">☽ Noche</button>
 <a href="#calendario" id="eligeNoche" onclick="aplicarModo('noche');return true;" style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--gold,#c9a84c);color:#0d0d08;font-family:'Cormorant SC',Georgia,serif;font-size:0.68rem;letter-spacing:2px;font-weight:600;padding:10px 18px;text-decoration:none;border:1px solid rgba(255,255,255,0.2)">🌕 Elige tu noche</a>
 
 <a href="#calendario" class="wa-btn">
@@ -455,7 +454,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <!-- 6. CALENDARIO 1 -->
 <section id="calendario">
   <span class="eyebrow">Próximas sesiones</span>
-  <h2 id="calTitulo">Elige tu día</h2>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:0.5rem">
+    <h2 id="calTitulo" style="margin:0">Elige tu día</h2>
+    <div style="display:inline-flex;border:1px solid var(--accent);overflow:hidden">
+      <button id="toggleDia" onclick="aplicarModo('dia')" style="font-family:var(--sc);font-size:0.62rem;letter-spacing:2px;font-weight:600;padding:8px 16px;border:none;cursor:pointer;transition:all 0.2s;background:var(--accent);color:var(--bg)">☀ Sesiones de día</button>
+      <button id="toggleNoche" onclick="aplicarModo('noche')" style="font-family:var(--sc);font-size:0.62rem;letter-spacing:2px;font-weight:600;padding:8px 16px;border:none;cursor:pointer;transition:all 0.2s;background:transparent;color:var(--accent)">🌕 Sesiones de luna llena</button>
+    </div>
+  </div>
   <div class="cal-leyenda">
     <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo y sábado · sesión de día</div>
     <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
@@ -881,7 +886,15 @@ function aplicarModo(modo){
   document.getElementById('horarios-noche').classList.toggle('hidden',esDia);
   document.getElementById('eventos').classList.toggle('hidden',esDia);
   document.getElementById('linkEventos').classList.toggle('hidden',esDia);
-  document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día';
+  document.getElementById('themeBtn') && (document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día');
+  var toggleDia = document.getElementById('toggleDia');
+  var toggleNoche = document.getElementById('toggleNoche');
+  if(toggleDia && toggleNoche){
+    toggleDia.style.background = esDia ? 'var(--accent)' : 'transparent';
+    toggleDia.style.color = esDia ? 'var(--bg)' : 'var(--accent)';
+    toggleNoche.style.background = esDia ? 'transparent' : 'var(--accent)';
+    toggleNoche.style.color = esDia ? 'var(--accent)' : 'var(--bg)';
+  }
   var eligeNoche = document.getElementById('eligeNoche');
   if(eligeNoche) eligeNoche.style.display = esDia ? 'block' : 'none';
   if(!esDia) renderEventos();
