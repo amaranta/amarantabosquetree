@@ -528,26 +528,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<!-- 11. CALENDARIO 2 -->
-<section id="calendario2">
-  <span class="eyebrow">¿Te apuntas?</span>
-  <h2 id="calTitulo2">Elige tu día</h2>
-  <div class="cal-nav">
-    <button class="cal-nav-btn" id="calPrev2">← Anterior</button>
-    <span class="cal-mes" id="calMes2"></span>
-    <button class="cal-nav-btn" id="calNext2">Siguiente →</button>
-  </div>
-  <div class="cal-grid" id="calGrid2"></div>
-  <div class="horario-picker" id="horarioPicker2">
-    <span class="horario-picker-titulo" id="horarioPickerTitulo2">Elige horario</span>
-    <div class="horario-picker-btns">
-      <a class="horario-opt" id="horarioOpt2a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
-      <a class="horario-opt" id="horarioOpt2b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
-      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 8 personas · Te confirmo plaza por WhatsApp.</p>
-  </div>
-  </div>
-  <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="btn-g" style="margin-top:2rem">📱 Apuntarme por WhatsApp</a>
-</section>
 
 <hr class="divider">
 
@@ -910,94 +890,6 @@ if(themeBtnEl) themeBtnEl.addEventListener('click',function(){
 if(location.search.indexOf('noche')!==-1) aplicarModo('noche');
 else aplicarModo('dia');
 
-
-// CALENDARIO 2 - mismo mes que el primero, sincronizado
-function renderCal2(esDia){
-  var mes2 = document.getElementById('calMes2');
-  var grid2 = document.getElementById('calGrid2');
-  var titulo2 = document.getElementById('calTitulo2');
-  if(!mes2 || !grid2) return;
-  if(titulo2) titulo2.textContent = esDia ? 'Elige tu día' : 'Elige tu luna';
-  mes2.textContent = MESES[calM-1]+' '+calY;
-  // Ocultar picker si estaba visible
-  var picker2 = document.getElementById('horarioPicker2');
-  if(picker2) picker2.classList.remove('visible');
-  var hoy = new Date();
-  var html = '';
-  DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
-  var off = new Date(calY,calM-1,1).getDay(); off = off===0?6:off-1;
-  for(var i=0;i<off;i++) html += '<div class="cal-d"></div>';
-  var dias = new Date(calY,calM,0).getDate();
-  for(var d=1;d<=dias;d++){
-    var cls='cal-d', url='', extraAttrs='';
-    var mes = MESES[calM-1];
-    var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
-    var ftTexto = d+' de '+mes+' de '+calY;
-    if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
-    if(esEclipse(calY,calM,d)){
-      cls+=' eclipse';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
-    } else if(esLuna(calY,calM,d)&&!esDia){
-      cls+=' luna';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
-    } else if(esLunaNueva(calY,calM,d)&&!esDia){
-      cls+=' luna-nueva';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
-    } else if(esDia && esDiaReservable(calY,calM,d)){
-      cls+=' dom';
-      url='placeholder';
-      var diaNombre = new Date(calY,calM-1,d).getDay()===6 ? 'sábado' : 'domingo';
-      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="'+encodeURIComponent(diaNombre)+'"';
-    }
-    html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
-  }
-  grid2.innerHTML = html;
-}
-
-document.getElementById('calGrid2').addEventListener('click',function(e){
-  var el=e.target.closest('[data-url]');
-  if(!el) return;
-  if(el.classList.contains('dom')){
-    var picker = document.getElementById('horarioPicker2');
-    var tituloEl = document.getElementById('horarioPickerTitulo2');
-    var ftTexto = el.getAttribute('data-fecha-texto');
-    var ftEncoded = el.getAttribute('data-fecha');
-    var diaNombre = el.getAttribute('data-dia') || 'domingo';
-    tituloEl.textContent = 'Elige horario · ' + ftTexto;
-    var horas = horasPorMes(calM);
-    var base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
-    var opt2a = document.getElementById('horarioOpt2a');
-    var opt2b = document.getElementById('horarioOpt2b');
-    opt2a.textContent = '☀ Mañana · ' + horas[0] + ' h';
-    opt2b.textContent = '☀ Tarde · ' + horas[1] + ' h';
-    opt2a.href = base + '%20a%20las%20' + encodeURIComponent(horas[0]) + '%20h';
-    opt2b.href = base + '%20a%20las%20' + encodeURIComponent(horas[1]) + '%20h';
-    var fechaObj2 = new Date(calY, calM-1, parseInt(ftTexto));
-    var soloManana2 = (fechaObj2.getDay()===2 || fechaObj2.getDay()===4);
-    opt2b.style.display = soloManana2 ? 'none' : '';
-    picker.classList.add('visible');
-    picker.scrollIntoView({behavior:'smooth', block:'nearest'});
-  } else {
-    window.open(el.getAttribute('data-url'),'_blank');
-  }
-});
-document.getElementById('calPrev2').addEventListener('click',function(){
-  calM--; if(calM<1){calM=12;calY--;} 
-  renderCal(modoActual==='dia');
-  renderCal2(modoActual==='dia');
-});
-document.getElementById('calNext2').addEventListener('click',function(){
-  calM++; if(calM>12){calM=1;calY++;} 
-  renderCal(modoActual==='dia');
-  renderCal2(modoActual==='dia');
-});
-
-// Sincronizar cal2 con aplicarModo
-var _aplicarModoOriginal = aplicarModo;
-aplicarModo = function(modo){
-  _aplicarModoOriginal(modo);
-  renderCal2(modo==='dia');
-};
 
 // Reinicializar siempre en modo día salvo ?noche
 if(location.search.indexOf('noche')!==-1) aplicarModo('noche');
