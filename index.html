@@ -366,7 +366,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#grupos">Grupos y parejas</a>
 </div>
 
-<a href="#calendario" id="eligeNoche" onclick="aplicarModo('noche');return true;" style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--gold,#c9a84c);color:#0d0d08;font-family:'Cormorant SC',Georgia,serif;font-size:0.68rem;letter-spacing:2px;font-weight:600;padding:10px 18px;text-decoration:none;border:1px solid rgba(255,255,255,0.2)">🌕 Elige tu noche</a>
+<button class="theme-btn" id="themeBtn">☽ Noche</button>
 
 <a href="#calendario" class="wa-btn">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.875L.057 23.5l5.797-1.52A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.579-.484-5.083-1.332l-.362-.215-3.44.902.918-3.352-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
@@ -895,8 +895,7 @@ function aplicarModo(modo){
     toggleNoche.style.background = esDia ? 'transparent' : 'var(--accent)';
     toggleNoche.style.color = esDia ? 'var(--accent)' : 'var(--bg)';
   }
-  var eligeNoche = document.getElementById('eligeNoche');
-  if(eligeNoche) eligeNoche.style.display = esDia ? 'block' : 'none';
+
   if(!esDia) renderEventos();
   renderCal(esDia);
   document.body.className = modo;
@@ -904,14 +903,13 @@ function aplicarModo(modo){
   try{ localStorage.setItem('amaranta-theme',modo); }catch(e){}
 }
 
-document.getElementById('themeBtn').addEventListener('click',function(){
+var themeBtnEl = document.getElementById('themeBtn');
+if(themeBtnEl) themeBtnEl.addEventListener('click',function(){
   aplicarModo(modoActual==='dia'?'noche':'dia');
 });
 
-var guardado='';
-try{ guardado=localStorage.getItem('amaranta-theme')||''; }catch(e){}
 if(location.search.indexOf('noche')!==-1) aplicarModo('noche');
-else aplicarModo(guardado==='noche'?'noche':'dia');
+else aplicarModo('dia');
 
 
 // CALENDARIO 2 - mismo mes que el primero, sincronizado
@@ -1002,13 +1000,9 @@ aplicarModo = function(modo){
   renderCal2(modo==='dia');
 };
 
-// Reinicializar
-try{
-  var guardado2=localStorage.getItem('amaranta-theme')||'';
-  aplicarModo(guardado2==='noche'?'noche':'dia');
-}catch(e){
-  aplicarModo('dia');
-}
+// Reinicializar siempre en modo día salvo ?noche
+if(location.search.indexOf('noche')!==-1) aplicarModo('noche');
+else aplicarModo('dia');
 </script>
 </body>
 </html>
