@@ -850,8 +850,7 @@ function textoFechaHero(esDia){
     var d = proximoDiaReservable();
     var diaTexto = DIAS_TEXTO[d.getDay()];
     var diaCap = diaTexto.charAt(0).toUpperCase() + diaTexto.slice(1);
-    var wa = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20'+encodeURIComponent(diaTexto)+'%20'+d.getDate()+'%20de%20'+encodeURIComponent(MESES_TEXTO[d.getMonth()])+'%20de%20'+d.getFullYear();
-    return '<a href="'+wa+'" target="_blank" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
+    return '<a href="#calendario" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
   } else {
     var l = proximaLuna();
     if(!l) return '';
