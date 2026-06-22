@@ -537,7 +537,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <span class="eyebrow">Información práctica</span>
   <h2>Lo práctico</h2>
   <div class="practico-grid">
-    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Domingos. Sábados a partir del 27 de junio. Otras fechas bajo petición.</p></div>
+    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Viernes, sábados y domingos. Otras fechas bajo petición.</p></div>
     <div class="p-item"><span class="p-label">Dónde</span><p>El Espinar, Segovia. A 50 minutos de Madrid por la A-6, salida 69.</p></div>
     <div class="p-item"><span class="p-label">Duración</span><p>Hora y media a dos horas.</p></div>
     <div class="p-item"><span class="p-label">Grupo</span><p id="pGrupo">Máximo 8 personas.</p></div>
@@ -635,8 +635,7 @@ function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d
 function esDiaReservable(y,m,d){
   var fecha = new Date(y,m-1,d);
   var dow = fecha.getDay();
-  return true;
-  return false;
+  return (dow===5 || dow===6 || dow===0);
 }
 
 function renderCal(esDia){
@@ -765,7 +764,7 @@ var MODOS={
     sub:'Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.',
     intro:'No es senderismo. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo muy lento entre árboles, con todos los sentidos abiertos. Sin móvil, sin prisa, sin rendir cuentas a nadie.',
     calTitulo:'Elige tu día',
-    cuando:'Domingos. Sábados a partir del 27 de junio. Otras fechas bajo petición.',
+    cuando:'Viernes, sábados y domingos. Otras fechas bajo petición.',
     grupo:'Máximo 8 personas.',
     llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
     ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
