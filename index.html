@@ -364,12 +364,12 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
   <a href="#practico">Lo práctico</a>
   <a href="#grupos">Grupos y parejas</a>
-  <a href="/blog/">Blog</a>
 </div>
 
 <button class="theme-btn" id="themeBtn">☽ Noche</button>
+<a href="#calendario" id="eligeNoche" onclick="aplicarModo('noche');return true;" style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--gold,#c9a84c);color:#0d0d08;font-family:'Cormorant SC',Georgia,serif;font-size:0.68rem;letter-spacing:2px;font-weight:600;padding:10px 18px;text-decoration:none;border:1px solid rgba(255,255,255,0.2)">🌕 Elige tu noche</a>
 
-<a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="wa-btn">
+<a href="#calendario" class="wa-btn">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.558 4.14 1.535 5.875L.057 23.5l5.797-1.52A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.579-.484-5.083-1.332l-.362-.215-3.44.902.918-3.352-.235-.374A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
   Apuntarme
 </a>
@@ -387,7 +387,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <h1>Baños de<br><em id="heroWord">bosque</em></h1>
     <p class="hero-sub" id="heroSub">Dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.</p>
     <span class="hero-fecha" id="heroFecha"></span>
-    <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto" target="_blank" class="cta-link">Apuntarme</a>
+    <a href="#calendario" class="cta-link">Apuntarme</a>
     <p class="hero-lema">Reconecta<span>·</span>Respira<span>·</span>Renueva</p>
   </div>
 </section>
@@ -649,8 +649,7 @@ function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d
 function esDiaReservable(y,m,d){
   var fecha = new Date(y,m-1,d);
   var dow = fecha.getDay();
-  if(dow===0) return true;
-  if(dow===6 && fecha>=LIMITE_SABADOS) return true;
+  return true;
   return false;
 }
 
@@ -721,6 +720,10 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     opt1b.textContent = '☀ Tarde · ' + horas[1] + ' h';
     opt1a.href = base + '%20a%20las%20' + encodeURIComponent(horas[0]) + '%20h';
     opt1b.href = base + '%20a%20las%20' + encodeURIComponent(horas[1]) + '%20h';
+    // Martes (2) y jueves (4): solo mañana
+    var fechaObj = new Date(calY, calM-1, parseInt(ftTexto));
+    var soloManana = (fechaObj.getDay()===2 || fechaObj.getDay()===4);
+    opt1b.style.display = soloManana ? 'none' : '';
     picker.classList.add('visible');
     picker.scrollIntoView({behavior:'smooth', block:'nearest'});
   } else {
@@ -879,6 +882,8 @@ function aplicarModo(modo){
   document.getElementById('eventos').classList.toggle('hidden',esDia);
   document.getElementById('linkEventos').classList.toggle('hidden',esDia);
   document.getElementById('themeBtn').textContent = esDia ? '☽ Noche' : '☀ Día';
+  var eligeNoche = document.getElementById('eligeNoche');
+  if(eligeNoche) eligeNoche.style.display = esDia ? 'block' : 'none';
   if(!esDia) renderEventos();
   renderCal(esDia);
   document.body.className = modo;
@@ -892,7 +897,8 @@ document.getElementById('themeBtn').addEventListener('click',function(){
 
 var guardado='';
 try{ guardado=localStorage.getItem('amaranta-theme')||''; }catch(e){}
-aplicarModo(guardado==='noche'?'noche':'dia');
+if(location.search.indexOf('noche')!==-1) aplicarModo('noche');
+else aplicarModo(guardado==='noche'?'noche':'dia');
 
 
 // CALENDARIO 2 - mismo mes que el primero, sincronizado
@@ -956,6 +962,9 @@ document.getElementById('calGrid2').addEventListener('click',function(e){
     opt2b.textContent = '☀ Tarde · ' + horas[1] + ' h';
     opt2a.href = base + '%20a%20las%20' + encodeURIComponent(horas[0]) + '%20h';
     opt2b.href = base + '%20a%20las%20' + encodeURIComponent(horas[1]) + '%20h';
+    var fechaObj2 = new Date(calY, calM-1, parseInt(ftTexto));
+    var soloManana2 = (fechaObj2.getDay()===2 || fechaObj2.getDay()===4);
+    opt2b.style.display = soloManana2 ? 'none' : '';
     picker.classList.add('visible');
     picker.scrollIntoView({behavior:'smooth', block:'nearest'});
   } else {
