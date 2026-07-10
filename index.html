@@ -449,7 +449,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre · Noviembre</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 20:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 18:30 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">⚡ 12 agosto<small>Eclipse + Perseidas</small></span><div class="h-horas"><span class="h-hora">🌞 · 18:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">⚡ 12 agosto<small>Eclipse solar</small></span><div class="h-horas"><span class="h-hora">🌞 · 18:00 h</span></div></div>
   </div>
 </section>
 
@@ -469,7 +469,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo y sábado · sesión de día</div>
     <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
     <div class="cal-leyenda-item" id="leyNueva"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div>
-    <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse + Perseidas</div>
+    <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse</div>
   </div>
   <div class="cal-nav">
     <button class="cal-nav-btn" id="calPrev">← Anterior</button>
@@ -516,15 +516,15 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <div id="eclipseBloque" style="display:none">
     <div class="eclipse-box">
       <span class="eclipse-badge">⚡ Evento único · 12 agosto 2026</span>
-      <div class="eclipse-titulo">🌞✨ Eclipse solar + Perseidas</div>
+      <div class="eclipse-titulo">🌞✨ Eclipse solar</div>
       <span class="eclipse-fecha">12 / 08 / 2026 · 18:00 h</span>
-      <p class="eclipse-desc">Un eclipse solar del 95% y la lluvia de estrellas Perseidas en la misma noche. Solo ocurre una vez en la vida. Una inmersión sensorial en el bosque mientras el cielo cambia de color, las aves callan y las estrellas fugaces cruzan el firmamento.</p>
+      <p class="eclipse-desc">El 12 de agosto de 2026, El Espinar vivirá un eclipse solar parcial que cubrirá el 95% del sol. Esa misma noche, con luna nueva, llegará el punto álgido de las Perseidas, la lluvia de estrellas también llamada lágrimas de San Lorenzo. Una coincidencia que no se repite todos los años.<br><br>Te propongo vivirla desde el bosque, con los sentidos abiertos: mientras el eclipse avanza, la luz cambia de tono y la temperatura baja. Cuando cae la noche, las estrellas fugaces cruzan el cielo sobre las copas de los pinos.</p>
       <div class="eclipse-dets">
         <div><span class="eclipse-det-label">🦉 Fauna</span>Todas las aves callan</div>
         <div><span class="eclipse-det-label">🌿 Flora</span>Pino silvestre</div>
         <div><span class="eclipse-det-label">🌱 Medicinal</span>Artemisa</div>
       </div>
-      <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto" target="_blank" class="btn-g">📱 Reservar plaza</a>
+      <a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%2012%20agosto" target="_blank" class="btn-g">📱 Reservar plaza</a>
     </div>
   </div>
   <div id="eventosContainer"></div>
@@ -660,7 +660,7 @@ function renderCal(esDia){
     if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%20%2B%20Perseidas%2012%20agosto';
+      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%2012%20agosto';
     } else if(esLuna(calY,calM,d)&&!esDia){
       cls+=' luna';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
@@ -726,7 +726,7 @@ var EVENTOS=[
   {f:"2026-06-30",n:"Luna de Fresa",e:"🌕",d:"Primera luna llena del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"22:00"},
   {f:"2026-07-14",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:45"},
   {f:"2026-07-29",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:45"},
-  {f:"2026-08-12",n:"Eclipse solar + Perseidas",e:"🌞✨",d:"Eclipse solar (95%) + Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
+  {f:"2026-08-12",n:"Eclipse solar",e:"🌞✨",d:"Eclipse solar parcial (95%). Esa misma noche, con luna nueva, punto álgido de las Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
   {f:"2026-08-28",n:"Luna del Esturión",e:"🌕",d:"Última luna llena del verano.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"},
   {f:"2026-09-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Andrómeda visible a simple vista. La galaxia más cercana.",fauna:"Búho real",flora:"Níscalo",med:"Diente de león",h:"20:30"},
   {f:"2026-09-26",n:"Luna de la Cosecha",e:"🌕",d:"Luna cerca del equinoccio.",fauna:"Ciervo",flora:"Níscalos",med:"Cola de caballo",h:"20:00"},
