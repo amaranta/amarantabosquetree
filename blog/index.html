@@ -29,7 +29,6 @@ a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.8rem,8vw,5rem);line-height:1;letter-spacing:-1px;color:var(--fg);margin-bottom:1.5rem}
 h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.2;color:var(--fg);margin-bottom:0.6rem}
 p{font-size:1.05rem;line-height:1.8;color:var(--fg)}
-
 nav{padding:2rem 0;border-bottom:1px solid var(--line);margin-bottom:0}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:var(--sc);font-size:0.8rem;letter-spacing:2.5px;font-weight:600;color:var(--fg);text-decoration:none}
@@ -37,7 +36,6 @@ nav{padding:2rem 0;border-bottom:1px solid var(--line);margin-bottom:0}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{font-family:var(--sc);font-size:0.7rem;letter-spacing:2px;color:var(--fg);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:var(--accent)}
-
 .page-header{padding:4rem 0 3rem}
 .blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;padding:3rem 0 5rem}
 .post-card{border:1px solid var(--line);transition:border-color 0.2s;text-decoration:none;color:var(--fg);display:flex;flex-direction:column}
@@ -48,13 +46,11 @@ nav{padding:2rem 0;border-bottom:1px solid var(--line);margin-bottom:0}
 .post-card-body h2{font-size:clamp(1.1rem,2vw,1.4rem);margin-bottom:0.8rem}
 .post-card-body p{font-size:0.95rem;color:var(--fg2);line-height:1.65}
 .post-leer{font-family:var(--sc);font-size:0.65rem;letter-spacing:2px;font-weight:600;color:var(--accent);margin-top:1.2rem;display:inline-block}
-
 footer{border-top:1px solid var(--line);padding:2.5rem 0;text-align:center}
 .f-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem}
 .f-links a{font-family:var(--sc);font-size:0.65rem;letter-spacing:2px;color:var(--fg2);text-decoration:none}
 .f-links a:hover{color:var(--accent)}
 .f-copy{font-family:var(--sc);font-size:0.65rem;letter-spacing:1.5px;color:var(--fg2);margin-top:1rem}
-
 @media(max-width:640px){
   .blog-grid{grid-template-columns:1fr}
   .nav-links{display:none}
@@ -91,6 +87,16 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;text-align:center}
         <span class="post-tag">Evento</span>
         <h2>El 12 de agosto el sol se apagará casi por completo sobre El Espinar</h2>
         <p>Eclipse solar, luna nueva y el pico de las Perseidas, la misma tarde. Antes de que pase, empezamos por el cuerpo.</p>
+        <span class="post-leer">Leer →</span>
+      </div>
+    </a>
+
+    <a href="/blog/banos-de-bosque-madrid/" class="post-card">
+      <img src="/arroyo-grupo.jpg" alt="Grupo de mujeres en el arroyo del pinar de El Espinar durante una sesión de baño de bosque, Sierra de Guadarrama, Segovia" class="post-card-img" style="object-position:center" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-tag">Escapada desde Madrid</span>
+        <h2>Baños de bosque cerca de Madrid: El Espinar, a 50 minutos</h2>
+        <p>El pinar de El Espinar lleva aquí más tiempo que cualquier prisa que traigas. A 50 minutos de Madrid, a 1200 metros, con pinos silvestres y silencio real.</p>
         <span class="post-leer">Leer →</span>
       </div>
     </a>
