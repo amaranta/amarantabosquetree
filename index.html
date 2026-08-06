@@ -404,34 +404,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
-<section id="medios">
-  <span class="eyebrow">En los medios</span>
-  <h2 style="margin-bottom:2rem">Medios</h2>
-  <a class="medio-item medio-pendiente" href="#" onclick="return false;">
-    <div>
-      <span class="medio-fuente">RTVE</span>
-      <span class="medio-titulo">Entrevista sobre el baño de bosque del eclipse solar (próximamente)</span>
-    </div>
-    <span class="medio-flecha">→</span>
-  </a>
-  <a class="medio-item" href="https://www.europapress.es/castilla-y-leon/noticia-espinar-segovia-acogera-sesion-shinrin-yoku-bano-bosque-vivir-eclipse-solar-otra-manera-20260804113755.html" target="_blank">
-    <div>
-      <span class="medio-fuente">Europa Press</span>
-      <span class="medio-titulo">El Espinar (Segovia) acogerá una sesión de shinrin-yoku para vivir el eclipse solar de otra manera</span>
-    </div>
-    <span class="medio-flecha">→</span>
-  </a>
-  <a class="medio-item" href="https://lavozdeelespinar.es/el-espinar-acogera-un-bano-de-bosque-para-vivir-el-eclipse-solar-de-otra-manera/" target="_blank">
-    <div>
-      <span class="medio-fuente">La Voz de El Espinar</span>
-      <span class="medio-titulo">El Espinar acogerá un baño de bosque para vivir el eclipse solar de otra manera</span>
-    </div>
-    <span class="medio-flecha">→</span>
-  </a>
-</section>
-
-<hr class="divider">
-
 <!-- 2. TESTIMONIOS -->
 <section id="testimonios">
   <span class="eyebrow">Lo que dicen</span>
@@ -623,6 +595,34 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
 </section>
 
+<hr class="divider">
+
+<section id="medios">
+  <span class="eyebrow">En los medios</span>
+  <h2 style="margin-bottom:2rem">Medios</h2>
+  <a class="medio-item medio-pendiente" href="#" onclick="return false;">
+    <div>
+      <span class="medio-fuente">RTVE</span>
+      <span class="medio-titulo">Entrevista sobre el baño de bosque del eclipse solar (próximamente)</span>
+    </div>
+    <span class="medio-flecha">→</span>
+  </a>
+  <a class="medio-item" href="https://www.europapress.es/castilla-y-leon/noticia-espinar-segovia-acogera-sesion-shinrin-yoku-bano-bosque-vivir-eclipse-solar-otra-manera-20260804113755.html" target="_blank">
+    <div>
+      <span class="medio-fuente">Europa Press</span>
+      <span class="medio-titulo">El Espinar (Segovia) acogerá una sesión de shinrin-yoku para vivir el eclipse solar de otra manera</span>
+    </div>
+    <span class="medio-flecha">→</span>
+  </a>
+  <a class="medio-item" href="https://lavozdeelespinar.es/el-espinar-acogera-un-bano-de-bosque-para-vivir-el-eclipse-solar-de-otra-manera/" target="_blank">
+    <div>
+      <span class="medio-fuente">La Voz de El Espinar</span>
+      <span class="medio-titulo">El Espinar acogerá un baño de bosque para vivir el eclipse solar de otra manera</span>
+    </div>
+    <span class="medio-flecha">→</span>
+  </a>
+</section>
+
 <!-- CIERRE POÉTICO -->
 <div class="cierre-poetico">
   <p>Una experiencia guiada donde el silencio es el protagonista<br>y la naturaleza tu mejor terapeuta.</p>
@@ -671,9 +671,12 @@ drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', ce
 var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
 var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
 var ECLIPSE = [2026,8,12];
-// FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene.
+// FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
-var COMPLETOS = ["2026-08-12"];
+var COMPLETOS = ["2026-08-12", "2026-08-07", "2026-08-08"];
+// TURNOS COMPLETOS: para cuando solo se llena UN turno de un día (no el día entero).
+// Formato: "YYYY-MM-DD": "manana" o "YYYY-MM-DD": "tarde"
+var TURNOS_COMPLETOS = { "2026-08-09": "tarde" };
 var LIMITE_SABADOS = new Date(2026,5,27); // sábados reservables a partir del 27 de junio de 2026
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
@@ -685,6 +688,7 @@ function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]==
 function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d; }
 function fechaISO(y,m,d){ return y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
 function esCompleto(y,m,d){ return COMPLETOS.indexOf(fechaISO(y,m,d))!==-1; }
+function turnoCompleto(y,m,d){ return TURNOS_COMPLETOS[fechaISO(y,m,d)] || null; }
 function esDiaReservable(y,m,d){
   var fecha = new Date(y,m-1,d);
   var dow = fecha.getDay();
@@ -766,7 +770,9 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     // Martes (2) y jueves (4): solo mañana
     var fechaObj = new Date(calY, calM-1, parseInt(ftTexto));
     var soloManana = (fechaObj.getDay()===2 || fechaObj.getDay()===4);
-    opt1b.style.display = soloManana ? 'none' : '';
+    var turnoLleno = turnoCompleto(calY, calM, parseInt(ftTexto));
+    opt1a.style.display = (turnoLleno==='manana') ? 'none' : '';
+    opt1b.style.display = (soloManana || turnoLleno==='tarde') ? 'none' : '';
     picker.classList.add('visible');
     picker.scrollIntoView({behavior:'smooth', block:'nearest'});
   } else {
@@ -863,9 +869,10 @@ var DIAS_TEXTO = ['domingo','lunes','martes','miércoles','jueves','viernes','s�
 function proximoDiaReservable(){
   var hoy = new Date();
   var d = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-  for(var i=1; i<=14; i++){
+  for(var i=1; i<=30; i++){
     var cand = new Date(d.getFullYear(), d.getMonth(), d.getDate()+i);
-    if(esDiaReservable(cand.getFullYear(), cand.getMonth()+1, cand.getDate())) return cand;
+    var y=cand.getFullYear(), m=cand.getMonth()+1, dd=cand.getDate();
+    if(esDiaReservable(y,m,dd) && !esCompleto(y,m,dd)) return cand;
   }
   return d;
 }
@@ -888,7 +895,10 @@ function textoFechaHero(esDia){
     var d = proximoDiaReservable();
     var diaTexto = DIAS_TEXTO[d.getDay()];
     var diaCap = diaTexto.charAt(0).toUpperCase() + diaTexto.slice(1);
-    return '<a href="#calendario" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+'</a>';
+    var horas = horasPorMes(d.getMonth()+1);
+    var turnoLleno = turnoCompleto(d.getFullYear(), d.getMonth()+1, d.getDate());
+    var horaMostrar = (turnoLleno==='manana') ? horas[1] : horas[0];
+    return '<a href="#calendario" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+' · '+horaMostrar+'h</a>';
   } else {
     var l = proximaLuna();
     if(!l) return '';
