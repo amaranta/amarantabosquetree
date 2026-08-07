@@ -502,6 +502,11 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
       <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 15 personas · Te confirmo plaza por WhatsApp.</p>
   </div>
   </div>
+  <div class="horario-picker" id="completoPicker1">
+    <span class="horario-picker-titulo" id="completoPickerTitulo1">Sesión completa</span>
+    <p style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--fg);line-height:1.6;margin-bottom:0.9rem">Gracias por escribir.<br>Esta sesión ya tiene todas las plazas ocupadas.</p>
+    <p style="font-family:var(--serif);font-style:italic;font-size:0.95rem;color:var(--fg2);line-height:1.6">Puedes elegir otra fecha en el calendario — hay sesiones de día y de noche a lo largo de todo el año.</p>
+  </div>
 </section>
 
 <hr class="divider">
@@ -673,10 +678,10 @@ var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11]
 var ECLIPSE = [2026,8,12];
 // FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
-var COMPLETOS = ["2026-08-12", "2026-08-07", "2026-08-08"];
+var COMPLETOS = ["2026-08-12", "2026-08-07", "2026-08-08", "2026-08-14", "2026-08-21"];
 // TURNOS COMPLETOS: para cuando solo se llena UN turno de un día (no el día entero).
 // Formato: "YYYY-MM-DD": "manana" o "YYYY-MM-DD": "tarde"
-var TURNOS_COMPLETOS = { "2026-08-09": "tarde" };
+var TURNOS_COMPLETOS = { "2026-08-09": "tarde", "2026-08-15": "manana", "2026-08-22": "manana" };
 var LIMITE_SABADOS = new Date(2026,5,27); // sábados reservables a partir del 27 de junio de 2026
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
@@ -700,6 +705,8 @@ function renderCal(esDia){
   // Ocultar picker si estaba visible
   var picker1 = document.getElementById('horarioPicker1');
   if(picker1) picker1.classList.remove('visible');
+  var completoPickerReset = document.getElementById('completoPicker1');
+  if(completoPickerReset) completoPickerReset.classList.remove('visible');
   var hoy = new Date();
   var html = '';
   DIAS.forEach(function(d){ html += '<div class="cal-dnom">'+d+'</div>'; });
@@ -730,7 +737,7 @@ function renderCal(esDia){
     if(esCompleto(calY,calM,d)){
       cls+=' completo';
       url='';
-      extraAttrs=' title="Completo"';
+      extraAttrs=' title="Completo" data-completo="1" data-fecha-texto="'+ftTexto+'"';
     }
     html += '<div class="'+cls+'"'+(url?' data-url="'+url+'"':'')+extraAttrs+'>'+d+'</div>';
   }
@@ -749,8 +756,22 @@ function horasPorMes(m){
 }
 
 document.getElementById('calGrid').addEventListener('click',function(e){
+  var elCompleto = e.target.closest('[data-completo]');
+  if(elCompleto){
+    var picker0 = document.getElementById('horarioPicker1');
+    if(picker0) picker0.classList.remove('visible');
+    var completoPicker = document.getElementById('completoPicker1');
+    var completoTitulo = document.getElementById('completoPickerTitulo1');
+    var ftTextoC = elCompleto.getAttribute('data-fecha-texto');
+    completoTitulo.textContent = 'Sesión completa · ' + ftTextoC;
+    completoPicker.classList.add('visible');
+    completoPicker.scrollIntoView({behavior:'smooth', block:'nearest'});
+    return;
+  }
   var el=e.target.closest('[data-url]');
   if(!el) return;
+  var completoPicker2 = document.getElementById('completoPicker1');
+  if(completoPicker2) completoPicker2.classList.remove('visible');
   if(el.classList.contains('dom')){
     // Mostrar selector de horario
     var picker = document.getElementById('horarioPicker1');
