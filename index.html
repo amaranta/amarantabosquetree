@@ -504,8 +504,11 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
   <div class="horario-picker" id="completoPicker1">
     <span class="horario-picker-titulo" id="completoPickerTitulo1">Sesión completa</span>
-    <p style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--fg);line-height:1.6;margin-bottom:0.9rem">Gracias por escribir.<br>Esta sesión ya tiene todas las plazas ocupadas.</p>
-    <p style="font-family:var(--serif);font-style:italic;font-size:0.95rem;color:var(--fg2);line-height:1.6">Puedes elegir otra fecha en el calendario — hay sesiones de día y de noche a lo largo de todo el año.</p>
+    <p style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--fg);line-height:1.6;margin-bottom:0.9rem">Las plazas se agotan rápido — esta ya está al completo.</p>
+    <div class="horario-picker-btns">
+      <a class="horario-opt" id="completoListaEspera" href="#" target="_blank">✉ Escríbeme y te aviso si se libera un hueco</a>
+    </div>
+    <p style="font-family:var(--serif);font-style:italic;font-size:0.95rem;color:var(--fg2);line-height:1.6;margin-top:0.9rem">O elige otra fecha en el calendario: hay sesiones de luna llena, luna nueva y baño de bosque de día.</p>
   </div>
 </section>
 
@@ -764,6 +767,8 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     var completoTitulo = document.getElementById('completoPickerTitulo1');
     var ftTextoC = elCompleto.getAttribute('data-fecha-texto');
     completoTitulo.textContent = 'Sesión completa · ' + ftTextoC;
+    var listaEsperaLink = document.getElementById('completoListaEspera');
+    listaEsperaLink.href = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, la sesión del ' + ftTextoC + ' está completa, ¿me avisas si se libera un hueco?');
     completoPicker.classList.add('visible');
     completoPicker.scrollIntoView({behavior:'smooth', block:'nearest'});
     return;
