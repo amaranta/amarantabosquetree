@@ -467,7 +467,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <h2>Horarios por estación</h2>
   <div id="horarios-dia">
     <div class="horario-estacion"><span class="h-est">🌼 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 19:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre · Noviembre</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 12:00 h</span><span class="h-hora">☀ Tarde · 16:00 h</span></div></div>
   </div>
@@ -770,7 +770,7 @@ function renderCal(esDia){
 
 // Horarios por estación (mañana, tarde)
 function horasPorMes(m){
-  if(m>=6&&m<=8) return ['10:00','19:00'];   // Verano
+  if(m>=6&&m<=8) return ['10:00','18:00'];   // Verano
   if(m===12||m<=2) return ['12:00','16:00'];  // Invierno
   return ['11:00','18:00'];                   // Primavera / Otoño
 }
