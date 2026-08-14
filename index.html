@@ -402,14 +402,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
 </section>
 
-<div class="wrap" style="margin-top:2rem;">
-  <div style="background:var(--bg2);border-left:3px solid var(--accent);padding:1.4rem 1.8rem;font-family:var(--sans);">
-    <p style="font-size:0.98rem;color:var(--fg2);line-height:1.7;margin:0;">
-      <strong style="color:var(--fg);">La sesión del eclipse del 12 de agosto queda suspendida</strong> por el incendio activo cerca de El Espinar. Habrá otros encuentros en el pinar. <a href="/blog/eclipse/" style="color:var(--accent);text-decoration:underline;">Más información →</a>
-    </p>
-  </div>
-</div>
-
 <hr class="divider">
 
 <!-- 2. TESTIMONIOS -->
@@ -419,13 +411,10 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 </section>
 
 <!-- 2b. RESEÑAS DE GOOGLE -->
-<!-- OCULTA TEMPORALMENTE: widget de Elfsight desactivado por limite de plan gratuito, se reactiva solo el 11 de agosto. Para volver a mostrarla ese dia, borra la linea de apertura de comentario de arriba y la de cierre de abajo (las que solo contienen simbolos de comentario). -->
-<!--
 <section id="resenas-google" style="margin-top:2rem">
   <span class="eyebrow">Reseñas en Google</span>
   <div class="elfsight-app-47ea982d-67f1-4712-bebd-b4a164b0049f" data-elfsight-app-lazy></div>
 </section>
--->
 
 <hr class="divider">
 
@@ -575,7 +564,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <span class="eyebrow">Información práctica</span>
   <h2>Lo práctico</h2>
   <div class="practico-grid">
-    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Viernes, sábados y domingos. Otras fechas bajo petición.</p></div>
+    <div class="p-item"><span class="p-label">Cuándo</span><p id="pCuando">Sábados y domingos. Otras fechas bajo petición.</p></div>
     <div class="p-item"><span class="p-label">Dónde</span><p>El Espinar, Segovia. A 50 minutos de Madrid por la A-6, salida 69.</p></div>
     <div class="p-item"><span class="p-label">Duración</span><p>Hora y media a dos horas.</p></div>
     <div class="p-item"><span class="p-label">Grupo</span><p id="pGrupo">Máximo 15 personas.</p></div>
@@ -618,13 +607,6 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <section id="medios">
   <span class="eyebrow">En los medios</span>
   <h2 style="margin-bottom:2rem">Medios</h2>
-  <a class="medio-item medio-pendiente" href="#" onclick="return false;">
-    <div>
-      <span class="medio-fuente">RTVE</span>
-      <span class="medio-titulo">Entrevista sobre la suspensión del baño de bosque del eclipse por el incendio en El Espinar (próximamente)</span>
-    </div>
-    <span class="medio-flecha">→</span>
-  </a>
   <a class="medio-item" href="https://www.europapress.es/castilla-y-leon/noticia-espinar-segovia-acogera-sesion-shinrin-yoku-bano-bosque-vivir-eclipse-solar-otra-manera-20260804113755.html" target="_blank">
     <div>
       <span class="medio-fuente">Europa Press</span>
@@ -717,7 +699,7 @@ function turnoCompleto(y,m,d){ return TURNOS_COMPLETOS[fechaISO(y,m,d)] || null;
 function esDiaReservable(y,m,d){
   var fecha = new Date(y,m-1,d);
   var dow = fecha.getDay();
-  return (dow===5 || dow===6 || dow===0);
+  return (dow===6 || dow===0);
 }
 
 function renderCal(esDia){
@@ -751,7 +733,7 @@ function renderCal(esDia){
     } else if(esDia && esDiaReservable(calY,calM,d)){
       cls+=' dom';
       url='placeholder';
-      var _dow = new Date(calY,calM-1,d).getDay(); var diaNombre = _dow===5 ? 'viernes' : (_dow===6 ? 'sábado' : 'domingo');
+      var _dow = new Date(calY,calM-1,d).getDay(); var diaNombre = _dow===6 ? 'sábado' : 'domingo';
       extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="'+encodeURIComponent(diaNombre)+'"';
     }
     if(esCompleto(calY,calM,d)){
@@ -882,7 +864,7 @@ var MODOS={
     sub:'Hora y media a dos horas de luz entre los pinos.<br>Un paseo para despertar los sentidos.',
     intro:'No es senderismo ni yoga. No tienes que llegar a ningún sitio ni hacer nada bien. Es un paseo entre árboles, con todos los sentidos abiertos, sin móvil ni rendir cuentas a nadie.',
     calTitulo:'Elige tu día',
-    cuando:'Viernes, sábados y domingos. Otras fechas bajo petición.',
+    cuando:'Sábados y domingos. Otras fechas bajo petición.',
     grupo:'Máximo 15 personas.',
     llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
     ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
