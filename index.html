@@ -221,6 +221,8 @@ h1 em { font-style:italic; color:var(--accent); }
 .cal-d.completo { cursor:not-allowed; opacity:0.55; position:relative; }
 .cal-d.eclipse.completo { background:#7a4028; }
 .cal-d.completo::after { content:''; position:absolute; left:10%; right:10%; top:50%; height:1px; background:currentColor; }
+.cal-d.dom.medio { position:relative; }
+.cal-d.dom.medio::after { content:''; position:absolute; top:5px; right:5px; width:6px; height:6px; border-radius:50%; background:#fff; box-shadow:0 0 0 1px var(--accent); }
 
 .estaciones-franja { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; margin-top:1.5rem; position:relative; }
 .est-item { padding:1.2rem 0.8rem; background:var(--bg2); cursor:pointer; transition:background 0.2s; }
@@ -680,10 +682,10 @@ var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11]
 var ECLIPSE = [2026,8,12];
 // FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
-var COMPLETOS = ["2026-08-12", "2026-08-08", "2026-08-09"];
+var COMPLETOS = ["2026-08-12", "2026-08-08", "2026-08-09", "2026-08-22"];
 // TURNOS COMPLETOS: para cuando solo se llena UN turno de un día (no el día entero).
 // Formato: "YYYY-MM-DD": "manana" o "YYYY-MM-DD": "tarde"
-var TURNOS_COMPLETOS = { "2026-08-15": "manana", "2026-08-22": "manana" };
+var TURNOS_COMPLETOS = { "2026-08-15": "manana", "2026-08-30": "manana" };
 var LIMITE_SABADOS = new Date(2026,5,27); // sábados reservables a partir del 27 de junio de 2026
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
@@ -724,10 +726,10 @@ function renderCal(esDia){
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%2012%20agosto';
-    } else if(esLuna(calY,calM,d)&&!esDia){
+    } else if(esLuna(calY,calM,d)){
       cls+=' luna';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
-    } else if(esLunaNueva(calY,calM,d)&&!esDia){
+    } else if(esLunaNueva(calY,calM,d)){
       cls+=' luna-nueva';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
     } else if(esDia && esDiaReservable(calY,calM,d)){
@@ -735,6 +737,11 @@ function renderCal(esDia){
       url='placeholder';
       var _dow = new Date(calY,calM-1,d).getDay(); var diaNombre = _dow===6 ? 'sábado' : 'domingo';
       extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="'+encodeURIComponent(diaNombre)+'"';
+      var _turno = turnoCompleto(calY,calM,d);
+      if(_turno){
+        cls+=' medio';
+        extraAttrs+=' title="'+(_turno==='manana'?'Mañana completa · queda tarde':'Tarde completa · queda mañana')+'"';
+      }
     }
     if(esCompleto(calY,calM,d)){
       cls+=' completo';
@@ -745,8 +752,8 @@ function renderCal(esDia){
   }
   document.getElementById('calGrid').innerHTML = html;
   var ll=document.getElementById('leyLuna'), le=document.getElementById('leyEclipse'), ln=document.getElementById('leyNueva');
-  if(ll) ll.style.display = esDia?'none':'flex';
-  if(ln) ln.style.display = esDia?'none':'flex';
+  if(ll) ll.style.display = 'flex';
+  if(ln) ln.style.display = 'flex';
   if(le) le.style.display = (new Date()<=new Date(2026,7,12))?'flex':'none';
 }
 
