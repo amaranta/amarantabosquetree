@@ -463,8 +463,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 12:00 h</span><span class="h-hora">☀ Tarde · 16:00 h</span></div></div>
   </div>
   <div id="horarios-noche" class="hidden">
-    <div class="horario-estacion"><span class="h-est">🌸 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
-    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:30 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌸 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:00 h</span></div></div>
+    <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 21:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">🍂 Otoño<small>Septiembre · Octubre · Noviembre</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 20:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">❄️ Invierno<small>Diciembre · Enero · Febrero</small></span><div class="h-horas"><span class="h-hora">☽ Luna llena · 18:30 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">⚡ 12 agosto<small>Eclipse solar</small></span><div class="h-horas"><span class="h-hora">🌞 · 18:00 h</span></div></div>
@@ -826,10 +826,10 @@ document.getElementById('calPrev').addEventListener('click',function(){ calM--; 
 document.getElementById('calNext').addEventListener('click',function(){ calM++; if(calM>12){calM=1;calY++;} renderCal(modoActual==='dia'); });
 
 var EVENTOS=[
-  {f:"2026-06-15",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Sin luna, el cielo se abre. La Vía Láctea visible a simple vista entre los pinos.",fauna:"Murciélagos, autillo",flora:"Tomillo",med:"Tomillo",h:"22:00"},
-  {f:"2026-06-30",n:"Luna de Fresa",e:"🌕",d:"Primera luna llena del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"22:00"},
-  {f:"2026-07-14",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:45"},
-  {f:"2026-07-29",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:45"},
+  {f:"2026-06-15",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Sin luna, el cielo se abre. La Vía Láctea visible a simple vista entre los pinos.",fauna:"Murciélagos, autillo",flora:"Tomillo",med:"Tomillo",h:"21:00"},
+  {f:"2026-06-30",n:"Luna de Fresa",e:"🌕",d:"Primera luna llena del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"21:00"},
+  {f:"2026-07-14",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:00"},
+  {f:"2026-07-29",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:00"},
   {f:"2026-08-12",n:"Eclipse solar",e:"🌞✨",d:"Eclipse solar parcial (95%). Esa misma noche, con luna nueva, punto álgido de las Perseidas.",fauna:"Aves callan",flora:"Pino",med:"Artemisa",h:"18:00"},
   {f:"2026-08-28",n:"Luna del Esturión",e:"🌕",d:"Última luna llena del verano.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"},
   {f:"2026-09-11",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Andrómeda visible a simple vista. La galaxia más cercana.",fauna:"Búho real",flora:"Níscalo",med:"Diente de león",h:"20:30"},
