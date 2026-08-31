@@ -500,7 +500,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="horario-picker-btns">
       <a class="horario-opt" id="horarioOpt1a" href="#" target="_blank">☀ Mañana · 11:00 h</a>
       <a class="horario-opt" id="horarioOpt1b" href="#" target="_blank">☀ Tarde · 18:00 h</a>
-      <p style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 15 personas · Te confirmo plaza por WhatsApp.</p>
+      <p id="horarioPickerNota1" style="font-family:var(--serif);font-style:italic;font-size:0.88rem;color:var(--fg2);margin-top:0.9rem">Grupos de máximo 15 personas · Te confirmo plaza por WhatsApp.</p>
   </div>
   </div>
   <div class="horario-picker" id="completoPicker1">
@@ -798,11 +798,14 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     var horas = horasPorMes(calM);
     var esEspecialSonido = (calY===2026 && calM===9 && parseInt(ftTexto)===6);
     var base;
+    var notaEl = document.getElementById('horarioPickerNota1');
     if(esEspecialSonido){
       tituloEl.textContent = '🔊 Baño de bosque con sonido · ' + ftTexto;
       base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, quiero reservar la sesión especial de baños de bosque con sonido del domingo 6 de septiembre de 2026');
+      if(notaEl) notaEl.style.display = 'none';
     } else {
       base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
+      if(notaEl) notaEl.style.display = '';
     }
     var opt1a = document.getElementById('horarioOpt1a');
     var opt1b = document.getElementById('horarioOpt1b');
