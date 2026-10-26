@@ -358,6 +358,13 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   .quien-fotos { grid-template-columns:1fr; }
   .horario-picker-btns { flex-direction:column; }
 }
+
+/* CIERRE DE INVIERNO */
+.cal-d.cerrado { opacity:0.35; cursor:default; }
+.cal-d.luna.sin-sesion, .cal-d.luna-nueva.sin-sesion { cursor:default; opacity:0.85; }
+.cal-d.con-luna { position:relative; }
+.cal-d.con-luna::before { content:attr(data-luna); position:absolute; top:2px; left:4px; font-size:0.62rem; line-height:1; }
+.aviso-cierre { font-family:var(--serif); font-style:italic; font-size:1rem; line-height:1.6; color:var(--fg2); margin:1rem 0 0; }
 </style>
 </head>
 <body class="dia">
@@ -456,6 +463,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <section id="horarios">
   <span class="eyebrow">Cuándo venir</span>
   <h2>Horarios por estación</h2>
+  <p id="avisoHorarios" class="aviso-cierre hidden" style="margin:0 0 1.5rem"></p>
   <div id="horarios-dia">
     <div class="horario-estacion"><span class="h-est">🌼 Primavera<small>Marzo · Abril · Mayo</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 11:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
     <div class="horario-estacion"><span class="h-est">🌞 Verano<small>Junio · Julio · Agosto</small></span><div class="h-horas"><span class="h-hora">☀ Mañana · 10:00 h</span><span class="h-hora">☀ Tarde · 18:00 h</span></div></div>
@@ -495,6 +503,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <button class="cal-nav-btn" id="calNext">Siguiente →</button>
   </div>
   <div class="cal-grid" id="calGrid"></div>
+  <p id="avisoCalendario" class="aviso-cierre hidden"></p>
   <div class="horario-picker" id="horarioPicker1">
     <span class="horario-picker-titulo" id="horarioPickerTitulo1">Elige horario</span>
     <div class="horario-picker-btns">
@@ -677,9 +686,27 @@ menuBtn.addEventListener('click', function(){ drawer.classList.contains('open') 
 overlay.addEventListener('click', cerrarMenu);
 drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', cerrarMenu); });
 
-var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24]];
-var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9]];
+var LUNAS = [[2026,6,30],[2026,7,29],[2026,8,28],[2026,9,26],[2026,10,25],[2026,11,24],[2026,12,24],
+  // 2027 (fecha local de Madrid del máximo de la luna)
+  [2027,1,22],[2027,2,21],[2027,3,22],[2027,4,21],[2027,5,20],[2027,6,19],[2027,7,18],[2027,8,17],[2027,9,16],[2027,10,15],[2027,11,14],[2027,12,13]];
+var LUNAS_NUEVAS = [[2026,6,15],[2026,7,14],[2026,8,12],[2026,9,11],[2026,10,11],[2026,11,9],[2026,12,9],
+  // 2027
+  [2027,1,7],[2027,2,6],[2027,3,8],[2027,4,7],[2027,5,6],[2027,6,4],[2027,7,4],[2027,8,2],[2027,8,31],[2027,9,30],[2027,10,29],[2027,11,28],[2027,12,27]];
 var ECLIPSE = [2026,8,12];
+
+// CIERRE DE INVIERNO ------------------------------------------------------
+// Entre INICIO_CIERRE y FIN_CIERRE (ambos incluidos) NO hay sesiones de fin de semana ni nocturnas,
+// salvo los domingos de SESIONES_INVIERNO, que se ofrecen solo por la tarde a HORA_SESION_INVIERNO.
+// Las lunas siguen viéndose en el calendario, pero sin enlace para apuntarse.
+// Para reabrir un día suelto: quítalo de SESIONES_INVIERNO o cambia las fechas de abajo.
+// A partir del 1 de mayo de 2027 todo vuelve a funcionar como antes, sin tocar nada más.
+var INICIO_CIERRE = "2026-10-26";
+var FIN_CIERRE = "2027-04-30";
+var REAPERTURA = "2027-05-01";
+var HORA_SESION_INVIERNO = "17:00";
+var SESIONES_INVIERNO = ["2026-11-22", "2026-12-13", "2027-01-24", "2027-02-21", "2027-03-14", "2027-04-18"];
+var AVISO_DIA = "Hasta el 30 de abril hay una sesión al mes, en domingo a las 17:00. Son los días en verde del calendario. Desde mayo vuelven los sábados y domingos.";
+var AVISO_NOCHE = "Las sesiones nocturnas de luna vuelven en mayo. Hasta entonces el calendario muestra las lunas, pero no hay sesión.";
 // FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
 var COMPLETOS = ["2026-08-12", "2026-08-08", "2026-08-09", "2026-08-22", "2026-09-12", "2026-09-19"];
@@ -690,7 +717,17 @@ var LIMITE_SABADOS = new Date(2026,5,27); // sábados reservables a partir del 2
 var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DIAS = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
 var calY = 2026, calM = 6;
-(function(){ var h = new Date(); if(h.getFullYear()===2026 && h.getMonth()+1>=6){ calM = h.getMonth()+1; } })();
+(function(){
+  var h = new Date();
+  if(h.getFullYear()>2026 || (h.getFullYear()===2026 && h.getMonth()+1>=6)){ calY = h.getFullYear(); calM = h.getMonth()+1; }
+  // Durante el cierre, el calendario se abre en el mes de la próxima sesión
+  if(hoyEnCierre()){
+    for(var i=0;i<=400;i++){
+      var c = new Date(h.getFullYear(), h.getMonth(), h.getDate()+i);
+      if(esDiaReservable(c.getFullYear(), c.getMonth()+1, c.getDate()) && !esCompleto(c.getFullYear(), c.getMonth()+1, c.getDate())){ calY = c.getFullYear(); calM = c.getMonth()+1; break; }
+    }
+  }
+})();
 
 function esLuna(y,m,d){ return LUNAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
@@ -698,7 +735,11 @@ function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d
 function fechaISO(y,m,d){ return y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
 function esCompleto(y,m,d){ return COMPLETOS.indexOf(fechaISO(y,m,d))!==-1; }
 function turnoCompleto(y,m,d){ return TURNOS_COMPLETOS[fechaISO(y,m,d)] || null; }
+function enCierre(iso){ return iso>=INICIO_CIERRE && iso<=FIN_CIERRE; }
+function hoyEnCierre(){ var h = new Date(); return enCierre(fechaISO(h.getFullYear(), h.getMonth()+1, h.getDate())); }
 function esDiaReservable(y,m,d){
+  var iso = fechaISO(y,m,d);
+  if(enCierre(iso)) return SESIONES_INVIERNO.indexOf(iso)!==-1;
   var fecha = new Date(y,m-1,d);
   var dow = fecha.getDay();
   return (dow===6 || dow===0);
@@ -722,16 +763,42 @@ function renderCal(esDia){
     var mes = MESES[calM-1];
     var ft = d+'%20de%20'+encodeURIComponent(mes)+'%20de%20'+calY;
     var ftTexto = d+' de '+mes+' de '+calY;
+    var iso = fechaISO(calY,calM,d);
+    var cierreDia = enCierre(iso);
+    var sesInv = cierreDia && SESIONES_INVIERNO.indexOf(iso)!==-1;
+    var dowDia = new Date(calY,calM-1,d).getDay();
     if(hoy.getFullYear()===calY&&hoy.getMonth()+1===calM&&hoy.getDate()===d) cls+=' hoy';
     if(esEclipse(calY,calM,d)){
       cls+=' eclipse';
       url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20Eclipse%2012%20agosto';
+    } else if(sesInv && esDia){
+      // Domingo de invierno: sesión de tarde. Si coincide con luna, se marca con un icono pequeño.
+      cls+=' dom';
+      url='placeholder';
+      extraAttrs=' data-fecha="'+ft+'" data-fecha-texto="'+ftTexto+'" data-dia="domingo" data-invierno="1"';
+      if(esLuna(calY,calM,d) || esLunaNueva(calY,calM,d)){
+        var _llena = esLuna(calY,calM,d);
+        cls+=' con-luna';
+        extraAttrs+=' data-luna="'+(_llena?'🌕':'🌑')+'" title="'+(_llena?'Luna llena':'Luna nueva')+' · sesión de día a las '+HORA_SESION_INVIERNO+'"';
+      } else {
+        extraAttrs+=' title="Sesión a las '+HORA_SESION_INVIERNO+'"';
+      }
     } else if(esLuna(calY,calM,d)){
       cls+=' luna';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+      if(cierreDia){
+        cls+=' sin-sesion';
+        extraAttrs=' title="Luna llena · sin sesión nocturna hasta mayo"';
+      } else {
+        url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20luna%20llena%20del%20'+ft;
+      }
     } else if(esLunaNueva(calY,calM,d)){
       cls+=' luna-nueva';
-      url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
+      if(cierreDia){
+        cls+=' sin-sesion';
+        extraAttrs=' title="Luna nueva · sin sesión nocturna hasta mayo"';
+      } else {
+        url='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20la%20sesi%C3%B3n%20de%20V%C3%ADa%20L%C3%A1ctea%20del%20'+ft;
+      }
     } else if(esDia && esDiaReservable(calY,calM,d)){
       cls+=' dom';
       url='placeholder';
@@ -742,6 +809,8 @@ function renderCal(esDia){
         cls+=' medio';
         extraAttrs+=' title="'+(_turno==='manana'?'Mañana completa · queda tarde':'Tarde completa · queda mañana')+'"';
       }
+    } else if(esDia && cierreDia && (dowDia===6 || dowDia===0)){
+      cls+=' cerrado';
     }
     if(esCompleto(calY,calM,d)){
       cls+=' completo';
@@ -799,13 +868,18 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     var esEspecialSonido = (calY===2026 && calM===9 && parseInt(ftTexto)===6);
     var base;
     var notaEl = document.getElementById('horarioPickerNota1');
+    var esInvierno = el.getAttribute('data-invierno')==='1';
     if(esEspecialSonido){
       tituloEl.textContent = '🔊 Baño de bosque con sonido · ' + ftTexto;
       base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, quiero reservar la sesión especial de baños de bosque con sonido del domingo 6 de septiembre de 2026');
       if(notaEl) notaEl.style.display = 'none';
+    } else if(esInvierno){
+      tituloEl.textContent = 'Baños de bosque de invierno · ' + ftTexto;
+      base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, me apunto al baño de bosque de invierno del domingo ' + ftTexto + ' a las ' + HORA_SESION_INVIERNO + ' h');
+      if(notaEl){ notaEl.style.display = ''; notaEl.textContent = 'Plazas limitadas · Te confirmo plaza por WhatsApp.'; }
     } else {
       base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
-      if(notaEl) notaEl.style.display = '';
+      if(notaEl){ notaEl.style.display = ''; notaEl.textContent = 'Grupos de máximo 15 personas · Te confirmo plaza por WhatsApp.'; }
     }
     var opt1a = document.getElementById('horarioOpt1a');
     var opt1b = document.getElementById('horarioOpt1b');
@@ -819,6 +893,13 @@ document.getElementById('calGrid').addEventListener('click',function(e){
     var turnoLleno = turnoCompleto(calY, calM, parseInt(ftTexto));
     opt1a.style.display = (turnoLleno==='manana') ? 'none' : '';
     opt1b.style.display = (soloManana || turnoLleno==='tarde') ? 'none' : '';
+    if(esInvierno){
+      // Sesión de invierno: un único turno de tarde
+      opt1a.style.display = 'none';
+      opt1b.style.display = '';
+      opt1b.textContent = '☀ Tarde · ' + HORA_SESION_INVIERNO + ' h';
+      opt1b.href = base;
+    }
     picker.classList.add('visible');
     picker.scrollIntoView({behavior:'smooth', block:'nearest'});
   } else {
@@ -849,7 +930,25 @@ var EVENTOS=[
   {f:"2026-11-09",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Noche oscura. Las Pléyades en el cénit.",fauna:"Erizo",flora:"Hongos",med:"Enebro",h:"18:30"},
   {f:"2026-11-24",n:"Superluna",e:"🌕✨",d:"La más brillante del año.",fauna:"Corzo",flora:"Acebo",med:"Enebro",h:"18:15"},
   {f:"2026-12-09",n:"Luna nueva · Gemínidas",e:"🌑",d:"Luna nueva coincide con las Gemínidas. Hasta 120 meteoros/hora con cielo completamente oscuro.",fauna:"Corzo",flora:"Acebo",med:"Sauco",h:"18:00"},
-  {f:"2026-12-24",n:"Luna Fría",e:"🌕🎄",d:"Nochebuena con luna llena.",fauna:"Corzo",flora:"Acebo",med:"Acebo",h:"18:00"}
+  {f:"2026-12-24",n:"Luna Fría",e:"🌕🎄",d:"Nochebuena con luna llena.",fauna:"Corzo",flora:"Acebo",med:"Acebo",h:"18:00"},
+  // 2027: desde mayo vuelven las sesiones nocturnas
+  {f:"2027-05-06",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Sin luna, el cielo se abre. La Vía Láctea visible a simple vista entre los pinos.",fauna:"Murciélagos, autillo",flora:"Tomillo",med:"Tomillo",h:"21:00"},
+  {f:"2027-05-20",n:"Luna de las Flores",e:"🌕",d:"Luna llena de mayo, con el pinar ya despierto.",fauna:"Ruiseñor",flora:"Jara",med:"Espliego",h:"21:00"},
+  {f:"2027-06-04",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:00"},
+  {f:"2027-06-19",n:"Luna de Fresa",e:"🌕",d:"Luna llena de junio, a las puertas del verano.",fauna:"Grillos",flora:"Madroño",med:"Madroño",h:"21:00"},
+  {f:"2027-07-04",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:00"},
+  {f:"2027-07-18",n:"Luna del Ciervo",e:"🌕",d:"Berrea suave.",fauna:"Ciervo",flora:"Boletus",med:"Achicoria",h:"21:00"},
+  {f:"2027-08-02",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Oscuridad total. El corazón de la galaxia en el cénit.",fauna:"Jabalí, murciélagos",flora:"Hiedra",med:"Hiedra",h:"21:00"},
+  {f:"2027-08-17",n:"Luna del Esturión",e:"🌕",d:"Luna llena de agosto.",fauna:"Zorro",flora:"Madroño",med:"Madroño",h:"21:00"},
+  {f:"2027-08-31",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Andrómeda visible a simple vista. La galaxia más cercana.",fauna:"Búho real",flora:"Níscalo",med:"Diente de león",h:"20:30"},
+  {f:"2027-09-16",n:"Luna de la Cosecha",e:"🌕",d:"Luna cerca del equinoccio.",fauna:"Ciervo",flora:"Níscalos",med:"Cola de caballo",h:"20:00"},
+  {f:"2027-09-30",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Orión domina el cielo. Constelaciones de otoño.",fauna:"Lechuza",flora:"Roble",med:"Manzanilla",h:"20:00"},
+  {f:"2027-10-15",n:"Luna del Cazador",e:"🌕",d:"Luna de octubre.",fauna:"Cárabo",flora:"Roble",med:"Roble",h:"19:30"},
+  {f:"2027-10-29",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Noche oscura. Las Pléyades en el cénit.",fauna:"Erizo",flora:"Hongos",med:"Enebro",h:"19:30"},
+  {f:"2027-11-14",n:"Luna del Castor",e:"🌕",d:"Luna llena de noviembre.",fauna:"Corzo",flora:"Acebo",med:"Enebro",h:"18:15"},
+  {f:"2027-11-28",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Noche oscura. Las Pléyades en el cénit.",fauna:"Erizo",flora:"Hongos",med:"Enebro",h:"18:30"},
+  {f:"2027-12-13",n:"Luna Fría",e:"🌕",d:"Luna llena de diciembre.",fauna:"Corzo",flora:"Acebo",med:"Acebo",h:"18:00"},
+  {f:"2027-12-27",n:"Luna nueva · Vía Láctea",e:"🌑",d:"Cielo oscuro entre Navidad y Año Nuevo.",fauna:"Corzo",flora:"Acebo",med:"Sauco",h:"18:00"}
 ];
 
 function renderEventos(){
@@ -857,8 +956,9 @@ function renderEventos(){
   var eb=document.getElementById('eclipseBloque');
   if(eb) eb.style.display=(hoy<='2026-08-12')?'block':'none';
   var cont=document.getElementById('eventosContainer');
-  var prox=EVENTOS.filter(function(ev){ return ev.f>=hoy&&ev.f!=='2026-08-12'; }).slice(0,4);
-  var html='';
+  var desde = hoyEnCierre() ? REAPERTURA : hoy;
+  var prox=EVENTOS.filter(function(ev){ return ev.f>=desde&&ev.f!=='2026-08-12'; }).slice(0,4);
+  var html = hoyEnCierre() ? '<p class="aviso-cierre" style="margin:0 0 1.5rem">Las sesiones nocturnas vuelven en mayo. Estas son las primeras.</p>' : '';
   prox.forEach(function(ev){
     var wa='https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20a%20'+encodeURIComponent(ev.n);
     html+='<div class="ev-item"><div class="ev-head"><span class="ev-nombre">'+ev.e+' '+ev.n+'</span><span class="ev-fecha">'+ev.f.replace(/-/g,'/')+'&nbsp;&middot;&nbsp;'+ev.h+'h</span></div>';
@@ -922,7 +1022,7 @@ var DIAS_TEXTO = ['domingo','lunes','martes','miércoles','jueves','viernes','s�
 function proximoDiaReservable(){
   var hoy = new Date();
   var d = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-  for(var i=1; i<=30; i++){
+  for(var i=1; i<=400; i++){
     var cand = new Date(d.getFullYear(), d.getMonth(), d.getDate()+i);
     var y=cand.getFullYear(), m=cand.getMonth()+1, dd=cand.getDate();
     if(esDiaReservable(y,m,dd) && !esCompleto(y,m,dd)) return cand;
@@ -951,8 +1051,10 @@ function textoFechaHero(esDia){
     var horas = horasPorMes(d.getMonth()+1);
     var turnoLleno = turnoCompleto(d.getFullYear(), d.getMonth()+1, d.getDate());
     var horaMostrar = (turnoLleno==='manana') ? horas[1] : horas[0];
+    if(enCierre(fechaISO(d.getFullYear(), d.getMonth()+1, d.getDate()))) horaMostrar = HORA_SESION_INVIERNO;
     return '<a href="#calendario" style="text-decoration:none;color:inherit">Próxima sesión · '+diaCap+' '+d.getDate()+' de '+MESES_TEXTO[d.getMonth()]+' · '+horaMostrar+'h</a>';
   } else {
+    if(hoyEnCierre()) return 'Las sesiones nocturnas vuelven en mayo';
     var l = proximaLuna();
     if(!l) return '';
     var emoji = l.tipo==='llena' ? '🌕' : '🌑';
@@ -972,7 +1074,14 @@ function aplicarModo(modo){
   document.getElementById('heroSub').innerHTML      = t.sub;
   document.getElementById('introTexto').textContent = t.intro;
   document.getElementById('calTitulo').textContent  = t.calTitulo;
-  document.getElementById('pCuando').textContent    = t.cuando;
+  var enInv = hoyEnCierre();
+  document.getElementById('pCuando').textContent    = enInv ? (esDia ? 'Hasta el 30 de abril, una sesión al mes en domingo a las 17:00. Desde mayo, sábados y domingos. Otras fechas bajo petición.' : 'Las sesiones nocturnas vuelven en mayo.') : t.cuando;
+  ['avisoHorarios','avisoCalendario'].forEach(function(id){
+    var av = document.getElementById(id);
+    if(!av) return;
+    av.textContent = enInv ? (esDia ? AVISO_DIA : AVISO_NOCHE) : '';
+    av.classList.toggle('hidden', !enInv);
+  });
   document.getElementById('pGrupo').textContent     = t.grupo;
   document.getElementById('pLlevar').textContent    = t.llevar;
   document.getElementById('cienciaTexto').textContent = t.ciencia;
