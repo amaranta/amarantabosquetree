@@ -158,11 +158,12 @@ a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
 .hero {
   min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
   padding:0 !important;
-  max-width:100%;
-  margin-left:calc(-1 * clamp(1.5rem,5vw,3rem));
-  width:calc(100% + 2 * clamp(1.5rem,5vw,3rem));
+  max-width:none;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
 }
 .hero-img { position:relative; overflow:hidden; min-height:600px; }
+.hero-content { padding-left:clamp(2rem,5vw,5rem) !important; }
 .hero-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:30% center; filter:saturate(0.85) brightness(0.9); }
 .hero-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 55%,var(--bg)); }
 .hero-content { display:flex; flex-direction:column; justify-content:center; padding:clamp(6rem,12vw,9rem) clamp(2rem,4vw,3.5rem) 4rem 2.5rem; }
@@ -286,6 +287,27 @@ h1 em { font-style:italic; color:var(--accent); }
 .btn-g:hover { background:var(--accent); color:var(--bg); text-decoration:none; }
 .btn-n { border-color:var(--fg); color:var(--fg); }
 .btn-n:hover { background:var(--fg); color:var(--bg); text-decoration:none; }
+
+
+/* PRUEBA: bandas de foto a todo el ancho */
+.banda { width:100vw; margin-left:calc(50% - 50vw); height:clamp(260px,52vh,520px); overflow:hidden; }
+.banda img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.88); }
+html { overflow-x:clip; }
+.galeria-ancha { width:100vw; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:var(--gap); margin-bottom:var(--gap); }
+.galeria-ancha .gx { height:clamp(320px,64vh,620px); overflow:hidden; }
+.galeria-ancha img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.88); transition:filter 0.4s; }
+.galeria-ancha img:hover { filter:saturate(1); }
+@media(max-width:640px){ .galeria-ancha { grid-template-columns:1fr 1fr; } .galeria-ancha .gx { height:62vw; } .galeria-ancha .gx3 { grid-column:1/-1; height:58vw; } }
+
+.banda-doble { width:100vw; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:1fr 1fr; gap:3px; grid-template-rows:minmax(0,1fr); height:clamp(260px,46vh,460px); overflow:hidden; }
+.banda-doble img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.88); }
+@media(max-width:640px){ .banda-doble { grid-template-columns:1fr; grid-template-rows:none; height:auto; } .banda-doble img { height:240px; } }
+
+@media(max-width:640px){
+  .theme-btn { bottom:auto; top:20px; right:76px; padding:12px 12px; font-size:0.62rem; letter-spacing:1.5px; }
+  .hero-img { height:58vh; }
+  .wa-btn { bottom:14px; right:14px; padding:10px 14px; }
+}
 
 /* Regala un baño de bosque */
 .regalo-form { margin-top:0.4rem; max-width:560px; }
@@ -455,6 +477,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<div class="banda"><img src="pinos2.jpg" alt="Copas de los pinos de El Espinar vistas desde abajo" loading="lazy" style="object-position:center 40%"></div>
+
 <!-- 4. LA EXPERIENCIA -->
 <section id="experiencia">
   <div class="intro-grid">
@@ -467,6 +491,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 </section>
 
 <hr class="divider">
+
+<div class="banda" style="height:clamp(340px,74vh,700px)"><img src="grupo-atardecer.jpg" alt="Grupo contemplando el atardecer desde la sierra" loading="lazy" style="object-position:center 42%"></div>
 
 <!-- 5. HORARIOS -->
 <section id="horarios">
@@ -533,6 +559,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<div class="banda"><img src="atardecer-ramas.jpg" alt="El sol poniéndose entre las ramas de un pino" loading="lazy" style="object-position:center 50%"></div>
+
 <!-- 7. POR QUÉ FUNCIONA -->
 <section id="ciencia">
   <div class="intro-grid">
@@ -548,9 +576,10 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 <hr class="divider">
 
 <!-- 9. GALERÍA -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:var(--gap) 0;">
-  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg1" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul" loading="lazy"></div>
-  <div style="aspect-ratio:2/3;overflow:hidden;"><img id="galImg2" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;filter:saturate(0.85);" src="arroyo.jpg" alt="Arroyo entre los pinos" loading="lazy"></div>
+<div class="galeria-ancha">
+  <div class="gx"><img id="galImg1" src="pinos.jpg" alt="Pinos de El Espinar contra el cielo azul" loading="lazy"></div>
+  <div class="gx"><img id="galImg2" src="arroyo.jpg" alt="Arroyo entre los pinos" loading="lazy"></div>
+  <div class="gx gx3"><img id="galImg3" src="rocas-musgo.jpg" alt="Rocas con musgo entre los pinos" loading="lazy" style="object-position:center 62%"></div>
 </div>
 
 <!-- 10. EVENTOS NOCTURNOS -->
@@ -578,6 +607,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 
 <hr class="divider">
+
+<div class="banda"><img src="relajadas.jpg" alt="Dos personas descansando sobre la hierba en el pinar" loading="lazy" style="object-position:center 88%"></div>
 
 <!-- 12. PRÁCTICO + FAQ -->
 <section id="practico">
@@ -610,6 +641,11 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<div class="banda-doble">
+  <img src="llegando.jpg" alt="Un grupo llegando caminando por el pinar" loading="lazy" style="object-position:center 47%">
+  <img src="grupo-atardecer.jpg" alt="Personas sentadas en una roca viendo la puesta de sol" loading="lazy" style="object-position:center 82%">
+</div>
+
 <!-- 13. GRUPOS Y PAREJAS -->
 <section id="grupos">
   <span class="eyebrow">Sesiones privadas</span>
@@ -623,6 +659,8 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 </section>
 
 <hr class="divider">
+
+<div class="banda"><img src="cofre-regalo.jpg" alt="Un cofre de madera sobre un tocón cubierto de musgo en el pinar" loading="lazy" style="object-position:center 45%"></div>
 
 <!-- REGALA UN BAÑO DE BOSQUE -->
 <section id="regalo">
@@ -1021,7 +1059,7 @@ var MODOS={
     llevar:'Ropa cómoda, calzado cerrado, agua, esterilla, cojín y manta. Gorra y crema solar.',
     ciencia:'El shinrin-yoku —«baño de bosque» en japonés— no es una moda. Estudios científicos demuestran que caminar despacio entre árboles reduce el cortisol y fortalece el sistema inmune. Una práctica de conexión con la naturaleza para reducir el estrés, fortalecer el sistema inmunológico y devolver la claridad mental.',
     datos:'📊 Reduce el cortisol · Hasta +50% en actividad de células NK · Efectos hasta 30 días · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2793341/" target="_blank" style="color:inherit;text-decoration:underline;">Fuente</a>',
-    heroImg:'hero.jpg', galImg1:'pinos.jpg', galImg2:'arroyo.jpg',
+    heroImg:'hero.jpg', galImg1:'pinos.jpg', galImg2:'arroyo.jpg', galImg3:'rocas-musgo.jpg',
     testi:[
       {t:'"Desde que empecé los Baños de bosque con Amaranta, la calma ha llegado a mi vida."',a:'Esther'},
       {t:'"Recomiendo esta experiencia. Aborda todos nuestros sentidos y me conecto conmigo misma. Las sensaciones y el disfrute han sido muy reconfortantes."',a:'Claudia'},
@@ -1040,7 +1078,7 @@ var MODOS={
     llevar:'Ropa cómoda y de abrigo, calzado cerrado, agua, esterilla, cojín y manta.',
     ciencia:'La oscuridad activa la melatonina, baja el ritmo cardíaco y agudiza los sentidos. Sin estímulos visuales, la mente entra en un estado de atención abierta que reduce el estrés y mejora el sueño.',
     datos:'📊 Mayor melatonina · Reducción del estrés · Mejora del sueño',
-    heroImg:'hero-noche.jpg', galImg1:'arroyo-noche.jpg', galImg2:'vialactea.jpg',
+    heroImg:'hero-noche.jpg', galImg1:'arroyo-noche.jpg', galImg2:'vialactea.jpg', galImg3:'luna-llena.jpg',
     testi:[
       {t:'"Dormí como no lo hacía en meses. El bosque de noche tiene algo que no se puede explicar, solo vivir."',a:'Ana'},
       {t:'"Ver las estrellas entre los pinos con todos los sentidos despiertos es una experiencia que se queda para siempre."',a:'Sofía'},
@@ -1124,6 +1162,7 @@ function aplicarModo(modo){
   document.getElementById('heroImg').src  = t.heroImg;
   document.getElementById('galImg1').src  = t.galImg1;
   document.getElementById('galImg2').src  = t.galImg2;
+  document.getElementById('galImg3').src  = t.galImg3;
   var th=''; t.testi.forEach(function(x){ th+='<blockquote class="testi">'+x.t+'<span class="testi-autor">— '+x.a+'</span></blockquote>'; });
   document.getElementById('testiContainer').innerHTML = th;
   document.getElementById('horarios-dia').classList.toggle('hidden',!esDia);
