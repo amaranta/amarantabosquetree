@@ -113,12 +113,13 @@ body.noche #stars { display:block; }
 
 .drawer {
   position:fixed; top:0; right:-300px; width:270px; height:100%;
-  z-index:999; padding:90px 28px 40px;
+  z-index:999; padding:80px 28px 90px;
   background:var(--bg); border-left:1px solid var(--line); transition:right 0.3s ease;
+  overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
 }
 .drawer.open { right:0; }
 .drawer a {
-  display:block; padding:13px 0;
+  display:block; padding:10px 0;
   font-family:var(--sc); font-size:0.78rem; letter-spacing:2.5px;
   color:var(--fg); text-decoration:none; border-bottom:1px solid var(--line);
   transition:color 0.2s, padding-left 0.2s;
@@ -205,6 +206,7 @@ h1 em { font-style:italic; color:var(--accent); }
 .cal-dot.d { background:var(--accent); }
 .cal-dot.l { background:#c8a84b; }
 .cal-dot.n { background:#2a3a5a; }
+.cal-dot.c { background:#2f6f73; }
 .cal-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
 .cal-nav-btn { background:none; border:1px solid var(--line); color:var(--fg); font-family:var(--sc); font-size:0.62rem; letter-spacing:2px; padding:8px 14px; cursor:pointer; transition:all 0.2s; }
 .cal-nav-btn:hover { border-color:var(--accent); color:var(--accent); }
@@ -215,6 +217,11 @@ h1 em { font-style:italic; color:var(--accent); }
 .cal-d.dom { background:var(--accent); color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; transition:opacity 0.2s; }
 .cal-d.dom:hover { opacity:0.8; }
 .cal-d.luna { background:#c8a84b; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
+.cal-d.casa { background:#2f6f73; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; transition:opacity 0.2s; }
+.cal-d.casa:hover { opacity:0.8; }
+.cal-d.en-casa { position:relative; }
+.cal-d.en-casa::after { content:''; position:absolute; bottom:4px; right:4px; width:7px; height:7px; border-radius:50%; background:#2f6f73; box-shadow:0 0 0 1px #fff; }
+.casa-nota { font-family:var(--serif); font-style:italic; font-size:0.95rem; color:var(--fg2); margin-top:0.9rem; }
 .cal-d.eclipse { background:#d45a20; color:#fff; cursor:pointer; font-family:var(--sc); font-weight:600; }
 .cal-d.luna-nueva { background:#2a3a5a; color:#aac4ff; cursor:pointer; font-family:var(--sc); font-weight:600; }
 .cal-d.luna-nueva:hover { opacity:0.8; }
@@ -396,6 +403,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 .cal-d.con-luna::before { content:attr(data-luna); position:absolute; top:2px; left:4px; font-size:0.62rem; line-height:1; }
 .aviso-cierre { font-family:var(--serif); font-style:italic; font-size:1rem; line-height:1.6; color:var(--fg2); margin:1rem 0 0; }
 </style>
+<script src="/sesiones-online.js"></script>
 </head>
 <body class="dia">
 <div id="stars"></div>
@@ -412,6 +420,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
   <a href="#practico">Lo práctico</a>
   <a href="#grupos">Grupos y parejas</a>
+  <a href="/bosque-en-casa/">Bosque en casa</a>
   <a href="#regalo">Regala un baño de bosque</a>
   <a href="#medios">Medios</a>
   <a href="/blog/">Blog</a>
@@ -528,6 +537,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
   <div class="cal-leyenda">
     <div class="cal-leyenda-item"><div class="cal-dot d"></div>Domingo y sábado · sesión de día</div>
+    <div class="cal-leyenda-item" id="leyCasa"><div class="cal-dot c"></div>En casa · por videollamada</div>
     <div class="cal-leyenda-item" id="leyLuna"><div class="cal-dot l"></div>Luna llena · nocturna</div>
     <div class="cal-leyenda-item" id="leyNueva"><div class="cal-dot n"></div>Luna nueva · Vía Láctea</div>
     <div class="cal-leyenda-item" id="leyEclipse"><div class="cal-dot e"></div>Eclipse</div>
@@ -539,6 +549,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   </div>
   <div class="cal-grid" id="calGrid"></div>
   <p id="avisoCalendario" class="aviso-cierre hidden"></p>
+  <p class="casa-nota" id="casaNota">Los días en verde azulado, y las lunas con un punto verde azulado, hay sesión en casa, por videollamada. De mayo a octubre las sesiones son presenciales, en el pinar, y las de casa son otra opción para quien no puede venir. <a href="/bosque-en-casa/">Cómo funcionan</a>.</p>
   <div class="horario-picker" id="horarioPicker1">
     <span class="horario-picker-titulo" id="horarioPickerTitulo1">Elige horario</span>
     <div class="horario-picker-btns">
@@ -655,6 +666,22 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
     <div class="modalidad"><p class="mod-titulo">💑 Parejas o individual</p><p class="mod-texto">Una sesión íntima y personalizada, a tu ritmo. Sin grupo ni agenda compartida. Solo el bosque y lo que necesitas encontrar en él. Dos horas, solo para vosotros. Ajustamos el ritmo y el contenido por WhatsApp antes de venir.</p><a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20interesa%20una%20sesi%C3%B3n%20privada" target="_blank" class="btn-g">Consultar</a></div>
     <div class="modalidad"><p class="mod-titulo">🌿 Equipos y colectivos</p><p class="mod-texto">Una experiencia diferente para tu equipo o grupo. Con el bosque como espacio de encuentro, descanso y reconexión. Duración y formato se adaptan al grupo. Lo hablamos por WhatsApp según cuántos seáis y qué buscáis.</p><a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20interesa%20una%20sesi%C3%B3n%20para%20grupo" target="_blank" class="btn-g">Consultar</a></div>
     <div class="modalidad" style="grid-column:1/-1"><p class="mod-titulo">🍃 Terapia individual en el bosque</p><p class="mod-texto">Sesiones de terapia individuales en el pinar. El bosque no es el escenario — es parte del proceso. Para quien quiere ir más adentro. Sesiones de una hora y media. Escríbeme por WhatsApp y hacemos una llamada informativa por teléfono, sin compromiso, para ver si es lo que necesitas.</p><a href="https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20interesa%20una%20sesi%C3%B3n%20de%20terapia%20en%20el%20bosque" target="_blank" class="btn-g">Consultar</a></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="casa">
+  <span class="eyebrow">A distancia</span>
+  <h2>Bosque en casa</h2>
+  <p class="lead">Una hora larga una noche entre semana, con una manta, la luz baja y mi voz por videollamada.</p>
+  <div class="modalidades" style="grid-template-columns:1fr">
+    <div class="modalidad">
+      <p class="mod-titulo">🌙 Baño de bosque online, por la noche</p>
+      <p class="mod-texto" style="margin-bottom:0">Algunas noches entre semana, y en las lunas del invierno, te acompaño en directo, por videollamada, con una sesión guiada con la voz. Es para quien vive lejos de El Espinar o para quien prefiere empezar desde casa. Grupos pequeños, con la cámara encendida y el micrófono silenciado. Las reservas son por WhatsApp.</p>
+      <a href="/bosque-en-casa/" class="btn-g">Ver las próximas fechas</a>
+      <p class="mod-texto" style="margin:1.2rem 0 0">¿Te preguntas si se puede hacer un baño de bosque online? Lo cuento en <a href="/blog/bano-de-bosque-online/">este artículo</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -779,7 +806,7 @@ var REAPERTURA = "2027-05-01";
 var HORA_SESION_INVIERNO = "18:00";
 var SESIONES_INVIERNO = ["2026-11-29", "2026-12-13", "2027-01-17", "2027-02-14", "2027-03-14", "2027-04-18"];
 var AVISO_DIA = "De otoño a primavera: hasta el 30 de abril hay una sesión al mes, en domingo a las 18:00. Son los días en verde del calendario. Desde mayo vuelven los sábados y domingos.";
-var AVISO_NOCHE = "Las sesiones nocturnas de luna vuelven en mayo. Hasta entonces el calendario muestra las lunas, pero no hay sesión.";
+var AVISO_NOCHE = "Sin sesiones nocturnas en el pinar hasta mayo. Las lunas con un punto verde azulado tienen sesión por videollamada: pulsa en ellas para ver los detalles. De mayo a octubre las lunas son presenciales, en el pinar.";
 // FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
 var COMPLETOS = ["2026-08-12", "2026-08-08", "2026-08-09", "2026-08-22", "2026-09-12", "2026-09-19"];
@@ -802,6 +829,11 @@ var calY = 2026, calM = 6;
   }
 })();
 
+function textoOnline(so, dn, ftTexto){
+  var tipo = so.t==='llena' ? 'de luna llena ' : (so.t==='nueva' ? 'de luna nueva ' : '');
+  return 'https://wa.me/34630928698?text='+encodeURIComponent('Hola Amaranta, me apunto a Bosque en casa '+tipo+'del '+dn+' '+ftTexto+' a las '+so.h+' h');
+}
+function sesionOnline(iso){ for(var i=0;i<SESIONES_ONLINE.length;i++){ if(SESIONES_ONLINE[i].f===iso) return SESIONES_ONLINE[i]; } return null; }
 function esLuna(y,m,d){ return LUNAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esLunaNueva(y,m,d){ return LUNAS_NUEVAS.some(function(l){ return l[0]===y&&l[1]===m&&l[2]===d; }); }
 function esEclipse(y,m,d){ return ECLIPSE[0]===y&&ECLIPSE[1]===m&&ECLIPSE[2]===d; }
@@ -856,9 +888,20 @@ function renderCal(esDia){
       } else {
         extraAttrs+=' title="De otoño a primavera · '+HORA_SESION_INVIERNO+' h"';
       }
+    } else if(esDia && sesionOnline(iso) && !esLuna(calY,calM,d) && !esLunaNueva(calY,calM,d)){
+      var _so = sesionOnline(iso);
+      var _dn = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'][dowDia];
+      cls+=' casa';
+      url=textoOnline(_so,_dn,ftTexto);
+      extraAttrs=' title="Bosque en casa · por videollamada · '+_so.h+' h" data-casa="1" data-casa-tipo="" data-fecha-texto="'+ftTexto+'" data-hora="'+_so.h+'"';
     } else if(esLuna(calY,calM,d)){
       cls+=' luna';
-      if(cierreDia){
+      var _soL = sesionOnline(iso);
+      if(cierreDia && _soL){
+        cls+=' en-casa';
+        url=textoOnline(_soL,['domingo','lunes','martes','miércoles','jueves','viernes','sábado'][dowDia],ftTexto);
+        extraAttrs=' title="Luna llena · en casa, por videollamada · '+_soL.h+' h" data-casa="1" data-casa-tipo="llena" data-fecha-texto="'+ftTexto+'" data-hora="'+_soL.h+'"';
+      } else if(cierreDia){
         cls+=' sin-sesion';
         extraAttrs=' title="Luna llena · sin sesión nocturna hasta mayo"';
       } else {
@@ -866,7 +909,12 @@ function renderCal(esDia){
       }
     } else if(esLunaNueva(calY,calM,d)){
       cls+=' luna-nueva';
-      if(cierreDia){
+      var _soN = sesionOnline(iso);
+      if(cierreDia && _soN){
+        cls+=' en-casa';
+        url=textoOnline(_soN,['domingo','lunes','martes','miércoles','jueves','viernes','sábado'][dowDia],ftTexto);
+        extraAttrs=' title="Luna nueva · en casa, por videollamada · '+_soN.h+' h" data-casa="1" data-casa-tipo="nueva" data-fecha-texto="'+ftTexto+'" data-hora="'+_soN.h+'"';
+      } else if(cierreDia){
         cls+=' sin-sesion';
         extraAttrs=' title="Luna nueva · sin sesión nocturna hasta mayo"';
       } else {
@@ -896,6 +944,9 @@ function renderCal(esDia){
   var ll=document.getElementById('leyLuna'), le=document.getElementById('leyEclipse'), ln=document.getElementById('leyNueva');
   if(ll) ll.style.display = 'flex';
   if(ln) ln.style.display = 'flex';
+  var lc=document.getElementById('leyCasa'), cn=document.getElementById('casaNota');
+  if(lc) lc.style.display = esDia ? 'flex' : 'none';
+  if(cn) cn.style.display = esDia ? '' : 'none';
   if(le) le.style.display = (new Date()<=new Date(2026,7,12))?'flex':'none';
 }
 
@@ -923,6 +974,23 @@ document.getElementById('calGrid').addEventListener('click',function(e){
   if(elCompleto){
     mostrarCompleto(elCompleto);
     document.getElementById('completoPicker1').scrollIntoView({behavior:'smooth', block:'nearest'});
+    return;
+  }
+  var elCasa = e.target.closest('[data-casa]');
+  if(elCasa){
+    var cpk = document.getElementById('completoPicker1'); if(cpk) cpk.classList.remove('visible');
+    var pk = document.getElementById('horarioPicker1');
+    var tp = elCasa.getAttribute('data-casa-tipo');
+    var ftC = elCasa.getAttribute('data-fecha-texto'), hhC = elCasa.getAttribute('data-hora');
+    document.getElementById('horarioPickerTitulo1').textContent = (tp==='llena'?'Luna llena · en casa, por videollamada':(tp==='nueva'?'Luna nueva · en casa, por videollamada':'Bosque en casa · por videollamada')) + ' · ' + ftC;
+    document.getElementById('horarioOpt1a').style.display = 'none';
+    var ob = document.getElementById('horarioOpt1b');
+    ob.style.display = ''; ob.textContent = '🌙 Apuntarme · ' + hhC + ' h'; ob.href = elCasa.getAttribute('data-url');
+    var nt = document.getElementById('horarioPickerNota1');
+    if(nt){ nt.style.display = ''; nt.textContent = tp ? 'Sin sesión nocturna en el pinar hasta mayo. Esta es por videollamada, con la cámara encendida y el micrófono silenciado. Se confirma cuando hay un mínimo de personas apuntadas.' : 'Por videollamada, con la cámara encendida y el micrófono silenciado. Se confirma cuando hay un mínimo de personas apuntadas.'; }
+    pk.classList.add('visible');
+    pk.scrollIntoView({block:'center'});
+    setTimeout(function(){var r=pk.getBoundingClientRect(); if(r.bottom>window.innerHeight||r.top<0){window.scrollBy(0, r.top-Math.max(20,(window.innerHeight-r.height)/2));}},60);
     return;
   }
   var el=e.target.closest('[data-url]');
