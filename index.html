@@ -287,6 +287,14 @@ h1 em { font-style:italic; color:var(--accent); }
 .btn-n { border-color:var(--fg); color:var(--fg); }
 .btn-n:hover { background:var(--fg); color:var(--bg); text-decoration:none; }
 
+/* Regala un baño de bosque */
+.regalo-form { margin-top:0.4rem; max-width:560px; }
+.regalo-form label { display:block; font-family:var(--sc); font-size:0.78rem; letter-spacing:2px; font-weight:600; color:var(--accent); margin:1.2rem 0 0.4rem; }
+.regalo-form input, .regalo-form textarea { width:100%; padding:0.8rem 0.9rem; border:1px solid var(--line); background:transparent; color:var(--fg); font-family:var(--sans); font-size:1rem; border-radius:0; }
+.regalo-form input:focus, .regalo-form textarea:focus { outline:none; border-color:var(--accent); }
+.regalo-form textarea { resize:vertical; }
+.regalo-aviso { min-height:1.4em; margin-top:0.8rem; font-size:0.9rem; color:var(--fg2); line-height:1.5; }
+
 .cierre-poetico { padding:var(--gap) 0; text-align:center; border-top:1px solid var(--line); }
 .cierre-poetico p { font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.2rem,3vw,1.7rem); color:var(--accent); line-height:1.55; }
 
@@ -382,6 +390,7 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
   <a href="#eventos" id="linkEventos" class="hidden">Próximas lunas</a>
   <a href="#practico">Lo práctico</a>
   <a href="#grupos">Grupos y parejas</a>
+  <a href="#regalo">Regala un baño de bosque</a>
   <a href="#medios">Medios</a>
   <a href="/blog/">Blog</a>
 </div>
@@ -615,6 +624,32 @@ footer { padding:2.5rem 0; border-top:1px solid var(--line); display:flex; justi
 
 <hr class="divider">
 
+<!-- REGALA UN BAÑO DE BOSQUE -->
+<section id="regalo">
+  <span class="eyebrow">Para regalar</span>
+  <h2>Regala un baño de bosque</h2>
+  <p class="lead">Un paseo de dos horas por el pinar de El Espinar, con los sentidos abiertos y ninguna prisa.</p>
+  <div class="modalidades" style="grid-template-columns:1fr">
+    <div class="modalidad">
+      <p class="mod-titulo">🌲 Cuéntame a quién se lo regalas</p>
+      <p class="mod-texto" style="margin-bottom:0">Dime para quién es y de parte de quién, y si quieres añade unas palabras tuyas que aparecerán en su regalo. Lo organizamos entre las dos y, cuando esté todo listo, te mando el enlace con su regalo, para que se lo reenvíes tú o se lo envío yo directamente. La tarjeta se canjea un sábado o un domingo entre el 1 de mayo y el 1 de octubre de 2027.</p>
+      <form class="regalo-form" id="regaloForm" novalidate>
+        <label for="rg-para">Para quién es</label>
+        <input id="rg-para" type="text" maxlength="40" autocomplete="off">
+        <label for="rg-de">De parte de</label>
+        <input id="rg-de" type="text" maxlength="40" autocomplete="off">
+        <label for="rg-msg">Unas palabras para quien lo recibe (opcional)</label>
+        <textarea id="rg-msg" rows="3" maxlength="160"></textarea>
+        <a href="https://wa.me/34630928698" target="_blank" class="btn-g" id="rg-wa">Enviar por WhatsApp</a>
+        <p class="regalo-aviso" id="rg-aviso" aria-live="polite"></p>
+      </form>
+      <p class="mod-texto" style="margin:0.4rem 0 0">La tarjeta no se canjea por dinero.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <section id="medios">
   <span class="eyebrow">En los medios</span>
   <h2 style="margin-bottom:2rem">Medios</h2>
@@ -703,9 +738,9 @@ var ECLIPSE = [2026,8,12];
 var INICIO_CIERRE = "2026-10-26";
 var FIN_CIERRE = "2027-04-30";
 var REAPERTURA = "2027-05-01";
-var HORA_SESION_INVIERNO = "17:00";
-var SESIONES_INVIERNO = ["2026-11-22", "2026-12-13", "2027-01-24", "2027-02-21", "2027-03-14", "2027-04-18"];
-var AVISO_DIA = "Hasta el 30 de abril hay una sesión al mes, en domingo a las 17:00. Son los días en verde del calendario. Desde mayo vuelven los sábados y domingos.";
+var HORA_SESION_INVIERNO = "18:00";
+var SESIONES_INVIERNO = ["2026-11-29", "2026-12-13", "2027-01-17", "2027-02-14", "2027-03-14", "2027-04-18"];
+var AVISO_DIA = "De otoño a primavera: hasta el 30 de abril hay una sesión al mes, en domingo a las 18:00. Son los días en verde del calendario. Desde mayo vuelven los sábados y domingos.";
 var AVISO_NOCHE = "Las sesiones nocturnas de luna vuelven en mayo. Hasta entonces el calendario muestra las lunas, pero no hay sesión.";
 // FECHAS COMPLETAS: añade aquí cualquier fecha (formato "YYYY-MM-DD") en cuanto se llene DEL TODO (mañana y tarde).
 // Se aplica sola en el calendario, tanto en la vista de día como de noche, sin tocar nada más.
@@ -781,7 +816,7 @@ function renderCal(esDia){
         cls+=' con-luna';
         extraAttrs+=' data-luna="'+(_llena?'🌕':'🌑')+'" title="'+(_llena?'Luna llena':'Luna nueva')+' · sesión de día a las '+HORA_SESION_INVIERNO+'"';
       } else {
-        extraAttrs+=' title="Sesión a las '+HORA_SESION_INVIERNO+'"';
+        extraAttrs+=' title="De otoño a primavera · '+HORA_SESION_INVIERNO+' h"';
       }
     } else if(esLuna(calY,calM,d)){
       cls+=' luna';
@@ -874,8 +909,8 @@ document.getElementById('calGrid').addEventListener('click',function(e){
       base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, quiero reservar la sesión especial de baños de bosque con sonido del domingo 6 de septiembre de 2026');
       if(notaEl) notaEl.style.display = 'none';
     } else if(esInvierno){
-      tituloEl.textContent = 'Baños de bosque de invierno · ' + ftTexto;
-      base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, me apunto al baño de bosque de invierno del domingo ' + ftTexto + ' a las ' + HORA_SESION_INVIERNO + ' h');
+      tituloEl.textContent = 'De otoño a primavera · ' + ftTexto;
+      base = 'https://wa.me/34630928698?text=' + encodeURIComponent('Hola Amaranta, me apunto a la sesión De otoño a primavera del domingo ' + ftTexto + ' a las ' + HORA_SESION_INVIERNO + ' h');
       if(notaEl){ notaEl.style.display = ''; notaEl.textContent = 'Plazas limitadas · Te confirmo plaza por WhatsApp.'; }
     } else {
       base = 'https://wa.me/34630928698?text=Hola%20Amaranta%2C%20me%20apunto%20al%20' + diaNombre + '%20' + ftEncoded;
@@ -897,7 +932,7 @@ document.getElementById('calGrid').addEventListener('click',function(e){
       // Sesión de invierno: un único turno de tarde
       opt1a.style.display = 'none';
       opt1b.style.display = '';
-      opt1b.textContent = '☀ Tarde · ' + HORA_SESION_INVIERNO + ' h';
+      opt1b.textContent = '☀ De otoño a primavera · ' + HORA_SESION_INVIERNO + ' h';
       opt1b.href = base;
     }
     picker.classList.add('visible');
@@ -1075,7 +1110,7 @@ function aplicarModo(modo){
   document.getElementById('introTexto').textContent = t.intro;
   document.getElementById('calTitulo').textContent  = t.calTitulo;
   var enInv = hoyEnCierre();
-  document.getElementById('pCuando').textContent    = enInv ? (esDia ? 'Hasta el 30 de abril, una sesión al mes en domingo a las 17:00. Desde mayo, sábados y domingos. Otras fechas bajo petición.' : 'Las sesiones nocturnas vuelven en mayo.') : t.cuando;
+  document.getElementById('pCuando').textContent    = enInv ? (esDia ? 'De otoño a primavera, una sesión al mes en domingo a las 18:00 hasta el 30 de abril. Desde mayo, sábados y domingos. Otras fechas bajo petición.' : 'Las sesiones nocturnas vuelven en mayo.') : t.cuando;
   ['avisoHorarios','avisoCalendario'].forEach(function(id){
     var av = document.getElementById(id);
     if(!av) return;
@@ -1144,5 +1179,33 @@ else aplicarModo('dia');
 </script>
 <!-- Elfsight Google Reviews | Untitled Google Reviews -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
+<script>
+(function () {
+  var para = document.getElementById('rg-para');
+  var de = document.getElementById('rg-de');
+  var msg = document.getElementById('rg-msg');
+  var wa = document.getElementById('rg-wa');
+  var aviso = document.getElementById('rg-aviso');
+  if (!para || !de || !msg || !wa) return;
+  function clean(v) { return v.replace(/\s+/g, ' ').trim(); }
+  function armar() {
+    var t = 'Hola Amaranta, quiero regalar un baño de bosque.';
+    if (clean(para.value)) t += '\nPara: ' + clean(para.value);
+    if (clean(de.value)) t += '\nDe parte de: ' + clean(de.value);
+    if (clean(msg.value)) t += '\nMensaje: ' + clean(msg.value);
+    wa.href = 'https://wa.me/34630928698?text=' + encodeURIComponent(t);
+    aviso.textContent = '';
+  }
+  [para, de, msg].forEach(function (el) { el.addEventListener('input', armar); });
+  wa.addEventListener('click', function (e) {
+    if (!clean(para.value) || !clean(de.value)) {
+      e.preventDefault();
+      aviso.textContent = 'Dime para quién es y de parte de quién, y te abro WhatsApp.';
+      (clean(para.value) ? de : para).focus();
+    }
+  });
+  armar();
+})();
+</script>
 </body>
 </html>
