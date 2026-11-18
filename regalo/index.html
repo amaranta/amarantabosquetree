@@ -102,8 +102,9 @@ details p{font-size:17px;margin:0 0 10px}
   var FALLBACK = { para: '', de: '', msg: '' };
   function clean(v, n) { return (v || '').replace(/\s+/g, ' ').trim().slice(0, n || 40); }
   var q = new URLSearchParams(location.search);
-  var para = clean(q.get('para')) || FALLBACK.para;
-  var de = clean(q.get('de')) || FALLBACK.de;
+  function nombre(v) { return clean(v).replace(/[\s.,;:!?]+$/, ''); }
+  var para = nombre(q.get('para')) || FALLBACK.para;
+  var de = nombre(q.get('de')) || FALLBACK.de;
   var msg = clean(q.get('msg'), 160) || FALLBACK.msg;
 
   if (para) document.getElementById('para').textContent = para;
